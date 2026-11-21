@@ -5,3 +5,6 @@ backups/
 iScreenBarStudioSync
 *.log
 .swiftpm/
+xcuserdata/
+*.xcuserstate
+DerivedData/

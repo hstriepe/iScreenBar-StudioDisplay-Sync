@@ -27,16 +27,16 @@ The icon appears yellow when the light is on, gray when it is off, and red to in
 
 Tested on: Apple Silicon MacBook Pro, macOS 26, Studio Display, and BenQ iScreenBar (USB VID 0x04A5 / PID 0x2501). Other systems and devices have not been fully verified.
 
-First, install the Xcode Command Line Tools, then run:
+Requires full Xcode 16 or later (the Command Line Tools alone are not enough). Install Xcode from the App Store, then run:
 
 ```bash
-xcode-select --install
+sudo xcode-select -s /Applications/Xcode.app
 git clone https://github.com/rogerbush007-a11y/iScreenBar-StudioDisplay-Sync.git
 cd iScreenBar-StudioDisplay-Sync
 ./scripts/install.sh
 ```
 
-The script performs a native build and applies a temporary signature, installing the application to `~/Applications/iScreen Menu.app`. It also creates a user-level LaunchAgent to ensure the app runs automatically upon login. No administrator password is required for the installation; however, the optional "prevent sleep" feature requires administrator authorization.
+The script builds the Xcode project with an ad-hoc (local) signature, installing the application to `~/Applications/iScreen Menu.app`. It also creates a user-level LaunchAgent to ensure the app runs automatically upon login. No administrator password is required for the installation; however, the optional "prevent sleep" feature requires administrator authorization.
 
 Daily light control is handled directly via USB HID, independent of the official application. It is recommended to avoid running both this software and the official application simultaneously, as both may attempt to write light settings automatically. Please note that the automatic video mode (linked to the camera) and the hardware-based memory of the light bar are not yet fully synchronized; therefore, this software is not intended as a complete replacement for all official features.
 
@@ -68,6 +68,10 @@ Display control relies on private macOS APIs—SkyLight, MonitorPanel, and Displ
 ./scripts/build.sh
 ```
 
-Uninstallation moves the app and the `LaunchAgent` to the Trash, while preserving log files. Build artifacts are located in `build/iScreen Menu.app`. Currently, the app uses a local, temporary signature; it lacks a Developer ID notarization and does not support automatic updates.
+Uninstallation moves the app and the `LaunchAgent` to the Trash, while preserving log files. Build artifacts are located in `build/iScreen Menu.app`.
+
+For development, open `iScreenMenu.xcodeproj` in Xcode. The project is generated from `project.yml` with [XcodeGen](https://github.com/yonaskolb/XcodeGen); after changing `project.yml`, run `xcodegen generate` and commit both. UI text is localized through `Resources/Localizable.xcstrings` (English source, Simplified Chinese translation).
+
+Currently, the app uses a local, temporary signature; it lacks a Developer ID notarization and does not support automatic updates.
 
 The source code contains no network requests, analytics, or cloud-based dependencies. Please refer to the [Security Notice](SECURITY.md), [Trademark Notice](NOTICE.md), and the [MIT License](LICENSE).

@@ -10,13 +10,20 @@ zsh -n "$project_dir/scripts/install.sh"
 zsh -n "$project_dir/scripts/uninstall.sh"
 "$project_dir/scripts/build.sh"
 
-if rg -n --hidden \
-  -g '!build/**' \
-  -g '!.git/**' \
-  -g '!scripts/check.sh' \
+# Scan tracked and untracked (non-ignored) files. git grep exits 1 when
+# nothing matches and >1 on error, so a missing tool cannot pass silently.
+set +e
+git -C "$project_dir" grep --untracked -nIE \
   '(gho_[A-Za-z0-9]+|github_pat_[A-Za-z0-9_]+|BEGIN (RSA|OPENSSH|EC) PRIVATE KEY|/Users/Qiu)' \
-  "$project_dir"; then
+  -- ':!scripts/check.sh'
+scan_status=$?
+set -e
+
+if (( scan_status == 0 )); then
   echo "Potential secret or machine-specific path found." >&2
+  exit 1
+elif (( scan_status != 1 )); then
+  echo "Secret scan failed to run (git grep exit $scan_status)." >&2
   exit 1
 fi
 

@@ -27,16 +27,16 @@
 
 已测试：Apple Silicon MacBook Pro、macOS 26、Studio Display、BenQ iScreenBar（USB VID 0x04A5 / PID 0x2501）。其他系统和设备尚未全面验证。
 
-先安装 Xcode Command Line Tools，然后运行：
+需要完整的 Xcode 16 或更高版本（仅安装 Command Line Tools 不够）。从 App Store 安装 Xcode 后运行：
 
 ```bash
-xcode-select --install
+sudo xcode-select -s /Applications/Xcode.app
 git clone https://github.com/rogerbush007-a11y/iScreenBar-StudioDisplay-Sync.git
 cd iScreenBar-StudioDisplay-Sync
 ./scripts/install.sh
 ```
 
-脚本本机编译、临时签名，安装到 `~/Applications/iScreen Menu.app`，创建用户级 LaunchAgent，登录后自动运行。安装无需管理员密码；防止休眠的强制层另需管理员授权。
+脚本使用 Xcode 工程本机编译、临时签名，安装到 `~/Applications/iScreen Menu.app`，创建用户级 LaunchAgent，登录后自动运行。安装无需管理员密码；防止休眠的强制层另需管理员授权。
 
 日常灯控直接通过 USB HID 执行，不依赖官方 App。建议避免两个软件同时自动写入灯光设置。相机自动视频模式和灯体硬件记忆尚未完全对齐，不宣称完整替代官方所有功能。
 
@@ -68,6 +68,10 @@ launchctl print gui/$(id -u)/local.qiu.iScreenBarStudioSync
 ./scripts/build.sh
 ```
 
-卸载将 App 和 LaunchAgent 移至废纸篓，保留日志。构建产物位于 `build/iScreen Menu.app`。目前为本机临时签名，无 Developer ID 公证或自动更新。
+卸载将 App 和 LaunchAgent 移至废纸篓，保留日志。构建产物位于 `build/iScreen Menu.app`。
+
+开发时用 Xcode 打开 `iScreenMenu.xcodeproj`。工程由 `project.yml` 通过 [XcodeGen](https://github.com/yonaskolb/XcodeGen) 生成；修改 `project.yml` 后运行 `xcodegen generate`，并同时提交两者。界面文字通过 `Resources/Localizable.xcstrings` 本地化（英文为源语言，含简体中文翻译）。
+
+目前为本机临时签名，无 Developer ID 公证或自动更新。
 
 源码无网络请求、分析或云端依赖。参见 [安全说明](SECURITY.md)、[商标声明](NOTICE.md)、[MIT 许可证](LICENSE)。
