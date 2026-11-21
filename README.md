@@ -1,30 +1,33 @@
 # iScreen Menu
-**Screen and Light Controller：灯光、双屏联动与 Mac 辅助控制，集中在菜单栏。**
 
-最初是为 Studio Display 补上 iScreenBar 熄屏同步，现在加入亮度联动、环境光规则、自动色温与内屏管理。非官方独立项目，与 BenQ、Apple 无隶属关系。最新版源码继续在这个原仓库以 MIT 许可证公开。
+English · [简体中文](README.zh-CN.md)
 
-## 界面与功能
+**Screen and Light Controller: Lighting, dual-display synchronization, and Mac auxiliary control—all centralized in the menu bar.**
 
-详见 [截图使用指南](docs/UI-GUIDE.zh-CN.md) · [完整功能清单](docs/FEATURES.zh-CN.md)。
+Originally created to add "screen-off synchronization" for the iScreenBar when used with a Studio Display, this tool has evolved to include brightness synchronization, ambient light rules, automatic color temperature adjustment, and internal display management. This is an independent, unofficial project with no affiliation to BenQ or Apple. The source code for the latest version remains publicly available in this repository under the MIT License.
 
-| 模块 | 功能 |
-| --- | --- |
-| 快捷控制 | 灯光、自动感光、入座检测、视频模式、亮度跟随、熄屏同步、自动色温、双屏亮度、防止休眠 |
-| 灯光调节 | 亮度与 2700–6500K 色温，支持物理操作后的状态回读 |
-| 亮度联动 | 保留当前亮度差，实现 MacBook ↔ Studio Display → iScreenBar 联动 |
-| 环境光标定 | 使用 Studio Display 传感器，分别保存明亮关灯、昏暗开灯阈值 |
-| 自动色温 | 按时间变化，白天偏冷、夜间偏暖；不是测量环境色温 |
-| 内屏管理 | 内屏开关、0°/90°/270° 旋转、5 秒确认回退、外屏断开恢复 |
-| Studio Display 按钮 | 黑色遮罩，保持窗口布局；**不关闭背光，不等同于硬件节电** |
-| 预设 | 保存灯光模式、按前台应用切换模式；独立保存旋转预设 |
+## Interface and Features
 
-图标黄色表示灯亮，灰色表示灯灭，红色提示异常；悬停显示亮度和色温。App 不占 Dock 位置。
+See the [UI Guide (Screenshots)](docs/UI-GUIDE.zh-CN.md) and the [Full Feature List](docs/FEATURES.zh-CN.md) for details.
 
-## 安装
+| Module                      | Features                                                     |
+| --------------------------- | ------------------------------------------------------------ |
+| Quick Controls              | Lighting, ambient light sensing, presence detection, video mode, brightness synchronization, screen-off sync, auto color temperature, dual-display brightness, and "prevent sleep" mode. |
+| Light Adjustment            | Control brightness and color temperature (2700–6500K); supports state feedback after physical adjustments. |
+| Brightness Sync             | Maintains relative brightness differences across devices (MacBook ↔ Studio Display → iScreenBar). |
+| Ambient Light Calibration   | Uses the Studio Display’s built-in sensors to define thresholds for "bright (lights off)" and "dim (lights on)" conditions. |
+| Auto Color Temp             | Adjusts color temperature based on the time of day (cooler during the day, warmer at night); does not measure actual ambient color temperature. |
+| Internal Display Management | Toggle internal display on/off, rotate (0°/90°/270°), auto-revert after 5 seconds if not confirmed, and restore settings upon external display disconnection. |
+| Studio Display "Off"        | Applies a black overlay while preserving window layout; **does not turn off the backlight** (not equivalent to hardware power-saving). |
+| Presets                     | Save lighting modes, switch modes based on the active foreground application, and store display rotation presets. |
 
-已测试：Apple Silicon MacBook Pro、macOS 26、Studio Display、BenQ iScreenBar（USB VID 0x04A5 / PID 0x2501）。其他系统和设备尚未全面验证。
+The icon appears yellow when the light is on, gray when it is off, and red to indicate an issue. Hovering over the icon displays the current brightness and color temperature. The app does not occupy a space in the Dock.
 
-先安装 Xcode Command Line Tools，然后运行：
+## Installation
+
+Tested on: Apple Silicon MacBook Pro, macOS 26, Studio Display, and BenQ iScreenBar (USB VID 0x04A5 / PID 0x2501). Other systems and devices have not been fully verified.
+
+First, install the Xcode Command Line Tools, then run:
 
 ```bash
 xcode-select --install
@@ -33,19 +36,19 @@ cd iScreenBar-StudioDisplay-Sync
 ./scripts/install.sh
 ```
 
-脚本本机编译、临时签名，安装到 `~/Applications/iScreen Menu.app`，创建用户级 LaunchAgent，登录后自动运行。安装无需管理员密码；防止休眠的强制层另需管理员授权。
+The script performs a native build and applies a temporary signature, installing the application to `~/Applications/iScreen Menu.app`. It also creates a user-level LaunchAgent to ensure the app runs automatically upon login. No administrator password is required for the installation; however, the optional "prevent sleep" feature requires administrator authorization.
 
-日常灯控直接通过 USB HID 执行，不依赖官方 App。建议避免两个软件同时自动写入灯光设置。相机自动视频模式和灯体硬件记忆尚未完全对齐，不宣称完整替代官方所有功能。
+Daily light control is handled directly via USB HID, independent of the official application. It is recommended to avoid running both this software and the official application simultaneously, as both may attempt to write light settings automatically. Please note that the automatic video mode (linked to the camera) and the hardware-based memory of the light bar are not yet fully synchronized; therefore, this software is not intended as a complete replacement for all official features.
 
-## 使用规则
+## Usage Guidelines
 
-- 亮度跟随与灯体自动感光互斥，关闭跟随后保留当前亮度。
-- 环境光采用近 10 秒中位数。明亮关灯约 30 秒，达到昏暗开灯点约 30 秒；环境关灯后的渐进回开约 45 秒。带回差与持续时间判断，不是越过数值就立即切换。
-- 旋转预设开启：连接 Studio Display 时应用保存角度。关闭：回到 0°，重新连接也请求保持 0°。
-- 外屏断开请求强制恢复内屏。一般显示配置操作避开锁屏/唤醒切换，断开恢复是例外。
-- 防止休眠使用 caffeinate 和管理员授权的 pmset disablesleep，关闭或退出后尝试释放。请实际验证本机合盖、锁屏与恢复行为。
+- Brightness synchronization and the light bar’s built-in ambient light sensor are mutually exclusive; if synchronization is disabled, the current brightness level is maintained.
+- Ambient light readings are calculated using the median value over the preceding 10 seconds. It takes approximately 30 seconds to trigger the light to turn off in bright conditions, and about 30 seconds to turn it on when the environment becomes dim. A gradual reactivation after the light has been turned off due to ambient brightness takes approximately 45 seconds. The system employs hysteresis and duration-based logic, meaning state changes do not occur immediately upon crossing a specific threshold.
+- When "Rotation Preset" is enabled, the saved angle is applied whenever the Studio Display is connected. When disabled, the angle resets to 0°, and the system will request that it remain at 0° upon reconnection.
+- If an external display is disconnected, the system will attempt to force the internal display to resume. While general display configuration operations are designed to avoid interference during screen locking or waking, the restoration process upon disconnection is an exception.
+- The "prevent sleep" feature utilizes `caffeinate` and an administrator-authorized `pmset disablesleep` command; the software attempts to release these settings upon closure or exit. Please verify the behavior on your specific machine regarding lid closure, screen locking, and system wake-up.
 
-## 验证与限制
+## Verification and Limitations
 
 ```bash
 ./scripts/check.sh
@@ -53,18 +56,18 @@ tail -f ~/Library/Logs/iScreenBarStudioSync.log
 launchctl print gui/$(id -u)/local.qiu.iScreenBarStudioSync
 ```
 
-2026-10-05 的“关闭内屏后拔掉外屏恢复”已由使用者实际确认；2026-10-06 的旋转预设关闭回 0°已构建部署，仍待新一轮插拔验收。构建通过、系统状态回读不代表面板确实发光。
+Restoring the internal display when the external display is unplugged while the internal display is turned off (2026-10-05) has been confirmed by a user on real hardware. Returning to 0° when the rotation preset is turned off (2026-10-06) has been built and deployed, but still needs another round of plug/unplug testing. Note that a successful build or a successful read-back of system state does not guarantee that the light panel is actually emitting light.
 
-显示控制依赖 macOS 私有 SkyLight / MonitorPanel / DisplayServices 接口，系统升级后需要复测。USB 报文针对特定灯型，其他 ScreenBar 型号不保证兼容。虚拟分屏实验不属于当前正式功能。
+Display control relies on private macOS APIs—SkyLight, MonitorPanel, and DisplayServices—which may require re-testing following system updates. USB command packets are specific to certain light models; compatibility with other ScreenBar models is not guaranteed. The virtual split-screen feature is experimental and not part of the official, production-ready functionality.
 
-## 卸载与开发
+## Uninstallation and Development
 
 ```bash
 ./scripts/uninstall.sh
-# 仅构建，不安装：
+# Build only (without installation):
 ./scripts/build.sh
 ```
 
-卸载将 App 和 LaunchAgent 移至废纸篓，保留日志。构建产物位于 `build/iScreen Menu.app`。目前为本机临时签名，无 Developer ID 公证或自动更新。
+Uninstallation moves the app and the `LaunchAgent` to the Trash, while preserving log files. Build artifacts are located in `build/iScreen Menu.app`. Currently, the app uses a local, temporary signature; it lacks a Developer ID notarization and does not support automatic updates.
 
-源码无网络请求、分析或云端依赖。参见 [安全说明](SECURITY.md)、[商标声明](NOTICE.md)、[MIT 许可证](LICENSE)。
+The source code contains no network requests, analytics, or cloud-based dependencies. Please refer to the [Security Notice](SECURITY.md), [Trademark Notice](NOTICE.md), and the [MIT License](LICENSE).
