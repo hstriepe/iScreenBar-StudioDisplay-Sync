@@ -23,6 +23,8 @@
 
 图标黄色表示灯亮，灰色表示灯灭，红色提示异常；悬停显示亮度和色温。App 不占 Dock 位置。
 
+界面支持英文和简体中文，跟随 macOS 语言设置。若只想让本 App 使用中文，可在“系统设置 › 通用 › 语言与地区 › 应用程序”中选择，然后重启 App。
+
 ## 安装
 
 已测试：Apple Silicon MacBook Pro、macOS 26、Studio Display、BenQ iScreenBar（USB VID 0x04A5 / PID 0x2501）。其他系统和设备尚未全面验证。

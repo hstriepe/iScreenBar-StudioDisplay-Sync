@@ -1,6 +1,932 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@  ·  Saved, not enabled" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@  ·  已保存，未启用"
+          }
+        }
+      }
+    },
+    "%@  ·  Thresholds overlap; may toggle repeatedly" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@  ·  阈值重叠，可能反复开关"
+          }
+        }
+      }
+    },
+    "%lld min" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld 分钟"
+          }
+        }
+      }
+    },
+    "Adjust color temperature automatically by time of day" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "根据当前时间自动调整色温"
+          }
+        }
+      }
+    },
+    "Ambient %lld" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前环境 %lld"
+          }
+        }
+      }
+    },
+    "Ambient --" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "当前环境 --"
+          }
+        }
+      }
+    },
+    "Ambient Light Calibration" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "环境光标定"
+          }
+        }
+      }
+    },
+    "Ambient light not calibrated yet" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "尚未完成环境标定"
+          }
+        }
+      }
+    },
+    "Apply Automatically When Studio Display Connects" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "连接 Studio Display 时自动启用"
+          }
+        }
+      }
+    },
+    "Apply “%@”" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用“%@”"
+          }
+        }
+      }
+    },
+    "Auto Light" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动感光"
+          }
+        }
+      }
+    },
+    "Auto Light Paused" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "感光暂停"
+          }
+        }
+      }
+    },
+    "Auto Temp" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动色温"
+          }
+        }
+      }
+    },
+    "Auto light can't be turned on while the ambient off-lock is active" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "环境关灯锁定期间不可开启自动感光"
+          }
+        }
+      }
+    },
+    "Away Delay" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "离席时间"
+          }
+        }
+      }
+    },
+    "Before Auto-Apply" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动启用前"
+          }
+        }
+      }
+    },
+    "Bind" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "绑定"
+          }
+        }
+      }
+    },
+    "Bind App" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "绑定应用"
+          }
+        }
+      }
+    },
+    "Bound: %@" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "已绑定 %@"
+          }
+        }
+      }
+    },
+    "Bright: Off" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "明亮关灯"
+          }
+        }
+      }
+    },
+    "Brightness" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "亮度"
+          }
+        }
+      }
+    },
+    "Built-in" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "内屏"
+          }
+        }
+      }
+    },
+    "Built-in display toggle" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "内屏开关"
+          }
+        }
+      }
+    },
+    "Can't read the Studio Display light sensor right now" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "暂时无法读取 Studio Display 光线传感器"
+          }
+        }
+      }
+    },
+    "Cancel" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "取消"
+          }
+        }
+      }
+    },
+    "Choose an App to Bind" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择要绑定的应用"
+          }
+        }
+      }
+    },
+    "Click to save the current ambient value as the bright (light off) point" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "点击后将当前环境值保存为明亮关灯点"
+          }
+        }
+      }
+    },
+    "Click to save the current ambient value as the dim (light on) point" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "点击后将当前环境值保存为昏暗开灯点"
+          }
+        }
+      }
+    },
+    "Color Temp" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "色温"
+          }
+        }
+      }
+    },
+    "Couldn't Switch Studio Display" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法切换 Studio Display"
+          }
+        }
+      }
+    },
+    "Couldn't Turn On Keep Awake" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法开启防止休眠"
+          }
+        }
+      }
+    },
+    "Dim: On" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "昏暗开灯"
+          }
+        }
+      }
+    },
+    "Displays & Rotation" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示屏与旋转"
+          }
+        }
+      }
+    },
+    "Enable" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用"
+          }
+        }
+      }
+    },
+    "Enable Preset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "启用预设"
+          }
+        }
+      }
+    },
+    "Favorite" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我的最爱"
+          }
+        }
+      }
+    },
+    "High" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "高"
+          }
+        }
+      }
+    },
+    "Keep Awake" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "防止休眠"
+          }
+        }
+      }
+    },
+    "Keep Built-in Display Rotation?" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保留内屏旋转？"
+          }
+        }
+      }
+    },
+    "Keep Rotation" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保留旋转"
+          }
+        }
+      }
+    },
+    "Light" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "灯光"
+          }
+        }
+      }
+    },
+    "Light Adjustment" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "灯光调节"
+          }
+        }
+      }
+    },
+    "Light Presets" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "灯光预设"
+          }
+        }
+      }
+    },
+    "Link Screens" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "双屏亮度"
+          }
+        }
+      }
+    },
+    "Locks the current brightness difference between the MacBook display and Studio Display; adjusting either one moves both" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "锁定 MacBook 内屏与 Studio Display 当前亮度差，调节任意一块时双向跟随"
+          }
+        }
+      }
+    },
+    "Low" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "低"
+          }
+        }
+      }
+    },
+    "Match Screen" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "亮度跟随"
+          }
+        }
+      }
+    },
+    "Medium" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "中"
+          }
+        }
+      }
+    },
+    "Mode Center" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "模式中心"
+          }
+        }
+      }
+    },
+    "Mode Center…" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "模式中心设置…"
+          }
+        }
+      }
+    },
+    "My Mode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我的模式"
+          }
+        }
+      }
+    },
+    "My Rotation Preset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我的旋转预设"
+          }
+        }
+      }
+    },
+    "New Scene Mode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新增场景模式"
+          }
+        }
+      }
+    },
+    "Night Work" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "夜间工作"
+          }
+        }
+      }
+    },
+    "No available Studio Display found." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未找到可用的 Studio Display。"
+          }
+        }
+      }
+    },
+    "Portrait Dual" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "竖屏双屏"
+          }
+        }
+      }
+    },
+    "Presence" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "入座检测"
+          }
+        }
+      }
+    },
+    "Presence Detection" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "入座检测设置"
+          }
+        }
+      }
+    },
+    "Presence Paused" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "入座暂停"
+          }
+        }
+      }
+    },
+    "Presence detection can't be turned on while the light-off lock is active" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关灯锁定期间不可开启入座检测"
+          }
+        }
+      }
+    },
+    "Prevents sleep on battery, on power, or with the lid closed; needs administrator authorization the first time" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在电池、接通电源或合盖时阻止休眠；首次开启需要管理员授权"
+          }
+        }
+      }
+    },
+    "Pure black overlay; doesn't disconnect the display or change window layout. Double-click the black screen or click the button again to restore" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "纯黑遮罩，不断开显示器、不改变窗口布局；双击黑屏或再次点击按钮恢复"
+          }
+        }
+      }
+    },
+    "Quick Controls" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "快捷控制"
+          }
+        }
+      }
+    },
+    "Quickly switch between lighting presets" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "快速切换预设灯光场景"
+          }
+        }
+      }
+    },
+    "Revert" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "恢复原状"
+          }
+        }
+      }
+    },
+    "Reverting to %lld° in %lld seconds unless you confirm." : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Reverting to %1$lld° in %2$lld seconds unless you confirm."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%2$lld 秒内未确认，将恢复到 %1$lld°。"
+          }
+        }
+      }
+    },
+    "Reverting to %lld° in 5 seconds unless you confirm." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "5 秒内未确认，将恢复到 %lld°。"
+          }
+        }
+      }
+    },
+    "Rotate %lld°" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "旋转 %lld°"
+          }
+        }
+      }
+    },
+    "Rotate —" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "旋转 —"
+          }
+        }
+      }
+    },
+    "Rotation Preset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "旋转预设"
+          }
+        }
+      }
+    },
+    "Save" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存"
+          }
+        }
+      }
+    },
+    "Save Current as Rotation Preset…" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存当前为旋转预设…"
+          }
+        }
+      }
+    },
+    "Save New Mode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存新模式"
+          }
+        }
+      }
+    },
+    "Save Rotation Preset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存旋转预设"
+          }
+        }
+      }
+    },
+    "Saves the built-in display on/off state, rotation, and main display role." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "记录内屏开关、旋转角度和主屏角色。"
+          }
+        }
+      }
+    },
+    "Saves the current brightness, color temperature, and video mode." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "记录当前亮度、色温和视频模式。"
+          }
+        }
+      }
+    },
+    "Sensitivity" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "侦测灵敏度"
+          }
+        }
+      }
+    },
+    "Sleep Sync" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "熄屏同步"
+          }
+        }
+      }
+    },
+    "Turn off auto light" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关闭自动感光"
+          }
+        }
+      }
+    },
+    "Turn on auto light" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开启自动感光"
+          }
+        }
+      }
+    },
+    "Turn the lamp's auto-light on or off with the official HID command" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用官方 HID 切换指令开启或关闭自动感光"
+          }
+        }
+      }
+    },
+    "Turn the lamp's presence detection on or off" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开启或关闭灯体入座检测"
+          }
+        }
+      }
+    },
+    "Turning auto light off…" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在关闭自动感光"
+          }
+        }
+      }
+    },
+    "Turning auto light on…" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在开启自动感光"
+          }
+        }
+      }
+    },
+    "Video Mode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "视频模式"
+          }
+        }
+      }
+    },
+    "Was on; paused while the ambient off-lock is active and restored automatically afterward" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "原设置已开启；环境关灯锁定期间临时暂停，解除后自动恢复"
+          }
+        }
+      }
+    },
+    "Was on; paused while the light-off lock is active and restored automatically afterward" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "原设置已开启；关灯锁定期间临时暂停，解除后自动恢复"
+          }
+        }
+      }
+    },
+    "Wind Down" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "睡前放松"
+          }
+        }
+      }
+    },
+    "iScreenBar status" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iScreenBar 状态"
+          }
+        }
+      }
+    },
+    "macOS couldn't start caffeinate. Please try again later." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS 未能启动 caffeinate，请稍后重试。"
+          }
+        }
+      }
+    },
+    "sync OK" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同步正常"
+          }
+        }
+      }
+    },
+    "sync error" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同步异常"
+          }
+        }
+      }
+    }
   },
   "version" : "1.0"
 }

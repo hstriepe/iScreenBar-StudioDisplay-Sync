@@ -23,6 +23,8 @@ See the [UI Guide (Screenshots)](docs/UI-GUIDE.zh-CN.md) and the [Full Feature L
 
 The icon appears yellow when the light is on, gray when it is off, and red to indicate an issue. Hovering over the icon displays the current brightness and color temperature. The app does not occupy a space in the Dock.
 
+The interface is in English and Simplified Chinese and follows the macOS language. To use Chinese for this app only, choose it under System Settings › General › Language & Region › Applications, then restart the app.
+
 ## Installation
 
 Tested on: Apple Silicon MacBook Pro, macOS 26, Studio Display, and BenQ iScreenBar (USB VID 0x04A5 / PID 0x2501). Other systems and devices have not been fully verified.
