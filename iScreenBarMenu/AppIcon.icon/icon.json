@@ -9,12 +9,12 @@
     {
       "layers" : [
         {
-          "image-name" : "AppIcon-light-over-monitor 3.png",
-          "name" : "AppIcon-light-over-monitor 3",
+          "image-name" : "AppIcon-light-over-monitor.png",
+          "name" : "AppIcon-light-over-monitor",
           "position" : {
             "scale" : 0.85,
             "translation-in-points" : [
-              0,
+              10,
               -59.5
             ]
           }

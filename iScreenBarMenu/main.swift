@@ -11,6 +11,8 @@ private let iScreenBarProductID = 0x2501
 private let appleDisplayVendorID: UInt32 = 0x0610
 // Studio Display models report different model numbers (0xAE46, 0xAE3A observed).
 private let studioDisplayProductIDs: Set<UInt32> = [0xAE46, 0xAE3A]
+// USB product IDs of the Studio Display HID interfaces (ambient light sensor). Firmware 17.0 changed 0x1118 to 0x1114.
+private let studioDisplaySensorProductIDs = [0x1118, 0x1114]
 private let pollInterval: TimeInterval = 0.25
 
 // Internal so Automation.swift and ScriptingSupport.swift can log too.
@@ -1044,9 +1046,20 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
     }
 
     func updateDisplayAmbientProxy(_ value: Int?, sourceName: String) {
+        let availabilityChanged = (currentDisplayAmbientProxy == nil) != (value == nil)
         currentDisplayAmbientProxy = value
         currentAmbientSourceName = sourceName
+        if availabilityChanged { updateAmbientControlAvailability() }
         if popover.isShown { updateAmbientStatusLabel() }
+    }
+
+    // Capture needs a sensor reading; the rules switch also needs at least one saved threshold.
+    // Kept separate from refreshControls so the menu and an open panel follow the sensor as soon as it appears or drops out.
+    private func updateAmbientControlAvailability() {
+        let hasReading = currentDisplayAmbientProxy != nil
+        captureBrightButton.isEnabled = hasReading
+        captureDarkButton.isEnabled = hasReading
+        ambientEnableSwitch.isEnabled = hasReading && (ambientCloseThreshold != nil || ambientOpenThreshold != nil)
     }
 
     @discardableResult
@@ -1197,10 +1210,11 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         captureBrightButton.state = .off
         captureDarkButton.state = .off
         ambientEnableSwitch.state = areAmbientRulesEnabled ? .on : .off
-        ambientEnableSwitch.isEnabled = currentDisplayAmbientProxy != nil &&
-            (ambientCloseThreshold != nil || ambientOpenThreshold != nil)
+        updateAmbientControlAvailability()
         let currentText = currentDisplayAmbientProxy.map { String(localized: "Ambient \($0)") } ?? String(localized: "Ambient --")
-        if let close = ambientCloseThreshold, let open = ambientOpenThreshold, open >= close {
+        if currentDisplayAmbientProxy != nil, ambientCloseThreshold == nil, ambientOpenThreshold == nil {
+            ambientStatusLabel.stringValue = String(localized: "\(currentText)  ·  Capture a threshold to enable")
+        } else if let close = ambientCloseThreshold, let open = ambientOpenThreshold, open >= close {
             ambientStatusLabel.stringValue = String(localized: "\(currentText)  ·  Thresholds overlap; may toggle repeatedly")
         } else if !areAmbientRulesEnabled, ambientCloseThreshold != nil || ambientOpenThreshold != nil {
             ambientStatusLabel.stringValue = String(localized: "\(currentText)  ·  Saved, not enabled")
@@ -2036,6 +2050,7 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         }
         menu.addItem(submenuItem(String(localized: "Lamp"), lampMenu))
 
+        updateAmbientControlAvailability()
         menu.addItem(toggleItem(String(localized: "Ambient Rules"), control: ambientEnableSwitch))
 
         let displayMenu = NSMenu()
@@ -2587,8 +2602,7 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         presenceSwitch.isEnabled = enabled && !isAmbientPresenceLockActive && !isScreenSleepPresenceLockActive
         videoModeSwitch.isEnabled = enabled
         powerSyncSwitch.isEnabled = enabled
-        captureBrightButton.isEnabled = currentDisplayAmbientProxy != nil
-        captureDarkButton.isEnabled = currentDisplayAmbientProxy != nil
+        updateAmbientControlAvailability()
         presenceDelayPopup.isEnabled = enabled
         presenceSensitivityPopup.isEnabled = enabled
     }
@@ -3010,7 +3024,10 @@ private final class StudioDisplayAmbientSensor {
             log("Could not open Studio Display ambient light sensor")
             return
         }
-        _ = attachSensor()
+        if !attachSensor() {
+            let ids = studioDisplaySensorProductIDs.map { String(format: "0x%04X", $0) }.joined(separator: ", ")
+            log("Studio Display ambient light sensor not found (VID 0x05AC, PID \(ids))")
+        }
     }
 
     deinit {
@@ -3035,13 +3052,15 @@ private final class StudioDisplayAmbientSensor {
 
     private static func makeManager() -> IOHIDManager {
         let manager = IOHIDManagerCreate(kCFAllocatorDefault, IOOptionBits(kIOHIDOptionsTypeNone))
-        let matching: [String: Any] = [
-            kIOHIDVendorIDKey as String: 0x05AC,
-            kIOHIDProductIDKey as String: 0x1118,
-            kIOHIDPrimaryUsagePageKey as String: 0x20,
-            kIOHIDPrimaryUsageKey as String: 0x41
-        ]
-        IOHIDManagerSetDeviceMatching(manager, matching as CFDictionary)
+        let matching: [[String: Any]] = studioDisplaySensorProductIDs.map { productID in
+            [
+                kIOHIDVendorIDKey as String: 0x05AC,
+                kIOHIDProductIDKey as String: productID,
+                kIOHIDPrimaryUsagePageKey as String: 0x20,
+                kIOHIDPrimaryUsageKey as String: 0x41
+            ]
+        }
+        IOHIDManagerSetDeviceMatchingMultiple(manager, matching as CFArray)
         return manager
     }
 

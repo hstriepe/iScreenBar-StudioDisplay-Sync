@@ -2,13 +2,16 @@ import Foundation
 import IOKit.hid
 
 let manager = IOHIDManagerCreate(kCFAllocatorDefault, IOOptionBits(kIOHIDOptionsTypeNone))
-let matching: [String: Any] = [
-    kIOHIDVendorIDKey as String: 0x05AC,
-    kIOHIDProductIDKey as String: 0x1118,
-    kIOHIDPrimaryUsagePageKey as String: 0x20,
-    kIOHIDPrimaryUsageKey as String: 0x41
-]
-IOHIDManagerSetDeviceMatching(manager, matching as CFDictionary)
+// 0x1118 before Studio Display firmware 17.0, 0x1114 after.
+let matching: [[String: Any]] = [0x1118, 0x1114].map { productID in
+    [
+        kIOHIDVendorIDKey as String: 0x05AC,
+        kIOHIDProductIDKey as String: productID,
+        kIOHIDPrimaryUsagePageKey as String: 0x20,
+        kIOHIDPrimaryUsageKey as String: 0x41
+    ]
+}
+IOHIDManagerSetDeviceMatchingMultiple(manager, matching as CFArray)
 guard IOHIDManagerOpen(manager, IOOptionBits(kIOHIDOptionsTypeNone)) == kIOReturnSuccess,
       let devices = IOHIDManagerCopyDevices(manager) as? Set<IOHIDDevice>,
       let device = devices.first else {
