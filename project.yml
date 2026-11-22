@@ -45,7 +45,7 @@ targets:
         EXECUTABLE_NAME: iScreenMenu
         PRODUCT_BUNDLE_IDENTIFIER: org.windholm.iScreenMenu
         MARKETING_VERSION: "0.4"
-        CURRENT_PROJECT_VERSION: 34
+        CURRENT_PROJECT_VERSION: 36
         INFOPLIST_FILE: iScreenMenu/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         GENERATE_INFOPLIST_FILE: NO
@@ -79,7 +79,7 @@ targets:
         PRODUCT_NAME: iScreenMenuControls
         PRODUCT_BUNDLE_IDENTIFIER: org.windholm.iScreenMenu.Controls
         MARKETING_VERSION: "0.4"
-        CURRENT_PROJECT_VERSION: 34
+        CURRENT_PROJECT_VERSION: 36
         MACOSX_DEPLOYMENT_TARGET: "26.0"
         INFOPLIST_FILE: iScreenMenuControls/Info.plist
         GENERATE_INFOPLIST_FILE: NO
