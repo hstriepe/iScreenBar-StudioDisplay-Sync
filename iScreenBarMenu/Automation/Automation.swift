@@ -5,7 +5,7 @@ import WidgetKit
 
 // Automation surface shared by AppleScript (ScriptingSupport.swift), App Intents (below),
 // and the Control Center extension (Darwin notifications, Shared/ControlActions.swift).
-// Everything runs on the main thread against the one StatusIndicator in main.swift.
+// Everything runs on the main thread against the one StatusIndicator created in main.swift.
 
 /// Settings that automation can read and turn on or off. Each maps to a control panel button.
 enum AutomationFeature: String, CaseIterable {
@@ -68,7 +68,7 @@ enum AutomationError: Error, LocalizedError, CustomLocalizedStringResourceConver
     }
 }
 
-/// Implemented by StatusIndicator in main.swift. Call on the main thread only.
+/// Implemented by StatusIndicator (StatusIndicator+Automation.swift). Call on the main thread only.
 protocol AutomationTarget: AnyObject {
     var isLampConnected: Bool { get }
     var lampBrightness: Int? { get }

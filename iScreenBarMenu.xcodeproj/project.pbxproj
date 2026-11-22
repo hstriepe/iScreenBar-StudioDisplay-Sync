@@ -7,21 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0268640EB1E9DE85AC7A3E38 /* DisplayLampSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B1B520A1D042A5C448E6F0 /* DisplayLampSync.swift */; };
+		0B6834741D3DFFF7494F9FF0 /* DisplayController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199C8A416735BB3295AE50AC /* DisplayController.swift */; };
+		0FE39C9F86CD8A63D3491FE9 /* LampController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A26ECF8EF31169B9D1C255 /* LampController.swift */; };
+		140B148BD8E9B1B1924A8A75 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C22BFEA053A0CF76C50F88 /* Logging.swift */; };
 		15EE127ECBF4184B1F59D1C2 /* LampState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D798EAC94DE77138251E1A5 /* LampState.swift */; };
+		1D4B48E9B3E97060952FBD03 /* StatusIndicator+Modes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C4E2D949D19105A575AA6A /* StatusIndicator+Modes.swift */; };
+		2367B3F0EAF2F612C4D54883 /* SettingsMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E60EAD509DFE5E35D14D15 /* SettingsMigration.swift */; };
+		24624AABB9511F4AC86632E6 /* BlackDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F3CE60EC01F76A9FD368835 /* BlackDisplayView.swift */; };
+		306BA1D6EF3EDE51E45172E7 /* StatusIndicator+Lamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FEAE63811C45F1FA599B9E0 /* StatusIndicator+Lamp.swift */; };
+		3095D9F4170BE268D20CCAC2 /* ScriptingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C3CFD0C27CE9F47B655A77 /* ScriptingSupport.swift */; };
 		39F7AB2463EDF3DA2CC086F8 /* ControlActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1FBC1FF4DB2E02C1AED963 /* ControlActions.swift */; };
-		54EB8F0D020A4361B2A3E01A /* ScriptingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292EEA1431B41EC26529136 /* ScriptingSupport.swift */; };
+		411D7551C1F9FF61D41F28E5 /* LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD144B1CEC69124A05C0D5 /* LoginItem.swift */; };
+		54DE75B460EB364B9BC1A4AA /* DisplayBrightnessReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18E8E2F648E9D964F6F9348 /* DisplayBrightnessReader.swift */; };
 		5B2CE789EAE98CE157E5AE61 /* iScreenBar Menu Controls.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 93A2701C0D7E472F92CC7D31 /* iScreenBar Menu Controls.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5B7538CE4BDF5AC6F52A8C84 /* AppShortcuts.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 00063A6C6B6A8F75E0E00FF8 /* AppShortcuts.xcstrings */; };
 		5C5722D1936100D277103CB2 /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88814CF4B5B375498B495DE /* Controls.swift */; };
 		5DB21A5E3D4E4325BAABDE77 /* LampState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D798EAC94DE77138251E1A5 /* LampState.swift */; };
 		5E647852EA7FE8B8323FD10C /* Help.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 32150E644526D32552F1D989 /* Help.rtfd */; };
-		61BC4A20ABD6F81D1FC3F518 /* Automation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF9398B0182BBFA627F3586 /* Automation.swift */; };
+		63373F7F89886D2E51BFD74E /* Automation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2C568461527313C47E6EEB /* Automation.swift */; };
+		671E723371B21FD0F1BBEE74 /* DisplayPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE3A0663FA2131F6F95B3C /* DisplayPreset.swift */; };
+		737567EBF62AFE19894A6370 /* HiddenMainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F1B9EB69AFBD0C6869D9BC /* HiddenMainMenu.swift */; };
+		7E74C8BAD6A68159C18FD8D3 /* StatusIndicator+Displays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787316F752B3794C48FBF1BA /* StatusIndicator+Displays.swift */; };
 		84A5E704831377CA255F0849 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 965296E55828CE996BA4121B /* Localizable.xcstrings */; };
 		8964DB79D3BD91A8BD9F6C66 /* iScreenBarMenu.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 439D1091E023518F9C3E540F /* iScreenBarMenu.sdef */; };
 		8DA7201B9098027FFDD5759C /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CA8E67D9D23414DEA244AD5E /* Localizable.xcstrings */; };
 		934F1866CF106D549805FD2E /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = B64DD89FF4EFF1AE32696745 /* AppIcon.icon */; };
+		95CF6D2C8CA225B27D3CFBBC /* HelpWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A330F0127C4C06B6BDA7C5F /* HelpWindowController.swift */; };
+		9A7A12BDE30F670EAF4D175B /* KeepAwakeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 561CF0DBA5E5FBA51A699A46 /* KeepAwakeController.swift */; };
+		9B64AB9DB9BB54F0CE00FBD2 /* StatusIndicator+Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3849C3C44F5D2F3E958639F1 /* StatusIndicator+Menu.swift */; };
+		A1C2E477100290D592249D75 /* StatusIndicator+Panel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C870FB6FFAF06D437833F6 /* StatusIndicator+Panel.swift */; };
+		A5EEAB3C404B61F245B94B49 /* StudioDisplayAmbientSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C900551C6652DE583D0 /* StudioDisplayAmbientSensor.swift */; };
+		A66B0FF4A691C59787C6CFFE /* StatusIndicator+Ambient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F13F1B7A055C90097F77493 /* StatusIndicator+Ambient.swift */; };
+		ACAA611D74B0DE9146550A2E /* SystemDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4E541F1370F33EEAD2C4A4 /* SystemDisplay.swift */; };
+		AE18C9CC2C124B94348C09D9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA755A6DDC7E3217F9DC25 /* Constants.swift */; };
+		B3E0192124BABFB5090567D7 /* StatusIndicator+Automation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EF8669A5409B0D265434B3 /* StatusIndicator+Automation.swift */; };
+		B8A7EDE3A6196030FD4ABC1A /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269E1AF228891A531993D99 /* Controls.swift */; };
+		C412C27AA225B84F8E4BAD50 /* StatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D024FCB59808A236DFC67D4B /* StatusIndicator.swift */; };
 		CAA12ABBAD43AAFAE3ECAF87 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE76FC85ED039F0B17515A /* main.swift */; };
 		E6271179BEB49E55F78BAF59 /* ControlActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1FBC1FF4DB2E02C1AED963 /* ControlActions.swift */; };
+		FDE1E35AC364627D8F5C8832 /* SavedMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F6002DC3C75D0ABAE84B67 /* SavedMode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,34 +76,74 @@
 /* Begin PBXFileReference section */
 		00063A6C6B6A8F75E0E00FF8 /* AppShortcuts.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AppShortcuts.xcstrings; sourceTree = "<group>"; };
 		08DE76FC85ED039F0B17515A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		0F3CE60EC01F76A9FD368835 /* BlackDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackDisplayView.swift; sourceTree = "<group>"; };
+		0FEAE63811C45F1FA599B9E0 /* StatusIndicator+Lamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusIndicator+Lamp.swift"; sourceTree = "<group>"; };
+		17EF8669A5409B0D265434B3 /* StatusIndicator+Automation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusIndicator+Automation.swift"; sourceTree = "<group>"; };
+		18E60EAD509DFE5E35D14D15 /* SettingsMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMigration.swift; sourceTree = "<group>"; };
+		199C8A416735BB3295AE50AC /* DisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayController.swift; sourceTree = "<group>"; };
+		25C870FB6FFAF06D437833F6 /* StatusIndicator+Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusIndicator+Panel.swift"; sourceTree = "<group>"; };
+		27B1B520A1D042A5C448E6F0 /* DisplayLampSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLampSync.swift; sourceTree = "<group>"; };
+		2ECE3A0663FA2131F6F95B3C /* DisplayPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayPreset.swift; sourceTree = "<group>"; };
+		3849C3C44F5D2F3E958639F1 /* StatusIndicator+Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusIndicator+Menu.swift"; sourceTree = "<group>"; };
 		439D1091E023518F9C3E540F /* iScreenBarMenu.sdef */ = {isa = PBXFileReference; path = iScreenBarMenu.sdef; sourceTree = "<group>"; };
 		452D4BB0F6F4D3D3BF9E07E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "zh-Hans"; path = "zh-Hans.lproj/Help.rtfd"; sourceTree = "<group>"; };
-		5292EEA1431B41EC26529136 /* ScriptingSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptingSupport.swift; sourceTree = "<group>"; };
-		6BF9398B0182BBFA627F3586 /* Automation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Automation.swift; sourceTree = "<group>"; };
+		46956C900551C6652DE583D0 /* StudioDisplayAmbientSensor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudioDisplayAmbientSensor.swift; sourceTree = "<group>"; };
+		49C4E2D949D19105A575AA6A /* StatusIndicator+Modes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusIndicator+Modes.swift"; sourceTree = "<group>"; };
+		4DAA755A6DDC7E3217F9DC25 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		55A26ECF8EF31169B9D1C255 /* LampController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampController.swift; sourceTree = "<group>"; };
+		561CF0DBA5E5FBA51A699A46 /* KeepAwakeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeepAwakeController.swift; sourceTree = "<group>"; };
+		63F6002DC3C75D0ABAE84B67 /* SavedMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedMode.swift; sourceTree = "<group>"; };
+		787316F752B3794C48FBF1BA /* StatusIndicator+Displays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusIndicator+Displays.swift"; sourceTree = "<group>"; };
+		8A330F0127C4C06B6BDA7C5F /* HelpWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpWindowController.swift; sourceTree = "<group>"; };
 		8D798EAC94DE77138251E1A5 /* LampState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampState.swift; sourceTree = "<group>"; };
 		93A2701C0D7E472F92CC7D31 /* iScreenBar Menu Controls.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "iScreenBar Menu Controls.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		94C72C20401985FD869D9312 /* en */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = en; path = en.lproj/Help.rtfd; sourceTree = "<group>"; };
 		965296E55828CE996BA4121B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		9F13F1B7A055C90097F77493 /* StatusIndicator+Ambient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusIndicator+Ambient.swift"; sourceTree = "<group>"; };
+		A269E1AF228891A531993D99 /* Controls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
+		B18E8E2F648E9D964F6F9348 /* DisplayBrightnessReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayBrightnessReader.swift; sourceTree = "<group>"; };
+		B3C3CFD0C27CE9F47B655A77 /* ScriptingSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptingSupport.swift; sourceTree = "<group>"; };
+		B4AD144B1CEC69124A05C0D5 /* LoginItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginItem.swift; sourceTree = "<group>"; };
+		B5C22BFEA053A0CF76C50F88 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		B64DD89FF4EFF1AE32696745 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		B88814CF4B5B375498B495DE /* Controls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
+		BA2C568461527313C47E6EEB /* Automation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Automation.swift; sourceTree = "<group>"; };
 		CA8E67D9D23414DEA244AD5E /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		D024FCB59808A236DFC67D4B /* StatusIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusIndicator.swift; sourceTree = "<group>"; };
 		D7ACB17BBB257033950198B9 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		F5F1B9EB69AFBD0C6869D9BC /* HiddenMainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenMainMenu.swift; sourceTree = "<group>"; };
 		FE1FBC1FF4DB2E02C1AED963 /* ControlActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlActions.swift; sourceTree = "<group>"; };
 		FE6F979420C94DDC982F383E /* iScreenBar Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iScreenBar Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF4E541F1370F33EEAD2C4A4 /* SystemDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemDisplay.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		1B2CC592A74709CCA4B472A6 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				0F3CE60EC01F76A9FD368835 /* BlackDisplayView.swift */,
+				A269E1AF228891A531993D99 /* Controls.swift */,
+				8A330F0127C4C06B6BDA7C5F /* HelpWindowController.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		1CAF1DD2BD2F54C9953E9398 /* iScreenBarMenu */ = {
 			isa = PBXGroup;
 			children = (
+				4DC2844078B9149C784F6C4E /* App */,
+				2B2BAB59E3FCA8A28E1F5B2D /* Automation */,
+				97CE35694B4A72C459A8C804 /* Hardware */,
 				32150E644526D32552F1D989 /* Help.rtfd */,
+				58768AD54F03DAAE726029BE /* Models */,
+				46DF86EA6ABC65A2A2436445 /* StatusIndicator */,
+				9ADD604C6761AF8CA3262BE7 /* Sync */,
+				1B2CC592A74709CCA4B472A6 /* UI */,
 				B64DD89FF4EFF1AE32696745 /* AppIcon.icon */,
 				00063A6C6B6A8F75E0E00FF8 /* AppShortcuts.xcstrings */,
-				6BF9398B0182BBFA627F3586 /* Automation.swift */,
 				439D1091E023518F9C3E540F /* iScreenBarMenu.sdef */,
 				CA8E67D9D23414DEA244AD5E /* Localizable.xcstrings */,
 				08DE76FC85ED039F0B17515A /* main.swift */,
-				5292EEA1431B41EC26529136 /* ScriptingSupport.swift */,
 			);
 			path = iScreenBarMenu;
 			sourceTree = "<group>";
@@ -90,6 +155,51 @@
 				8D798EAC94DE77138251E1A5 /* LampState.swift */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		2B2BAB59E3FCA8A28E1F5B2D /* Automation */ = {
+			isa = PBXGroup;
+			children = (
+				BA2C568461527313C47E6EEB /* Automation.swift */,
+				B3C3CFD0C27CE9F47B655A77 /* ScriptingSupport.swift */,
+			);
+			path = Automation;
+			sourceTree = "<group>";
+		};
+		46DF86EA6ABC65A2A2436445 /* StatusIndicator */ = {
+			isa = PBXGroup;
+			children = (
+				D024FCB59808A236DFC67D4B /* StatusIndicator.swift */,
+				9F13F1B7A055C90097F77493 /* StatusIndicator+Ambient.swift */,
+				17EF8669A5409B0D265434B3 /* StatusIndicator+Automation.swift */,
+				787316F752B3794C48FBF1BA /* StatusIndicator+Displays.swift */,
+				0FEAE63811C45F1FA599B9E0 /* StatusIndicator+Lamp.swift */,
+				3849C3C44F5D2F3E958639F1 /* StatusIndicator+Menu.swift */,
+				49C4E2D949D19105A575AA6A /* StatusIndicator+Modes.swift */,
+				25C870FB6FFAF06D437833F6 /* StatusIndicator+Panel.swift */,
+			);
+			path = StatusIndicator;
+			sourceTree = "<group>";
+		};
+		4DC2844078B9149C784F6C4E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				4DAA755A6DDC7E3217F9DC25 /* Constants.swift */,
+				F5F1B9EB69AFBD0C6869D9BC /* HiddenMainMenu.swift */,
+				B5C22BFEA053A0CF76C50F88 /* Logging.swift */,
+				B4AD144B1CEC69124A05C0D5 /* LoginItem.swift */,
+				18E60EAD509DFE5E35D14D15 /* SettingsMigration.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		58768AD54F03DAAE726029BE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2ECE3A0663FA2131F6F95B3C /* DisplayPreset.swift */,
+				63F6002DC3C75D0ABAE84B67 /* SavedMode.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		606FD6B8D0CE88F0FA601C6F /* Products */ = {
@@ -108,6 +218,27 @@
 				965296E55828CE996BA4121B /* Localizable.xcstrings */,
 			);
 			path = iScreenBarMenuControls;
+			sourceTree = "<group>";
+		};
+		97CE35694B4A72C459A8C804 /* Hardware */ = {
+			isa = PBXGroup;
+			children = (
+				B18E8E2F648E9D964F6F9348 /* DisplayBrightnessReader.swift */,
+				199C8A416735BB3295AE50AC /* DisplayController.swift */,
+				561CF0DBA5E5FBA51A699A46 /* KeepAwakeController.swift */,
+				55A26ECF8EF31169B9D1C255 /* LampController.swift */,
+				46956C900551C6652DE583D0 /* StudioDisplayAmbientSensor.swift */,
+				FF4E541F1370F33EEAD2C4A4 /* SystemDisplay.swift */,
+			);
+			path = Hardware;
+			sourceTree = "<group>";
+		};
+		9ADD604C6761AF8CA3262BE7 /* Sync */ = {
+			isa = PBXGroup;
+			children = (
+				27B1B520A1D042A5C448E6F0 /* DisplayLampSync.swift */,
+			);
+			path = Sync;
 			sourceTree = "<group>";
 		};
 		DF30A2919745D70A21CECC3E = {
@@ -238,10 +369,35 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61BC4A20ABD6F81D1FC3F518 /* Automation.swift in Sources */,
+				63373F7F89886D2E51BFD74E /* Automation.swift in Sources */,
+				24624AABB9511F4AC86632E6 /* BlackDisplayView.swift in Sources */,
+				AE18C9CC2C124B94348C09D9 /* Constants.swift in Sources */,
 				E6271179BEB49E55F78BAF59 /* ControlActions.swift in Sources */,
+				B8A7EDE3A6196030FD4ABC1A /* Controls.swift in Sources */,
+				54DE75B460EB364B9BC1A4AA /* DisplayBrightnessReader.swift in Sources */,
+				0B6834741D3DFFF7494F9FF0 /* DisplayController.swift in Sources */,
+				0268640EB1E9DE85AC7A3E38 /* DisplayLampSync.swift in Sources */,
+				671E723371B21FD0F1BBEE74 /* DisplayPreset.swift in Sources */,
+				95CF6D2C8CA225B27D3CFBBC /* HelpWindowController.swift in Sources */,
+				737567EBF62AFE19894A6370 /* HiddenMainMenu.swift in Sources */,
+				9A7A12BDE30F670EAF4D175B /* KeepAwakeController.swift in Sources */,
+				0FE39C9F86CD8A63D3491FE9 /* LampController.swift in Sources */,
 				5DB21A5E3D4E4325BAABDE77 /* LampState.swift in Sources */,
-				54EB8F0D020A4361B2A3E01A /* ScriptingSupport.swift in Sources */,
+				140B148BD8E9B1B1924A8A75 /* Logging.swift in Sources */,
+				411D7551C1F9FF61D41F28E5 /* LoginItem.swift in Sources */,
+				FDE1E35AC364627D8F5C8832 /* SavedMode.swift in Sources */,
+				3095D9F4170BE268D20CCAC2 /* ScriptingSupport.swift in Sources */,
+				2367B3F0EAF2F612C4D54883 /* SettingsMigration.swift in Sources */,
+				A66B0FF4A691C59787C6CFFE /* StatusIndicator+Ambient.swift in Sources */,
+				B3E0192124BABFB5090567D7 /* StatusIndicator+Automation.swift in Sources */,
+				7E74C8BAD6A68159C18FD8D3 /* StatusIndicator+Displays.swift in Sources */,
+				306BA1D6EF3EDE51E45172E7 /* StatusIndicator+Lamp.swift in Sources */,
+				9B64AB9DB9BB54F0CE00FBD2 /* StatusIndicator+Menu.swift in Sources */,
+				1D4B48E9B3E97060952FBD03 /* StatusIndicator+Modes.swift in Sources */,
+				A1C2E477100290D592249D75 /* StatusIndicator+Panel.swift in Sources */,
+				C412C27AA225B84F8E4BAD50 /* StatusIndicator.swift in Sources */,
+				A5EEAB3C404B61F245B94B49 /* StudioDisplayAmbientSensor.swift in Sources */,
+				ACAA611D74B0DE9146550A2E /* SystemDisplay.swift in Sources */,
 				CAA12ABBAD43AAFAE3ECAF87 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,7 +442,7 @@
 				CODE_SIGN_ENTITLEMENTS = iScreenBarMenuControls/iScreenBarMenuControls.entitlements;
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 44;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -375,7 +531,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = iScreenBarMenuControls/iScreenBarMenuControls.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 44;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -403,7 +559,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 44;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				EXECUTABLE_NAME = iScreenBarMenu;
@@ -428,7 +584,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 43;
+				CURRENT_PROJECT_VERSION = 44;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				EXECUTABLE_NAME = iScreenBarMenu;

@@ -29,7 +29,7 @@ English · [简体中文](FEATURES.zh-CN.md)
 - When the Studio Display wakes, the lamp turns back on if this app turned it off.
 - While the screen is off, sleep sync has top priority: lamp auto-light, presence detection, or other logic must not turn the lamp back on.
 - The **Sleep Sync** button turns this feature on or off.
-- Exception, **Wake Screen** (off by default): presence detection keeps running while the screen is off. If the lamp turns itself on (no power command from the app in the last 3 seconds) while presence detection is on and no ambient off-lock is active, the app declares user activity to wake the display, like a key press. A locked Mac shows the lock screen. If the display is still asleep after 10 seconds, sleep sync turns the lamp off again and doesn't retry until the next wake.
+- Exception, **Wake Screen** (off by default): presence detection keeps running while the screen is off. If the lamp turns itself on after staying off for at least 60 seconds (with no power, auto-light, or presence command from the app in that time) while presence detection is on and no ambient off-lock is active, the app declares user activity to wake the display, like a key press. A locked Mac shows the lock screen. While you stay seated, for example right after locking the Mac, the lamp's sensor turns it back on within seconds; sleep sync turns it off again and the display stays asleep. If the display is still asleep 10 seconds after a wake request, sleep sync turns the lamp off again; the next time the lamp turns itself on (after another 60 seconds off) can wake it.
 - During lock and wake, all built-in display topology changes are paused to avoid conflicts with WindowServer's unlock transition.
 
 ## 4. iScreenBar brightness follows the Studio Display

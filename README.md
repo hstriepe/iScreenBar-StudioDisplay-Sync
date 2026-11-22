@@ -10,7 +10,7 @@ This is an independent, unofficial project with no affiliation to BenQ or Apple.
 
 ## Features
 
-See the [UI Guide](docs/UI-GUIDE.md) and the [Full Feature List](docs/FEATURES.md) for details.
+New here? Start with the [Quick Guide](docs/QUICK-GUIDE.md). See the [UI Guide](docs/UI-GUIDE.md) and the [Full Feature List](docs/FEATURES.md) for details.
 
 | Area | What it does |
 | --- | --- |
@@ -97,7 +97,7 @@ Ambient Rules only switch the lamp on and off. To have the lamp **dim** with the
 ### Other notes
 
 - Sleep Sync has priority: a dark room can't turn the lamp on while the display is asleep.
-- **Wake Screen** (switch in the Presence Detection section, or Lamp › Wake Screen on Presence) is the one exception. With Presence and Sleep Sync on, presence detection keeps running while the display sleeps. When you come back after the away delay and the lamp turns itself on, the app wakes the display. A locked Mac shows the lock screen; it isn't unlocked. It works only while the display sleeps, not when the whole Mac is asleep, and it reacts only to the lamp turning on, so someone walking past within range can wake it too. If the display doesn't wake within 10 seconds, Sleep Sync turns the lamp back off. While the ambient off-lock is active, presence detection stays paused and nothing wakes.
+- **Wake Screen** (switch in the Presence Detection section, or Lamp › Wake Screen on Presence) is the one exception. With Presence and Sleep Sync on, presence detection keeps running while the display sleeps. When you come back after the away delay and the lamp turns itself on, the app wakes the display. A locked Mac shows the lock screen; it isn't unlocked. It works only while the display sleeps, not when the whole Mac is asleep, and it reacts only to the lamp turning on, so someone walking past within range can wake it too. If the display doesn't wake within 10 seconds, Sleep Sync turns the lamp back off. The lamp must have been off for a minute first, so locking the Mac while you stay seated doesn't wake the display again. While the ambient off-lock is active, presence detection stays paused and nothing wakes.
 - When Match Screen is turned off, the lamp keeps its current brightness.
 - With the rotation preset on, the saved angle is applied whenever the Studio Display connects. With it off, the built-in display returns to 0° and stays there on reconnect.
 - When the external display is unplugged, the built-in display is forced back on. Apart from that, the app doesn't reconfigure displays during lock, sleep, or wake.

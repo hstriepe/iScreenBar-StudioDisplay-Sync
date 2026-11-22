@@ -2,6 +2,8 @@
 
 English · [简体中文](UI-GUIDE.zh-CN.md)
 
+For a one-page overview and setup steps, see the [Quick Guide](QUICK-GUIDE.md).
+
 This page walks through the control panel from top to bottom. Screenshots of the current panel are still to come; the green-dot and log images in the repository are from an early version and do not show the current interface.
 
 Button names below are the English UI labels. With the app in Chinese, see the Chinese guide for the matching labels.
@@ -51,7 +53,7 @@ The rules only turn the lamp on and off; they don't dim it. **Enable** stays una
 
 On the left is the away delay (3/5/10 minutes); on the right is the sensitivity (Low/Medium/High). While the ambient off-lock is active or the screen is off, the app temporarily pauses presence detection and restores the previous state afterward.
 
-**Wake Screen** (switch next to the heading, off by default) changes the screen-off part: presence detection keeps running while the Studio Display sleeps, and when you come back after the away delay and the lamp turns itself on, the display wakes too. It needs Presence and Sleep Sync, and is unavailable while Sleep Sync is off. A locked Mac shows the lock screen. Someone passing within the sensor's range can also wake the display; lower the sensitivity if that happens. If the display doesn't wake within 10 seconds, Sleep Sync turns the lamp off again.
+**Wake Screen** (switch next to the heading, off by default) changes the screen-off part: presence detection keeps running while the Studio Display sleeps, and when you come back after the away delay and the lamp turns itself on, the display wakes too. It needs Presence and Sleep Sync, and is unavailable while Sleep Sync is off. A locked Mac shows the lock screen. Someone passing within the sensor's range can also wake the display; lower the sensitivity if that happens. If the display doesn't wake within 10 seconds, Sleep Sync turns the lamp off again. The lamp must have been off for a minute first, so locking the Mac while you stay seated doesn't wake the display again.
 
 ## 5. Displays & Rotation
 
