@@ -31,6 +31,14 @@ targets:
       - path: iScreenMenu
         excludes:
           - Info.plist
+          - iScreenMenu.sdef
+      # Copy the scripting dictionary as a resource (a .sdef in Sources would run sdp instead).
+      - path: iScreenMenu/iScreenMenu.sdef
+        buildPhase: resources
+      # Control Center action names and intents, shared with the extension.
+      - path: Shared
+    dependencies:
+      - target: iScreen Menu Controls
     settings:
       base:
         PRODUCT_NAME: iScreen Menu
@@ -48,6 +56,38 @@ targets:
         SWIFT_EMIT_LOC_STRINGS: YES
         LOCALIZATION_PREFERS_STRING_CATALOGS: YES
         COMBINE_HIDPI_IMAGES: YES
+        ENABLE_USER_SCRIPT_SANDBOXING: YES
+      configs:
+        Release:
+          CODE_SIGN_INJECT_BASE_ENTITLEMENTS: NO
+  # Control Center controls (macOS 26+). Embedded in the app's PlugIns folder.
+  iScreen Menu Controls:
+    type: app-extension
+    platform: macOS
+    deploymentTarget: "26.0"
+    configFiles:
+      Debug: Config/Signing.xcconfig
+      Release: Config/Signing.xcconfig
+    sources:
+      - path: iScreenMenuControls
+        excludes:
+          - Info.plist
+          - iScreenMenuControls.entitlements
+      - path: Shared
+    settings:
+      base:
+        PRODUCT_NAME: iScreenMenuControls
+        PRODUCT_BUNDLE_IDENTIFIER: org.windholm.iScreenMenu.Controls
+        MARKETING_VERSION: "0.3"
+        CURRENT_PROJECT_VERSION: 29
+        MACOSX_DEPLOYMENT_TARGET: "26.0"
+        INFOPLIST_FILE: iScreenMenuControls/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        CODE_SIGN_ENTITLEMENTS: iScreenMenuControls/iScreenMenuControls.entitlements
+        ENABLE_APP_SANDBOX: YES
+        SKIP_INSTALL: YES
+        SWIFT_EMIT_LOC_STRINGS: YES
+        LOCALIZATION_PREFERS_STRING_CATALOGS: YES
         ENABLE_USER_SCRIPT_SANDBOXING: YES
       configs:
         Release:

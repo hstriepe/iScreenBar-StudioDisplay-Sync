@@ -11,24 +11,84 @@
 		6F2183A6B56D61B407E192FC /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 47030FBE4069413CCD98E152 /* AppIcon.icon */; };
 		8CBCC2A209413569191A0BC4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D8817242EBF63063C20B03C5 /* Localizable.xcstrings */; };
 		90CB155C3AAC97DCCD782314 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FBEB7490E8F99867DBFD63 /* main.swift */; };
+		923DA8086BF791F08D1115F8 /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE315C7E24A16AE63027D37C /* Controls.swift */; };
+		92449779081EFFF9816E469A /* AppShortcuts.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 1BD16B32CC9808D149ECF1A9 /* AppShortcuts.xcstrings */; };
+		A0A4DA2BD0973E6E63A01424 /* ControlActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7391402EE6447870E3C1BA /* ControlActions.swift */; };
+		A31ED36AB206409F88989B12 /* ScriptingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD08928EF0F1FFFC2C6D9A4F /* ScriptingSupport.swift */; };
+		A9830511CC8C66AE1FBAFF44 /* ControlActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7391402EE6447870E3C1BA /* ControlActions.swift */; };
+		BE4EEFDC43DC36F0FA03BC2D /* Automation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8977E56CBEF93054B13FA327 /* Automation.swift */; };
+		D88208DF8AEF26367CCAF1D4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 4EE074941EE008B9BA9E201B /* Localizable.xcstrings */; };
+		E77BE34F2A7271178F91C3AC /* iScreenMenu.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 5CE6D99F78A0CD7C081B7D09 /* iScreenMenu.sdef */; };
+		F7F0CF9F0B48E4838D50A25D /* iScreen Menu Controls.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 41FE0FC633C9AF19DBBCE1E9 /* iScreen Menu Controls.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		980169FCBFC014F000574251 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 60B27F5C1FE8FF1F634D629B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 65DE852894910816C2F185C4;
+			remoteInfo = "iScreen Menu Controls";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D70A93810B70B660BDD307B6 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				F7F0CF9F0B48E4838D50A25D /* iScreen Menu Controls.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		050AF115EEB8D92A192CBDAE /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
+		1BD16B32CC9808D149ECF1A9 /* AppShortcuts.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AppShortcuts.xcstrings; sourceTree = "<group>"; };
+		41FE0FC633C9AF19DBBCE1E9 /* iScreen Menu Controls.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "iScreen Menu Controls.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47030FBE4069413CCD98E152 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		4EE074941EE008B9BA9E201B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		5CE6D99F78A0CD7C081B7D09 /* iScreenMenu.sdef */ = {isa = PBXFileReference; path = iScreenMenu.sdef; sourceTree = "<group>"; };
 		61FF5E0ED03DC2147A6859EF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Help.rtf"; sourceTree = "<group>"; };
 		64E57838A64562321E80E6A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Help.rtf; sourceTree = "<group>"; };
+		6E7391402EE6447870E3C1BA /* ControlActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlActions.swift; sourceTree = "<group>"; };
 		82FBEB7490E8F99867DBFD63 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		8977E56CBEF93054B13FA327 /* Automation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Automation.swift; sourceTree = "<group>"; };
 		B63BC68ADDA370481D61627F /* iScreen Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iScreen Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8817242EBF63063C20B03C5 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		DD08928EF0F1FFFC2C6D9A4F /* ScriptingSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptingSupport.swift; sourceTree = "<group>"; };
+		FE315C7E24A16AE63027D37C /* Controls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
+		33B496D38914AD4E34672F10 /* iScreenMenuControls */ = {
+			isa = PBXGroup;
+			children = (
+				FE315C7E24A16AE63027D37C /* Controls.swift */,
+				4EE074941EE008B9BA9E201B /* Localizable.xcstrings */,
+			);
+			path = iScreenMenuControls;
+			sourceTree = "<group>";
+		};
+		54C1447C248715287CDC9256 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				6E7391402EE6447870E3C1BA /* ControlActions.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		CE095FCDFF0FF3F9E7FBA2B5 = {
 			isa = PBXGroup;
 			children = (
 				EBEEF69DB3ECB0E951BCBD1D /* Config */,
 				EE963633AA975C54BB4332C6 /* iScreenMenu */,
+				33B496D38914AD4E34672F10 /* iScreenMenuControls */,
+				54C1447C248715287CDC9256 /* Shared */,
 				D1C2494619C736F10DD49C44 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -36,6 +96,7 @@
 		D1C2494619C736F10DD49C44 /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				41FE0FC633C9AF19DBBCE1E9 /* iScreen Menu Controls.appex */,
 				B63BC68ADDA370481D61627F /* iScreen Menu.app */,
 			);
 			name = Products;
@@ -54,8 +115,12 @@
 			children = (
 				EE9B9BF82D1BFE3921434C40 /* Help.rtf */,
 				47030FBE4069413CCD98E152 /* AppIcon.icon */,
+				1BD16B32CC9808D149ECF1A9 /* AppShortcuts.xcstrings */,
+				8977E56CBEF93054B13FA327 /* Automation.swift */,
+				5CE6D99F78A0CD7C081B7D09 /* iScreenMenu.sdef */,
 				D8817242EBF63063C20B03C5 /* Localizable.xcstrings */,
 				82FBEB7490E8F99867DBFD63 /* main.swift */,
+				DD08928EF0F1FFFC2C6D9A4F /* ScriptingSupport.swift */,
 			);
 			path = iScreenMenu;
 			sourceTree = "<group>";
@@ -69,10 +134,12 @@
 			buildPhases = (
 				7FB289478BB792CC91E5FBD9 /* Sources */,
 				E67DAC3663123043330B9700 /* Resources */,
+				D70A93810B70B660BDD307B6 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				AEFE5ACB6C282044FB5B3569 /* PBXTargetDependency */,
 			);
 			name = "iScreen Menu";
 			packageProductDependencies = (
@@ -80,6 +147,24 @@
 			productName = "iScreen Menu";
 			productReference = B63BC68ADDA370481D61627F /* iScreen Menu.app */;
 			productType = "com.apple.product-type.application";
+		};
+		65DE852894910816C2F185C4 /* iScreen Menu Controls */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8323D2C27AD30EE5EB019D4D /* Build configuration list for PBXNativeTarget "iScreen Menu Controls" */;
+			buildPhases = (
+				246E1A8B8CECB7F3228B1CE4 /* Sources */,
+				159D534997805CC04A317744 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "iScreen Menu Controls";
+			packageProductDependencies = (
+			);
+			productName = "iScreen Menu Controls";
+			productReference = 41FE0FC633C9AF19DBBCE1E9 /* iScreen Menu Controls.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -91,6 +176,10 @@
 				LastUpgradeCheck = 2720;
 				TargetAttributes = {
 					30D7E65A5FE3738A7A0205EB = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+					65DE852894910816C2F185C4 = {
 						DevelopmentTeam = "";
 						ProvisioningStyle = Manual;
 					};
@@ -112,33 +201,64 @@
 			projectRoot = "";
 			targets = (
 				30D7E65A5FE3738A7A0205EB /* iScreen Menu */,
+				65DE852894910816C2F185C4 /* iScreen Menu Controls */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		159D534997805CC04A317744 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D88208DF8AEF26367CCAF1D4 /* Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E67DAC3663123043330B9700 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				6F2183A6B56D61B407E192FC /* AppIcon.icon in Resources */,
+				92449779081EFFF9816E469A /* AppShortcuts.xcstrings in Resources */,
 				020B983AD49EF103F97A5D42 /* Help.rtf in Resources */,
 				8CBCC2A209413569191A0BC4 /* Localizable.xcstrings in Resources */,
+				E77BE34F2A7271178F91C3AC /* iScreenMenu.sdef in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		246E1A8B8CECB7F3228B1CE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0A4DA2BD0973E6E63A01424 /* ControlActions.swift in Sources */,
+				923DA8086BF791F08D1115F8 /* Controls.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7FB289478BB792CC91E5FBD9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE4EEFDC43DC36F0FA03BC2D /* Automation.swift in Sources */,
+				A9830511CC8C66AE1FBAFF44 /* ControlActions.swift in Sources */,
+				A31ED36AB206409F88989B12 /* ScriptingSupport.swift in Sources */,
 				90CB155C3AAC97DCCD782314 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AEFE5ACB6C282044FB5B3569 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 65DE852894910816C2F185C4 /* iScreen Menu Controls */;
+			targetProxy = 980169FCBFC014F000574251 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		EE9B9BF82D1BFE3921434C40 /* Help.rtf */ = {
@@ -175,6 +295,61 @@
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenMenu;
 				PRODUCT_NAME = "iScreen Menu";
 				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		50C15DEC46A0C5DD598BF606 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 050AF115EEB8D92A192CBDAE /* Signing.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = iScreenMenuControls/iScreenMenuControls.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 29;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = iScreenMenuControls/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.3;
+				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenMenu.Controls;
+				PRODUCT_NAME = iScreenMenuControls;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		9DC9AEA6AEA46E1F9BFF8D19 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 050AF115EEB8D92A192CBDAE /* Signing.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = iScreenMenuControls/iScreenMenuControls.entitlements;
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 29;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = iScreenMenuControls/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.0;
+				MARKETING_VERSION = 0.3;
+				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenMenu.Controls;
+				PRODUCT_NAME = iScreenMenuControls;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
 			name = Release;
@@ -338,6 +513,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8323D2C27AD30EE5EB019D4D /* Build configuration list for PBXNativeTarget "iScreen Menu Controls" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50C15DEC46A0C5DD598BF606 /* Debug */,
+				9DC9AEA6AEA46E1F9BFF8D19 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
 		BB2382612DA8C6746A8ADD1C /* Build configuration list for PBXNativeTarget "iScreen Menu" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

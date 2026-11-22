@@ -1,0 +1,136 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Applies the saved built-in display rotation preset." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用已保存的内建显示器旋转预设。"
+          }
+        }
+      }
+    },
+    "Apply Rotation Preset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用旋转预设"
+          }
+        }
+      }
+    },
+    "Control Panel" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "控制面板"
+          }
+        }
+      }
+    },
+    "Keep Awake" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "防止休眠"
+          }
+        }
+      }
+    },
+    "Lamp Light" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯灯光"
+          }
+        }
+      }
+    },
+    "Light" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "灯光"
+          }
+        }
+      }
+    },
+    "Opens the iScreen Menu control panel." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开 iScreen Menu 控制面板。"
+          }
+        }
+      }
+    },
+    "Rotation Preset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "旋转预设"
+          }
+        }
+      }
+    },
+    "Show Control Panel" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示控制面板"
+          }
+        }
+      }
+    },
+    "Toggle Keep Awake" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切换防止休眠"
+          }
+        }
+      }
+    },
+    "Toggle Light" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切换灯光"
+          }
+        }
+      }
+    },
+    "Turns iScreen Menu's Keep Awake on or off." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开启或关闭 iScreen Menu 的防止休眠。"
+          }
+        }
+      }
+    },
+    "Turns the iScreenBar on or off." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开或关闭 iScreenBar。"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

@@ -1,0 +1,113 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Apply a favorite in ${applicationName}" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "Apply a favorite in ${applicationName}"
+            ]
+          }
+        },
+        "zh-Hans" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "在 ${applicationName} 中应用我的最爱"
+            ]
+          }
+        }
+      }
+    },
+    "Apply the ${applicationName} rotation preset" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "Apply the ${applicationName} rotation preset"
+            ]
+          }
+        },
+        "zh-Hans" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "应用 ${applicationName} 旋转预设"
+            ]
+          }
+        }
+      }
+    },
+    "Get ${applicationName} lamp status" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "Get ${applicationName} lamp status"
+            ]
+          }
+        },
+        "zh-Hans" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "获取 ${applicationName} 灯光状态"
+            ]
+          }
+        }
+      }
+    },
+    "Show the ${applicationName} control panel" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "Show the ${applicationName} control panel"
+            ]
+          }
+        },
+        "zh-Hans" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "显示 ${applicationName} 控制面板"
+            ]
+          }
+        }
+      }
+    },
+    "Toggle the ${applicationName} light" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringSet" : {
+            "state" : "new",
+            "values" : [
+              "Toggle the ${applicationName} light",
+              "Toggle light in ${applicationName}"
+            ]
+          }
+        },
+        "zh-Hans" : {
+          "stringSet" : {
+            "state" : "translated",
+            "values" : [
+              "切换 ${applicationName} 灯光",
+              "在 ${applicationName} 中切换灯光"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

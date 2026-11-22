@@ -5,7 +5,18 @@ script_dir=${0:A:h}
 project_dir=${script_dir:h}
 
 plutil -lint "$project_dir/iScreenMenu/Info.plist"
+plutil -lint "$project_dir/iScreenMenuControls/Info.plist"
+plutil -lint "$project_dir/iScreenMenuControls/iScreenMenuControls.entitlements"
+xmllint --noout "$project_dir/iScreenMenu/iScreenMenu.sdef"
 zsh -n "$project_dir/scripts/build.sh"
+
+# The Control Center extension must be embedded and keep its sandbox entitlement.
+app="$project_dir/build/iScreen Menu.app"
+appex="$app/Contents/PlugIns/iScreenMenuControls.appex"
+[[ -d "$appex" ]] || { echo "Control Center extension missing from the app bundle." >&2; exit 1; }
+codesign --verify --deep --strict "$app"
+codesign -d --entitlements - "$appex" 2>/dev/null | grep -q com.apple.security.app-sandbox \
+  || { echo "Control Center extension is not sandboxed." >&2; exit 1; }
 zsh -n "$project_dir/scripts/install.sh"
 zsh -n "$project_dir/scripts/uninstall.sh"
 "$project_dir/scripts/build.sh"

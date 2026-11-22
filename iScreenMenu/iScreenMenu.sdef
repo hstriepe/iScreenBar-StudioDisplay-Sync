@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
+<dictionary title="iScreen Menu Terminology">
+    <suite name="Standard Suite" code="????" description="Common classes and commands for all applications.">
+        <command name="quit" code="aevtquit" description="Quit iScreen Menu.">
+            <cocoa class="NSQuitCommand"/>
+        </command>
+        <class name="application" code="capp" description="The application's top-level scripting object.">
+            <cocoa class="NSApplication"/>
+            <property name="name" code="pnam" type="text" access="r" description="The name of the application."/>
+            <property name="frontmost" code="pisf" type="boolean" access="r" description="Is this the active application?">
+                <cocoa key="isActive"/>
+            </property>
+            <property name="version" code="vers" type="text" access="r" description="The version number of the application."/>
+            <responds-to command="quit">
+                <cocoa method="handleQuitScriptCommand:"/>
+            </responds-to>
+        </class>
+    </suite>
+
+    <suite name="iScreen Menu Suite" code="iScM" description="Control the iScreenBar lamp, displays, and keep-awake. Each setting works like its control panel button.">
+        <class-extension extends="application" description="iScreen Menu settings and lamp state.">
+            <property name="lamp connected" code="iCon" type="boolean" access="r" description="Is the iScreenBar connected?">
+                <cocoa key="scriptLampConnected"/>
+            </property>
+            <property name="lamp status" code="iSts" type="text" access="r" description="A short summary of the lamp's power, brightness, and color temperature.">
+                <cocoa key="scriptLampStatus"/>
+            </property>
+            <property name="light" code="iLgt" type="boolean" description="Is the lamp on? Reflects the lamp's last status report.">
+                <cocoa key="scriptLight"/>
+            </property>
+            <property name="brightness" code="iBrt" type="integer" description="Lamp brightness in percent (1–100).">
+                <cocoa key="scriptBrightness"/>
+            </property>
+            <property name="color temperature" code="iTmp" type="integer" description="Lamp color temperature in kelvin (2700–6500). Auto temperature must be off to set it.">
+                <cocoa key="scriptColorTemperature"/>
+            </property>
+            <property name="auto temperature" code="iATp" type="boolean" description="Adjust color temperature by time of day (Auto Temp).">
+                <cocoa key="scriptAutoTemperature"/>
+            </property>
+            <property name="auto light" code="iALt" type="boolean" description="The lamp's own auto-light (Auto Light).">
+                <cocoa key="scriptAutoLight"/>
+            </property>
+            <property name="presence" code="iPrs" type="boolean" description="The lamp's presence detection (Presence).">
+                <cocoa key="scriptPresence"/>
+            </property>
+            <property name="video mode" code="iVid" type="boolean" description="The lamp's video mode (Video Mode).">
+                <cocoa key="scriptVideoMode"/>
+            </property>
+            <property name="match screen" code="iMSc" type="boolean" description="Lamp brightness follows the Studio Display (Match Screen).">
+                <cocoa key="scriptMatchScreen"/>
+            </property>
+            <property name="link screens" code="iLSc" type="boolean" description="Keep the built-in and Studio Display brightness linked (Link Screens).">
+                <cocoa key="scriptLinkScreens"/>
+            </property>
+            <property name="sleep sync" code="iSSy" type="boolean" description="Lamp turns off and on with the Studio Display (Sleep Sync).">
+                <cocoa key="scriptSleepSync"/>
+            </property>
+            <property name="keep awake" code="iKAw" type="boolean" description="Keep the Mac awake (Keep Awake). Turning it on asks for an administrator password.">
+                <cocoa key="scriptKeepAwake"/>
+            </property>
+            <property name="builtin display" code="iBlt" type="boolean" description="Is the built-in display on?">
+                <cocoa key="scriptBuiltinDisplay"/>
+            </property>
+            <property name="favorites" code="iFav" access="r" description="The names of the favorites.">
+                <type type="text" list="yes"/>
+                <cocoa key="scriptFavorites"/>
+            </property>
+            <property name="rotation preset" code="iRot" type="text" access="r" description="The name of the saved rotation preset.">
+                <cocoa key="scriptRotationPreset"/>
+            </property>
+            <responds-to command="toggle light">
+                <cocoa method="handleToggleLightScriptCommand:"/>
+            </responds-to>
+            <responds-to command="apply favorite">
+                <cocoa method="handleApplyFavoriteScriptCommand:"/>
+            </responds-to>
+            <responds-to command="apply rotation preset">
+                <cocoa method="handleApplyRotationPresetScriptCommand:"/>
+            </responds-to>
+            <responds-to command="show control panel">
+                <cocoa method="handleShowControlPanelScriptCommand:"/>
+            </responds-to>
+        </class-extension>
+
+        <command name="toggle light" code="iScMTgLt" description="Turn the lamp on if it's off, or off if it's on.">
+            <cocoa class="NSScriptCommand"/>
+        </command>
+        <command name="apply favorite" code="iScMApFv" description="Turn the lamp on with a favorite's brightness and color temperature.">
+            <cocoa class="NSScriptCommand"/>
+            <direct-parameter type="text" description="The favorite's name, for example &quot;Night Work&quot;."/>
+        </command>
+        <command name="apply rotation preset" code="iScMApRp" description="Apply the saved built-in display rotation preset.">
+            <cocoa class="NSScriptCommand"/>
+        </command>
+        <command name="show control panel" code="iScMShCp" description="Open the control panel below the menu bar icon.">
+            <cocoa class="NSScriptCommand"/>
+        </command>
+    </suite>
+</dictionary>

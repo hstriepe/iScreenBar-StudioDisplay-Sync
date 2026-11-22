@@ -24,6 +24,9 @@ launchctl bootout "gui/$account_uid/$legacy_label" 2>/dev/null || true
 rm -f "$legacy_launch_agent"
 mkdir -p "$user_home_dir/Applications" "$launch_agents_dir" "$logs_dir"
 ditto "$source_app" "$installed_app"
+# Register with Launch Services so Shortcuts and Control Center find the
+# App Intents and the Control Center extension.
+/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -f "$installed_app"
 
 escaped_executable=${installed_app//&/&amp;}
 escaped_log=${log_file//&/&amp;}

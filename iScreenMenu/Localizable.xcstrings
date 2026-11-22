@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%@" : {
+      "shouldTranslate" : false
+    },
     "%@  ·  Saved, not enabled" : {
       "localizations" : {
         "zh-Hans" : {
@@ -91,12 +94,53 @@
         }
       }
     },
+    "Applies the saved built-in display rotation preset." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用已保存的内建显示器旋转预设。"
+          }
+        }
+      }
+    },
+    "Apply ${favorite}" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用${favorite}"
+          }
+        }
+      }
+    },
     "Apply Automatically When Studio Display Connects" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "连接 Studio Display 时自动启用"
+          }
+        }
+      }
+    },
+    "Apply Favorite" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用我的最爱"
+          }
+        }
+      }
+    },
+    "Apply Rotation Preset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用旋转预设"
           }
         }
       }
@@ -321,6 +365,16 @@
         }
       }
     },
+    "Control Panel" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "控制面板"
+          }
+        }
+      }
+    },
     "Control Panel…" : {
       "localizations" : {
         "zh-Hans" : {
@@ -357,6 +411,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "无法开启防止休眠"
+          }
+        }
+      }
+    },
+    "Couldn't change “%@”." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法更改“%@”。"
           }
         }
       }
@@ -431,6 +495,37 @@
         }
       }
     },
+    "Get ${feature}" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "获取${feature}"
+          }
+        }
+      }
+    },
+    "Get Lamp Status" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "获取灯光状态"
+          }
+        }
+      }
+    },
+    "Get Setting" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "获取设置"
+          }
+        }
+      }
+    },
     "Help isn't available." : {
       "localizations" : {
         "zh-Hans" : {
@@ -491,12 +586,32 @@
         }
       }
     },
+    "Kelvin" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "色温（K）"
+          }
+        }
+      }
+    },
     "Lamp" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "台灯"
+          }
+        }
+      }
+    },
+    "Lamp Status" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "灯光状态"
           }
         }
       }
@@ -537,6 +652,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "灯光预设"
+          }
+        }
+      }
+    },
+    "Light off" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "灯已关"
+          }
+        }
+      }
+    },
+    "Light on" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "灯已开"
           }
         }
       }
@@ -661,6 +796,36 @@
         }
       }
     },
+    "Off" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关"
+          }
+        }
+      }
+    },
+    "On" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开"
+          }
+        }
+      }
+    },
+    "Opens the iScreen Menu control panel below the menu bar icon." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "在菜单栏图标下方打开 iScreen Menu 控制面板。"
+          }
+        }
+      }
+    },
     "Portrait Dual" : {
       "localizations" : {
         "zh-Hans" : {
@@ -771,6 +936,26 @@
         }
       }
     },
+    "Returns the iScreenBar power, brightness, and color temperature." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "返回 iScreenBar 的开关、亮度和色温。"
+          }
+        }
+      }
+    },
+    "Returns whether an iScreen Menu setting is on." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "返回 iScreen Menu 的某项设置是否已开启。"
+          }
+        }
+      }
+    },
     "Revert" : {
       "localizations" : {
         "zh-Hans" : {
@@ -838,6 +1023,16 @@
       }
     },
     "Rotation Preset" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "旋转预设"
+          }
+        }
+      }
+    },
+    "Rotation preset" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
@@ -917,6 +1112,98 @@
         }
       }
     },
+    "Set Color Temperature" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置色温"
+          }
+        }
+      }
+    },
+    "Set Lamp Brightness" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置灯光亮度"
+          }
+        }
+      }
+    },
+    "Set Light" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置灯光"
+          }
+        }
+      }
+    },
+    "Set color temperature to ${kelvin} K" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "将色温设为 ${kelvin} K"
+          }
+        }
+      }
+    },
+    "Set lamp brightness to ${brightness}%" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "将灯光亮度设为 ${brightness}%"
+          }
+        }
+      }
+    },
+    "Sets the iScreenBar brightness in percent." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "以百分比设置 iScreenBar 亮度。"
+          }
+        }
+      }
+    },
+    "Sets the iScreenBar color temperature in kelvin (2700–6500). Auto Temp must be off." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "以开尔文设置 iScreenBar 色温（2700–6500）。需先关闭自动色温。"
+          }
+        }
+      }
+    },
+    "Setting" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置"
+          }
+        }
+      }
+    },
+    "Show Control Panel" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示控制面板"
+          }
+        }
+      }
+    },
     "Sleep Sync" : {
       "localizations" : {
         "zh-Hans" : {
@@ -927,12 +1214,114 @@
         }
       }
     },
+    "State" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "状态"
+          }
+        }
+      }
+    },
+    "The iScreenBar isn't connected." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iScreenBar 未连接。"
+          }
+        }
+      }
+    },
     "The login item in ~/Library/LaunchAgents couldn't be updated." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "无法更新 ~/Library/LaunchAgents 中的登录项。"
+          }
+        }
+      }
+    },
+    "There's no favorite named “%@”." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“我的最爱”中没有“%@”。"
+          }
+        }
+      }
+    },
+    "Toggle" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切换"
+          }
+        }
+      }
+    },
+    "Toggle Keep Awake" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切换防止休眠"
+          }
+        }
+      }
+    },
+    "Toggle Light" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "切换灯光"
+          }
+        }
+      }
+    },
+    "Turn ${feature} ${state}" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "将${feature}设为${state}"
+          }
+        }
+      }
+    },
+    "Turn Setting On or Off" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开启或关闭设置"
+          }
+        }
+      }
+    },
+    "Turn light ${state}" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "将灯光设为${state}"
+          }
+        }
+      }
+    },
+    "Turn off Auto Temp to set the color temperature." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "请先关闭自动色温再设置色温。"
           }
         }
       }
@@ -997,6 +1386,36 @@
         }
       }
     },
+    "Turns an iScreen Menu setting on or off, or toggles it, like its control panel button." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "开启、关闭或切换 iScreen Menu 的某项设置，效果与控制面板按钮相同。"
+          }
+        }
+      }
+    },
+    "Turns the iScreenBar lamp on or off, or toggles it." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开、关闭或切换 iScreenBar 灯光。"
+          }
+        }
+      }
+    },
+    "Turns the lamp on with a saved favorite's brightness and color temperature." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "打开灯光并使用已保存的“我的最爱”的亮度和色温。"
+          }
+        }
+      }
+    },
     "Video Mode" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1047,6 +1466,16 @@
         }
       }
     },
+    "iScreen Menu isn't ready yet." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iScreen Menu 尚未就绪。"
+          }
+        }
+      }
+    },
     "iScreenBar status" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1083,6 +1512,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "同步异常"
+          }
+        }
+      }
+    },
+    "“%@” isn't available right now." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "“%@”目前不可用。"
           }
         }
       }
