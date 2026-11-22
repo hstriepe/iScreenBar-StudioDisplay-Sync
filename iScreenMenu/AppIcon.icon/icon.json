@@ -1,0 +1,39 @@
+{
+  "fill" : {
+    "linear-gradient" : [
+      "display-p3:0.33523,0.59238,0.75979,1.00000",
+      "display-p3:0.15314,0.25931,0.35573,1.00000"
+    ]
+  },
+  "groups" : [
+    {
+      "layers" : [
+        {
+          "image-name" : "AppIcon-light-over-monitor 3.png",
+          "name" : "AppIcon-light-over-monitor 3",
+          "position" : {
+            "scale" : 0.85,
+            "translation-in-points" : [
+              0,
+              -59.5
+            ]
+          }
+        }
+      ],
+      "shadow" : {
+        "kind" : "neutral",
+        "opacity" : 0.5
+      },
+      "translucency" : {
+        "enabled" : true,
+        "value" : 0.3
+      }
+    }
+  ],
+  "supported-platforms" : {
+    "circles" : [
+      "watchOS"
+    ],
+    "squares" : "shared"
+  }
+}
