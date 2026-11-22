@@ -431,12 +431,12 @@
         }
       }
     },
-    "Help is coming soon. Left-click the menu bar icon for this menu; right-click it for the control panel." : {
+    "Help isn't available." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "帮助内容即将推出。左键点击菜单栏图标打开此菜单；右键点击打开控制面板。"
+            "value" : "帮助暂不可用。"
           }
         }
       }

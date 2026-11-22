@@ -8,8 +8,10 @@ Button names below are the English UI labels. With the app in Chinese, see the C
 
 ## Opening the menu and the panel
 
-- **Left-click** the menu bar icon for a standard menu. It covers the everyday controls: Light; Brightness (25/50/75/100%); Color Temperature (Auto Temp or 2700/4000/5000/6500K); Lamp (Auto Light, Presence, Video Mode, Match Screen, Link Screens, Sleep Sync); Ambient Rules; Displays (Built-in Display, Rotate Built-in 0°/90°/180°/270°, Studio Display, apply or auto-apply the rotation preset); Favorites (light presets and Mode Center…); and Keep Awake. Below those are **Control Panel…**, **Launch at Login**, **Help…** (placeholder for now), and **Quit iScreen Menu** (⌘Q).
+- **Left-click** the menu bar icon for a standard menu. It covers the everyday controls: Light; Brightness (25/50/75/100%); Color Temperature (Auto Temp or 2700/4000/5000/6500K); Lamp (Auto Light, Presence, Video Mode, Match Screen, Link Screens, Sleep Sync); Ambient Rules; Displays (Built-in Display, Rotate Built-in 0°/90°/180°/270°, Studio Display, apply or auto-apply the rotation preset); Favorites (light presets and Mode Center…); and Keep Awake. Below those are **Control Panel…**, **Launch at Login**, **Help…** (opens the Help window), and **Quit iScreen Menu** (⌘Q).
 - **Right-click** (or Control-click) the icon for the control panel described below. Its **Quit** button is at the bottom right.
+
+The Help window describes the menu, every panel section, Launch at Login, troubleshooting, and privacy, in the app's current language. It follows the system light/dark Appearance, even if you switch while it's open.
 
 Menu items and panel controls share the same settings, so a change in one shows up in the other. Rotation from the menu uses the same 5-second confirmation as the panel. Items are dimmed whenever the matching panel control is (for example, lamp items while the lamp is disconnected, or Ambient Rules before calibration).
 

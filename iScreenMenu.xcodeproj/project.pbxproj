@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020B983AD49EF103F97A5D42 /* Help.rtf in Resources */ = {isa = PBXBuildFile; fileRef = EE9B9BF82D1BFE3921434C40 /* Help.rtf */; };
 		6F2183A6B56D61B407E192FC /* AppIcon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 47030FBE4069413CCD98E152 /* AppIcon.icon */; };
 		8CBCC2A209413569191A0BC4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D8817242EBF63063C20B03C5 /* Localizable.xcstrings */; };
 		90CB155C3AAC97DCCD782314 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FBEB7490E8F99867DBFD63 /* main.swift */; };
@@ -14,6 +15,8 @@
 
 /* Begin PBXFileReference section */
 		47030FBE4069413CCD98E152 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = AppIcon.icon; sourceTree = "<group>"; };
+		61FF5E0ED03DC2147A6859EF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Help.rtf"; sourceTree = "<group>"; };
+		64E57838A64562321E80E6A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Help.rtf; sourceTree = "<group>"; };
 		82FBEB7490E8F99867DBFD63 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B63BC68ADDA370481D61627F /* iScreen Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iScreen Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8817242EBF63063C20B03C5 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -39,6 +42,7 @@
 		EE963633AA975C54BB4332C6 /* iScreenMenu */ = {
 			isa = PBXGroup;
 			children = (
+				EE9B9BF82D1BFE3921434C40 /* Help.rtf */,
 				47030FBE4069413CCD98E152 /* AppIcon.icon */,
 				D8817242EBF63063C20B03C5 /* Localizable.xcstrings */,
 				82FBEB7490E8F99867DBFD63 /* main.swift */,
@@ -75,6 +79,12 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 2720;
+				TargetAttributes = {
+					30D7E65A5FE3738A7A0205EB = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Manual;
+					};
+				};
 			};
 			buildConfigurationList = D3A052FEA9F92CD9728EDFD7 /* Build configuration list for PBXProject "iScreenMenu" */;
 			developmentRegion = en;
@@ -102,6 +112,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6F2183A6B56D61B407E192FC /* AppIcon.icon in Resources */,
+				020B983AD49EF103F97A5D42 /* Help.rtf in Resources */,
 				8CBCC2A209413569191A0BC4 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,30 +130,41 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXVariantGroup section */
+		EE9B9BF82D1BFE3921434C40 /* Help.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64E57838A64562321E80E6A2 /* en */,
+				61FF5E0ED03DC2147A6859EF /* zh-Hans */,
+			);
+			name = Help.rtf;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		477E593714DBCCB757641407 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 27;
-				DEVELOPMENT_TEAM = D6WY385Q4D;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				EXECUTABLE_NAME = iScreenMenu;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = iScreenMenu/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenMenu;
 				PRODUCT_NAME = "iScreen Menu";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -155,24 +177,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 27;
-				DEVELOPMENT_TEAM = D6WY385Q4D;
+				CURRENT_PROJECT_VERSION = 2;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				EXECUTABLE_NAME = iScreenMenu;
 				GENERATE_INFOPLIST_FILE = NO;
 				INFOPLIST_FILE = iScreenMenu/Info.plist;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 0.3;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenMenu;
 				PRODUCT_NAME = "iScreen Menu";
 				PROVISIONING_PROFILE_SPECIFIER = "";

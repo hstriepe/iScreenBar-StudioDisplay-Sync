@@ -686,6 +686,100 @@ private enum LoginItem {
     }
 }
 
+// Help window: localized Help.rtf (en.lproj / zh-Hans.lproj) in a read-only text view.
+// It follows the system Appearance; text and background use dynamic system colors, so a light/dark switch
+// while the window is open redraws without reloading.
+private final class HelpWindowController: NSWindowController {
+    init() {
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 560, height: 600),
+                              styleMask: [.titled, .closable, .miniaturizable, .resizable],
+                              backing: .buffered, defer: false)
+        window.title = String(localized: "iScreen Menu Help")
+        window.minSize = NSSize(width: 380, height: 320)
+        window.isReleasedWhenClosed = false
+        window.setFrameAutosaveName("HelpWindow")
+        super.init(window: window)
+        window.contentView = makeContentView()
+        if !window.setFrameUsingName("HelpWindow") { window.center() }
+    }
+
+    required init?(coder: NSCoder) { nil }
+
+    private func makeContentView() -> NSView {
+        let scrollView = NSScrollView(frame: NSRect(x: 0, y: 0, width: 560, height: 600))
+        scrollView.hasVerticalScroller = true
+        scrollView.autohidesScrollers = true
+        scrollView.borderType = .noBorder
+        scrollView.drawsBackground = true
+        scrollView.backgroundColor = .textBackgroundColor
+
+        let textView = NSTextView(frame: scrollView.bounds)
+        textView.isEditable = false
+        textView.isSelectable = true
+        textView.drawsBackground = true
+        textView.backgroundColor = .textBackgroundColor
+        textView.textContainerInset = NSSize(width: 18, height: 16)
+        textView.isVerticallyResizable = true
+        textView.isHorizontallyResizable = false
+        textView.autoresizingMask = [.width]
+        textView.minSize = NSSize(width: 0, height: 0)
+        textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+        textView.textContainer?.widthTracksTextView = true
+        textView.textStorage?.setAttributedString(Self.loadHelpText())
+        scrollView.documentView = textView
+        return scrollView
+    }
+
+    private static func loadHelpText() -> NSAttributedString {
+        guard let url = Bundle.main.url(forResource: "Help", withExtension: "rtf"),
+              let data = try? Data(contentsOf: url),
+              let text = NSMutableAttributedString(rtf: data, documentAttributes: nil) else {
+            log("Help.rtf not found in bundle")
+            return NSAttributedString(string: String(localized: "Help isn't available."),
+                                      attributes: [.foregroundColor: NSColor.labelColor,
+                                                   .font: NSFont.systemFont(ofSize: 13)])
+        }
+        // The RTF stores fixed black text; replace it with the dynamic label color so it follows light/dark.
+        let range = NSRange(location: 0, length: text.length)
+        text.removeAttribute(.backgroundColor, range: range)
+        text.addAttribute(.foregroundColor, value: NSColor.labelColor, range: range)
+        return text
+    }
+
+    func present() {
+        NSApp.activate(ignoringOtherApps: true)
+        showWindow(nil)
+        window?.makeKeyAndOrderFront(nil)
+    }
+}
+
+// LSUIElement apps show no menu bar, but key equivalents still come from the main menu.
+// A minimal hidden menu makes ⌘W, ⌘C, ⌘A (and ⌘Q) work in the app's windows.
+private func installHiddenMainMenu() {
+    let mainMenu = NSMenu()
+    let appItem = NSMenuItem()
+    let appMenu = NSMenu()
+    appMenu.addItem(NSMenuItem(title: String(localized: "Quit iScreen Menu"),
+                               action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
+    appItem.submenu = appMenu
+    mainMenu.addItem(appItem)
+
+    let fileItem = NSMenuItem()
+    let fileMenu = NSMenu(title: "File")
+    fileMenu.addItem(NSMenuItem(title: "Close", action: #selector(NSWindow.performClose(_:)), keyEquivalent: "w"))
+    fileItem.submenu = fileMenu
+    mainMenu.addItem(fileItem)
+
+    let editItem = NSMenuItem()
+    let editMenu = NSMenu(title: "Edit")
+    editMenu.addItem(NSMenuItem(title: "Copy", action: #selector(NSText.copy(_:)), keyEquivalent: "c"))
+    editMenu.addItem(NSMenuItem(title: "Paste", action: #selector(NSText.paste(_:)), keyEquivalent: "v"))
+    editMenu.addItem(NSMenuItem(title: "Select All", action: #selector(NSText.selectAll(_:)), keyEquivalent: "a"))
+    editItem.submenu = editMenu
+    mainMenu.addItem(editItem)
+    NSApp.mainMenu = mainMenu
+}
+
 private final class StatusIndicator: NSObject, NSMenuDelegate {
     private let presenceDelayOptions = [180, 300, 600]
     private let item: NSStatusItem
@@ -707,6 +801,7 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
     private let modeButton = NSButton(title: String(localized: "Favorite"), target: nil, action: nil)
     private let rotationModeButton = NSButton(title: String(localized: "Portrait Dual"), target: nil, action: nil)
     private var modeCenterWindow: NSWindow?
+    private var helpWindowController: HelpWindowController?
     private let bindAppButton = NSButton(title: String(localized: "Bind App"), target: nil, action: nil)
     private let brightnessFollowSwitch = FeatureButton(title: String(localized: "Match Screen"), symbol: "display", accentColor: activeControlColor)
     private let displayBrightnessLockSwitch = FeatureButton(title: String(localized: "Link Screens"), symbol: "rectangle.on.rectangle", accentColor: activeControlColor)
@@ -794,6 +889,7 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         presenceSensitivity = max(0, min(2, presenceSensitivity))
         NSApplication.shared.setActivationPolicy(.accessory)
         NSApplication.shared.finishLaunching()
+        installHiddenMainMenu()
         item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
         super.init()
 
@@ -2049,11 +2145,9 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
     }
 
     @objc private func showHelp() {
-        let alert = NSAlert()
-        alert.messageText = String(localized: "iScreen Menu Help")
-        alert.informativeText = String(localized: "Help is coming soon. Left-click the menu bar icon for this menu; right-click it for the control panel.")
-        NSApp.activate(ignoringOtherApps: true)
-        alert.runModal()
+        let controller = helpWindowController ?? HelpWindowController()
+        helpWindowController = controller
+        controller.present()
     }
 
     @objc private func quitApp() {

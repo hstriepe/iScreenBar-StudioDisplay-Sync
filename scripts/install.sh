@@ -46,5 +46,5 @@ escaped_log=${log_file//&/&amp;}
 plutil -lint "$launch_agent"
 launchctl bootstrap "gui/$account_uid" "$launch_agent"
 
-echo "iScreen Menu 已安装并启动，请从菜单栏打开。"
+echo "iScreen Menu is installed and running. Open it from the menu bar."
 echo "Log: $log_file"

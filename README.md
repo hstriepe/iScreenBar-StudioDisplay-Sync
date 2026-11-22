@@ -23,7 +23,7 @@ See the [UI Guide](docs/UI-GUIDE.md) and the [Full Feature List](docs/FEATURES.m
 
 The icon appears yellow when the light is on, gray when it is off, and red to indicate an issue. Hovering over the icon displays the current brightness and color temperature. The app does not occupy a space in the Dock.
 
-- **Left-click** the icon for a standard menu: Light, Brightness, Color Temperature, Lamp modes, Ambient Rules, Displays (built-in on/off, rotation 0°/90°/180°/270°, Studio Display, rotation preset), Favorites, Keep Awake, Control Panel…, Launch at Login, Help…, and Quit.
+- **Left-click** the icon for a standard menu: Light, Brightness, Color Temperature, Lamp modes, Ambient Rules, Displays (built-in on/off, rotation 0°/90°/180°/270°, Studio Display, rotation preset), Favorites, Keep Awake, Control Panel…, Launch at Login, Help… (a Help window that follows the system light/dark Appearance), and Quit.
 - **Right-click** (or Control-click) the icon for the full control panel, which has a **Quit** button at the bottom right.
 
 The interface is in English and Simplified Chinese and follows the macOS language. To use Chinese for this app only, choose it under System Settings › General › Language & Region › Applications, then restart the app.

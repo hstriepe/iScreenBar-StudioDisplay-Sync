@@ -6,12 +6,13 @@ English · [简体中文](FEATURES.zh-CN.md)
 
 ## 1. Menu bar and status
 
-- Click the menu-bar icon to open or close the control panel.
+- Left-click the menu-bar icon for a standard menu with submenus; right-click (or Control-click) it to open or close the control panel.
+- The menu has Launch at Login (user LaunchAgent), Help… (a Help window), and Quit; the panel has a Quit button at the bottom right.
 - The icon is yellow when the lamp is on and gray when it is off.
 - It turns red when the USB connection or a lamp power command fails.
 - Hovering over the icon shows the iScreenBar's current brightness and color temperature.
 - Opening the panel reads the lamp state, so the UI matches the actual lamp.
-- Starts at login through a user-level LaunchAgent; no administrator rights needed.
+- Starts at login through a user-level LaunchAgent (`org.windholm.iScreenMenu`); no administrator rights needed. Quit stays quit until the next login; launchd restarts the app only after a crash.
 - The interface is in English and Simplified Chinese and follows the macOS language (including the per-app language setting).
 
 ## 2. Basic iScreenBar control
@@ -131,6 +132,8 @@ English · [简体中文](FEATURES.zh-CN.md)
 - The brightness and color temperature sliders show a colored highlight while dragging and return to a static style on release.
 - The color temperature slider has 5 common tick marks.
 - Unavailable features gray out their buttons to avoid mistakes when the lid is closed, the Mac is locked, or a device is offline.
+- The Help window (Help… in the menu) is localized (English / Simplified Chinese). It follows the system light/dark Appearance, including a switch while it's open.
+- ⌘W closes the app's windows, ⌘C / ⌘A work in Help, and ⌘Q quits.
 
 ## 15. Local storage, privacy, and installation
 
