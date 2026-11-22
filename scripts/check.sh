@@ -4,7 +4,7 @@ set -euo pipefail
 script_dir=${0:A:h}
 project_dir=${script_dir:h}
 
-plutil -lint "$project_dir/Info.plist"
+plutil -lint "$project_dir/iScreenMenu/Info.plist"
 zsh -n "$project_dir/scripts/build.sh"
 zsh -n "$project_dir/scripts/install.sh"
 zsh -n "$project_dir/scripts/uninstall.sh"

@@ -72,7 +72,7 @@ Display control relies on private macOS APIs—SkyLight, MonitorPanel, and Displ
 
 Uninstallation moves the app and the `LaunchAgent` to the Trash, while preserving log files. Build artifacts are located in `build/iScreen Menu.app`.
 
-For development, open `iScreenMenu.xcodeproj` in Xcode. The project is generated from `project.yml` with [XcodeGen](https://github.com/yonaskolb/XcodeGen); after changing `project.yml`, run `xcodegen generate` and commit both. UI text is localized through `Resources/Localizable.xcstrings` (English source, Simplified Chinese translation).
+For development, open `iScreenMenu.xcodeproj` in Xcode. The project is generated from `project.yml` with [XcodeGen](https://github.com/yonaskolb/XcodeGen); after changing `project.yml`, run `xcodegen generate` and commit both. UI text is localized through `iScreenMenu/Localizable.xcstrings` (English source, Simplified Chinese translation).
 
 Currently, the app uses a local, temporary signature; it lacks a Developer ID notarization and does not support automatic updates.
 

@@ -7,32 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B0CEE5560DFC576821AAC82 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7336DC8786735422E40B7870 /* Localizable.xcstrings */; };
-		D53D42B54B4705E67E896F77 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70D2F504082419F2E54F5DFF /* main.swift */; };
+		8CBCC2A209413569191A0BC4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = D8817242EBF63063C20B03C5 /* Localizable.xcstrings */; };
+		90CB155C3AAC97DCCD782314 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82FBEB7490E8F99867DBFD63 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		03FCA832AC9E00D09F8A09C4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		70D2F504082419F2E54F5DFF /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		7336DC8786735422E40B7870 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		82FBEB7490E8F99867DBFD63 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B63BC68ADDA370481D61627F /* iScreen Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iScreen Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8817242EBF63063C20B03C5 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
-		45C93670C740C2891441BF64 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				7336DC8786735422E40B7870 /* Localizable.xcstrings */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
 		CE095FCDFF0FF3F9E7FBA2B5 = {
 			isa = PBXGroup;
 			children = (
-				45C93670C740C2891441BF64 /* Resources */,
-				D7DDD5F494715A5F1837BBB9 /* Sources */,
-				03FCA832AC9E00D09F8A09C4 /* Info.plist */,
+				EE963633AA975C54BB4332C6 /* iScreenMenu */,
 				D1C2494619C736F10DD49C44 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -45,12 +34,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		D7DDD5F494715A5F1837BBB9 /* Sources */ = {
+		EE963633AA975C54BB4332C6 /* iScreenMenu */ = {
 			isa = PBXGroup;
 			children = (
-				70D2F504082419F2E54F5DFF /* main.swift */,
+				D8817242EBF63063C20B03C5 /* Localizable.xcstrings */,
+				82FBEB7490E8F99867DBFD63 /* main.swift */,
 			);
-			path = Sources;
+			path = iScreenMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -95,6 +85,7 @@
 			knownRegions = (
 				Base,
 				en,
+				"zh-Hans",
 			);
 			mainGroup = CE095FCDFF0FF3F9E7FBA2B5;
 			minimizedProjectReferenceProxies = 1;
@@ -113,7 +104,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B0CEE5560DFC576821AAC82 /* Localizable.xcstrings in Resources */,
+				8CBCC2A209413569191A0BC4 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,7 +115,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D53D42B54B4705E67E896F77 /* main.swift in Sources */,
+				90CB155C3AAC97DCCD782314 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -145,7 +136,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				EXECUTABLE_NAME = iScreenBarStudioSync;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = iScreenMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -171,7 +162,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				EXECUTABLE_NAME = iScreenBarStudioSync;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = iScreenMenu/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

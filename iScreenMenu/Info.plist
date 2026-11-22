@@ -8,6 +8,10 @@
 	<string>iScreen Menu</string>
 	<key>CFBundleExecutable</key>
 	<string>iScreenBarStudioSync</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleIconName</key>
+	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>local.qiu.iScreenBarStudioSync</string>
 	<key>CFBundleLocalizations</key>

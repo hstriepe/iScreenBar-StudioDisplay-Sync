@@ -72,7 +72,7 @@ launchctl print gui/$(id -u)/local.qiu.iScreenBarStudioSync
 
 卸载将 App 和 LaunchAgent 移至废纸篓，保留日志。构建产物位于 `build/iScreen Menu.app`。
 
-开发时用 Xcode 打开 `iScreenMenu.xcodeproj`。工程由 `project.yml` 通过 [XcodeGen](https://github.com/yonaskolb/XcodeGen) 生成；修改 `project.yml` 后运行 `xcodegen generate`，并同时提交两者。界面文字通过 `Resources/Localizable.xcstrings` 本地化（英文为源语言，含简体中文翻译）。
+开发时用 Xcode 打开 `iScreenMenu.xcodeproj`。工程由 `project.yml` 通过 [XcodeGen](https://github.com/yonaskolb/XcodeGen) 生成；修改 `project.yml` 后运行 `xcodegen generate`，并同时提交两者。界面文字通过 `iScreenMenu/Localizable.xcstrings` 本地化（英文为源语言，含简体中文翻译）。
 
 目前为本机临时签名，无 Developer ID 公证或自动更新。
 
