@@ -7,3 +7,6 @@ backups/
 xcuserdata/
 *.xcuserstate
 DerivedData/
+
+# Local code-signing override (team ID); see Config/Signing.xcconfig
+*.local.xcconfig

@@ -14,6 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		050AF115EEB8D92A192CBDAE /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 		47030FBE4069413CCD98E152 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = AppIcon.icon; sourceTree = "<group>"; };
 		61FF5E0ED03DC2147A6859EF /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = "zh-Hans"; path = "zh-Hans.lproj/Help.rtf"; sourceTree = "<group>"; };
 		64E57838A64562321E80E6A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Help.rtf; sourceTree = "<group>"; };
@@ -26,6 +27,7 @@
 		CE095FCDFF0FF3F9E7FBA2B5 = {
 			isa = PBXGroup;
 			children = (
+				EBEEF69DB3ECB0E951BCBD1D /* Config */,
 				EE963633AA975C54BB4332C6 /* iScreenMenu */,
 				D1C2494619C736F10DD49C44 /* Products */,
 			);
@@ -37,6 +39,14 @@
 				B63BC68ADDA370481D61627F /* iScreen Menu.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		EBEEF69DB3ECB0E951BCBD1D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				050AF115EEB8D92A192CBDAE /* Signing.xcconfig */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		EE963633AA975C54BB4332C6 /* iScreenMenu */ = {
@@ -145,16 +155,13 @@
 /* Begin XCBuildConfiguration section */
 		477E593714DBCCB757641407 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 050AF115EEB8D92A192CBDAE /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
-				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 29;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_APP_SANDBOX = NO;
-				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				EXECUTABLE_NAME = iScreenMenu;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -167,7 +174,6 @@
 				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenMenu;
 				PRODUCT_NAME = "iScreen Menu";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};
@@ -175,15 +181,12 @@
 		};
 		B7C0146D9F3AACADD0A0A451 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 050AF115EEB8D92A192CBDAE /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "-";
-				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 29;
-				DEVELOPMENT_TEAM = "";
 				ENABLE_APP_SANDBOX = NO;
-				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				EXECUTABLE_NAME = iScreenMenu;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -196,7 +199,6 @@
 				MARKETING_VERSION = 0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenMenu;
 				PRODUCT_NAME = "iScreen Menu";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 			};

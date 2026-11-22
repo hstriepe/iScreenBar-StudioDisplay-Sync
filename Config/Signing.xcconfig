@@ -1,0 +1,17 @@
+// App target signing. Committed default: ad-hoc ("Sign to Run Locally"),
+// no team, no hardened runtime. Anyone can build without an Apple account.
+//
+// To sign with your own certificate, create Config/Signing.local.xcconfig
+// (git-ignored) and override these settings there, for example:
+//   CODE_SIGN_STYLE = Automatic
+//   CODE_SIGN_IDENTITY = Apple Development
+//   DEVELOPMENT_TEAM = YOURTEAMID
+//   ENABLE_HARDENED_RUNTIME = YES
+
+CODE_SIGN_STYLE = Manual
+CODE_SIGN_IDENTITY = -
+DEVELOPMENT_TEAM =
+PROVISIONING_PROFILE_SPECIFIER =
+ENABLE_HARDENED_RUNTIME = NO
+
+#include? "Signing.local.xcconfig"
