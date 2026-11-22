@@ -43,6 +43,15 @@ cd iScreenBar-StudioDisplay-Sync
 
 脚本使用 Xcode 工程本机编译、临时签名，安装到 `~/Applications/iScreen Menu.app`，创建用户级 LaunchAgent，登录后自动运行。菜单中的**登录时启动**可开关该 LaunchAgent。退出 App 后在下次登录前保持退出，launchd 只在崩溃后重启。若安装过旧版本，请重新运行 `./scripts/install.sh`（或注销后重新登录），以免退出后被自动重新启动。安装无需管理员密码；防止休眠的强制层另需管理员授权。
 
+### 不使用脚本安装
+
+1. 在 Xcode 中构建，或运行 `./scripts/build.sh`，得到 `build/iScreen Menu.app`。
+2. 将 `iScreen Menu.app` 拖到 `/Applications` 或 `~/Applications`。
+3. 在访达中打开一次。这样快捷指令和控制中心也能找到它。
+4. 左键点击菜单栏图标，选择**登录时启动**。这会写入与脚本相同的 LaunchAgent，指向 App 当前所在位置。
+
+与脚本不同，这样不会立即启动 LaunchAgent，而是在下次登录时生效；在此之前不会写入 `~/Library/Logs/iScreenMenu.log`。之后若移动了 App，请关闭再重新打开“登录时启动”。运行 `build/` 中的副本时不要开启“登录时启动”，否则每次登录都会启动该副本。若仍有使用 `local.qiu.iScreenBarStudioSync` 的旧版本在运行，请注销并重新登录一次。
+
 日常灯控直接通过 USB HID 执行，不依赖官方 App。建议避免两个软件同时自动写入灯光设置。相机自动视频模式和灯体硬件记忆尚未完全对齐，不宣称完整替代官方所有功能。
 
 ## 使用规则

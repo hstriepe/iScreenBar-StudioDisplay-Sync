@@ -43,6 +43,15 @@ cd iScreenBar-StudioDisplay-Sync
 
 The script builds the Xcode project with an ad-hoc (local) signature, installing the application to `~/Applications/iScreen Menu.app`. It also creates a user-level LaunchAgent so the app runs automatically at login. **Launch at Login** in the menu turns that LaunchAgent on or off. Quitting the app keeps it quit until the next login; launchd only restarts it after a crash. If you installed an earlier version, run `./scripts/install.sh` again (or log out and back in) so Quit is not undone by an automatic relaunch. No administrator password is required for the installation; however, the optional "prevent sleep" feature requires administrator authorization.
 
+### Installing without the script
+
+1. Build the app, either in Xcode or with `./scripts/build.sh`, which produces `build/iScreen Menu.app`.
+2. Drag `iScreen Menu.app` into `/Applications` or `~/Applications`.
+3. Open it once from Finder. This also lets Shortcuts and Control Center find it.
+4. Left-click the menu bar icon and choose **Launch at Login**. This writes the same LaunchAgent the script creates, pointing at the app's current location.
+
+Unlike the script, this doesn't start the LaunchAgent right away. It takes effect at the next login, and until then nothing is written to `~/Library/Logs/iScreenMenu.log`. If you move the app afterward, turn Launch at Login off and on again. Don't turn on Launch at Login while running the copy in `build/`, or that copy will start at every login. If an older version with the `local.qiu.iScreenBarStudioSync` agent is still running, log out and back in once.
+
 Daily light control is handled directly via USB HID, independent of the official application. It is recommended to avoid running both this software and the official application simultaneously, as both may attempt to write light settings automatically. Please note that the automatic video mode (linked to the camera) and the hardware-based memory of the light bar are not yet fully synchronized; therefore, this software is not intended as a complete replacement for all official features.
 
 ## Usage Guidelines
