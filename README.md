@@ -8,7 +8,7 @@ Originally created to add "screen-off synchronization" for the iScreenBar when u
 
 ## Interface and Features
 
-See the [UI Guide (Screenshots)](docs/UI-GUIDE.zh-CN.md) and the [Full Feature List](docs/FEATURES.zh-CN.md) for details.
+See the [UI Guide](docs/UI-GUIDE.md) and the [Full Feature List](docs/FEATURES.md) for details.
 
 | Module                      | Features                                                     |
 | --------------------------- | ------------------------------------------------------------ |

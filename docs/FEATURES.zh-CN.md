@@ -1,5 +1,7 @@
 # iScreen Menu 功能清单
 
+[English](FEATURES.md) · 简体中文
+
 > 以 `main` 分支当前已安装版本为准。这是非官方、本地运行的 macOS 菜单栏工具。
 
 ## 1. 菜单栏与运行状态
@@ -10,6 +12,7 @@
 - 悬停图标显示 iScreenBar 当前亮度和色温。
 - 点击面板时主动读取灯体状态，避免界面与实际灯体不一致。
 - 通过用户级 LaunchAgent 登录后自动运行，无需管理员权限。
+- 界面支持英文和简体中文，跟随 macOS 语言设置（包括按应用设置的语言）。
 
 ## 2. iScreenBar 基础控制
 
@@ -133,7 +136,7 @@
 
 - 所有开关、阈值、预设、应用绑定和亮度锁定状态存在本机 `UserDefaults`。
 - 不需要账户、云端服务、网络 API 或数据分析。
-- 安装脚本本地编译、临时签名、安装到 `~/Applications`，并创建用户级 LaunchAgent。
+- 安装脚本使用 Xcode 工程本地编译、临时签名、安装到 `~/Applications`，并创建用户级 LaunchAgent。需要完整的 Xcode。
 - 卸载脚本停止服务，并将安装版和 LaunchAgent 移入废纸篓；日志默认保留供排查。
 
 ## 16. 实现边界与风险提示
@@ -142,7 +145,7 @@
 - iScreenBar 控制使用设备特定的 33 字节 HID 报文，其他型号不保证兼容。
 - 显示亮度读写使用 DisplayServices；MacBook 内屏开关、旋转和主屏设置使用 macOS 私有 SkyLight/MonitorPanel 接口。
 - macOS 系统升级可能改变私有接口行为，因此显示拓扑功能需要真机回归验证。
-- Studio Display 按 Apple 厂商 ID 0x0610 与产品 ID 0xAE46 识别，不再选择任意最大外接显示器。
+- Studio Display 按 Apple 厂商 ID 0x0610 与已知型号 ID（0xAE46 或 0xAE3A）识别，不再选择任意最大外接显示器。
 - 灯体自动感光和入座检测的部分细节受灯体固件版本影响。
 
 ## 17. 功能优先级
