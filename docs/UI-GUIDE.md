@@ -59,6 +59,10 @@ A light preset saves brightness, color temperature, and video mode, and can be b
 
 The rotation preset controls display configuration on its own. With **Enable Preset** on, the saved rotation is applied when the Studio Display connects; with it off, the built-in display returns to 0° landscape and stays there on reconnect. Turning it off does not delete the saved preset.
 
+## 7. Automation
+
+AppleScript, Shortcuts, and Control Center (macOS 26) change the same settings as the panel, and the panel and menu show the result. A setting that's dimmed in the panel can't be changed by automation either; the script or shortcut gets an error instead. Control Center controls are buttons without state and need the app to be running. See the README's Automation section for the full list and an AppleScript example.
+
 ## Verification status
 
 Restoring the built-in display when the external display is unplugged was confirmed by a user on 2026-10-05. The change that returns to 0° when the rotation auto preset is turned off has been deployed but still needs plug/unplug retesting. Behavior may differ across firmware and macOS versions; when reporting a problem, include the macOS version, device models, steps, and a redacted log.

@@ -215,3 +215,10 @@
 - [BenQ iScreenBar 官方产品页](https://www.benq.com/en-us/lighting/monitor-light/iscreenbar.html)
 - [BenQ iScreenBar 快速入门指南](https://www.benq.com/en-us/qsg/iscreenbar/guide.html)
 - [BenQ iScreenBar 规格与兼容型号](https://www.benq.com/en-us/lighting/monitor-light/iscreenbar/spec.html)
+
+## 19. 自动化
+
+- **AppleScript：** 脚本词典 `iScreenMenu.sdef`。属性涵盖灯光、亮度、色温、自动色温、自动感光、入座检测、视频模式、亮度跟随、双屏亮度、熄屏同步、防止休眠和内建显示器，另有只读的台灯连接状态、灯光状态、我的最爱列表和旋转预设名称。命令：`toggle light`、`apply favorite`、`apply rotation preset`、`show control panel`。失败时返回带原因的脚本错误（例如台灯未连接）。
+- **快捷指令（App Intents，macOS 14+）：** 设置灯光、开启或关闭设置、获取设置、设置灯光亮度、设置色温、应用我的最爱、应用旋转预设、显示控制面板、获取灯光状态。为聚焦和 Siri 提供 5 个现成快捷指令。支持英文和简体中文。
+- **控制中心（macOS 26）：** 沙盒化的小组件扩展，提供 4 个按钮：台灯灯光（切换）、防止休眠（切换）、旋转预设、控制面板。按钮不显示状态，仅在 App 运行时有效。
+- 所有方式都会设置面板控件并执行其自身操作，因此副作用、保存和限制与点击按钮相同。

@@ -215,3 +215,10 @@ English · [简体中文](FEATURES.zh-CN.md)
 - [BenQ iScreenBar product page](https://www.benq.com/en-us/lighting/monitor-light/iscreenbar.html)
 - [BenQ iScreenBar quick start guide](https://www.benq.com/en-us/qsg/iscreenbar/guide.html)
 - [BenQ iScreenBar specifications and compatible models](https://www.benq.com/en-us/lighting/monitor-light/iscreenbar/spec.html)
+
+## 19. Automation
+
+- **AppleScript:** scripting dictionary `iScreenMenu.sdef`. Properties for Light, Brightness, Color Temperature, Auto Temp, Auto Light, Presence, Video Mode, Match Screen, Link Screens, Sleep Sync, Keep Awake, and the built-in display, plus read-only lamp connection, status, favorites, and rotation preset name. Commands: `toggle light`, `apply favorite`, `apply rotation preset`, `show control panel`. Failures return a script error with the reason (for example, lamp not connected).
+- **Shortcuts (App Intents, macOS 14+):** Set Light, Turn Setting On or Off, Get Setting, Set Lamp Brightness, Set Color Temperature, Apply Favorite, Apply Rotation Preset, Show Control Panel, Get Lamp Status. Five ready-made shortcuts for Spotlight and Siri. Localized in English and Simplified Chinese.
+- **Control Center (macOS 26):** a sandboxed widget extension with four buttons: Lamp Light (toggle), Keep Awake (toggle), Rotation Preset, Control Panel. They don't show state and only work while the app is running.
+- Every path sets the panel control and runs its own action, so automation has the same side effects, saving, and limits as clicking the button.

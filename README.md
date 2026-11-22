@@ -32,7 +32,7 @@ The interface is in English and Simplified Chinese and follows the macOS languag
 
 Tested on: Apple Silicon MacBook Pro, macOS 26, Studio Display, and BenQ iScreenBar (USB VID 0x04A5 / PID 0x2501). Other systems and devices have not been fully verified.
 
-Requires full Xcode 16 or later (the Command Line Tools alone are not enough). Install Xcode from the App Store, then run:
+Requires full Xcode 26 or later (the Command Line Tools alone are not enough). Install Xcode from the App Store, then run:
 
 ```bash
 sudo xcode-select -s /Applications/Xcode.app
@@ -52,6 +52,25 @@ Daily light control is handled directly via USB HID, independent of the official
 - When "Rotation Preset" is enabled, the saved angle is applied whenever the Studio Display is connected. When disabled, the angle resets to 0°, and the system will request that it remain at 0° upon reconnection.
 - If an external display is disconnected, the system will attempt to force the internal display to resume. While general display configuration operations are designed to avoid interference during screen locking or waking, the restoration process upon disconnection is an exception.
 - The "prevent sleep" feature utilizes `caffeinate` and an administrator-authorized `pmset disablesleep` command; the software attempts to release these settings upon closure or exit. Please verify the behavior on your specific machine regarding lid closure, screen locking, and system wake-up.
+
+## Automation
+
+iScreen Menu can be controlled from AppleScript, Shortcuts, and (on macOS 26) Control Center. Each setting works exactly like its control panel button, including the same limits: lamp settings need a connected iScreenBar, display settings are unavailable while the Mac is locked, and turning on Keep Awake asks for an administrator password. The app must be running; Shortcuts and AppleScript launch it if it isn't.
+
+**AppleScript.** Open the dictionary in Script Editor (File › Open Dictionary… › iScreen Menu). Properties: `light`, `brightness` (1–100), `color temperature` (2700–6500 K; Auto Temp must be off), `auto temperature`, `auto light`, `presence`, `video mode`, `match screen`, `link screens`, `sleep sync`, `keep awake`, `builtin display`, and read-only `lamp connected`, `lamp status`, `favorites`, `rotation preset`. Commands: `toggle light`, `apply favorite "Name"`, `apply rotation preset`, `show control panel`. The first time another app sends commands, macOS asks for Automation permission.
+
+```applescript
+tell application "iScreen Menu"
+    set brightness to 60
+    set color temperature to 4000
+    apply favorite "Night Work"
+    get lamp status -- "Light on · 60% · 4000K"
+end tell
+```
+
+**Shortcuts.** Actions: Set Light, Turn Setting On or Off, Get Setting, Set Lamp Brightness, Set Color Temperature, Apply Favorite, Apply Rotation Preset, Show Control Panel, and Get Lamp Status. Toggle Light, Apply Favorite, Lamp Status, Rotation Preset, and Control Panel are also offered as ready-made shortcuts for Spotlight and Siri.
+
+**Control Center (macOS 26).** Add controls from Control Center › Edit Controls › iScreen Menu: Lamp Light, Keep Awake, Rotation Preset, and Control Panel. They're buttons, not switches, and don't show the current state. A control signals the running app, so it does nothing while iScreen Menu is quit.
 
 ## Verification and Limitations
 

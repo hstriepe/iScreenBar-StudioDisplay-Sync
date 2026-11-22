@@ -32,7 +32,7 @@
 
 已测试：Apple Silicon MacBook Pro、macOS 26、Studio Display、BenQ iScreenBar（USB VID 0x04A5 / PID 0x2501）。其他系统和设备尚未全面验证。
 
-需要完整的 Xcode 16 或更高版本（仅安装 Command Line Tools 不够）。从 App Store 安装 Xcode 后运行：
+需要完整的 Xcode 26 或更高版本（仅安装 Command Line Tools 不够）。从 App Store 安装 Xcode 后运行：
 
 ```bash
 sudo xcode-select -s /Applications/Xcode.app
@@ -52,6 +52,25 @@ cd iScreenBar-StudioDisplay-Sync
 - 旋转预设开启：连接 Studio Display 时应用保存角度。关闭：回到 0°，重新连接也请求保持 0°。
 - 外屏断开请求强制恢复内屏。一般显示配置操作避开锁屏/唤醒切换，断开恢复是例外。
 - 防止休眠使用 caffeinate 和管理员授权的 pmset disablesleep，关闭或退出后尝试释放。请实际验证本机合盖、锁屏与恢复行为。
+
+## 自动化
+
+iScreen Menu 可通过 AppleScript、快捷指令以及（macOS 26 上的）控制中心操作。每项设置的效果与控制面板按钮完全相同，限制也相同：灯光设置需要连接 iScreenBar，Mac 锁定时无法调整显示器，开启防止休眠需要输入管理员密码。App 必须在运行；若未运行，快捷指令和 AppleScript 会自动启动它。
+
+**AppleScript。** 在“脚本编辑器”中打开词典（文件 › 打开词典… › iScreen Menu）。属性：`light`、`brightness`（1–100）、`color temperature`（2700–6500 K，需先关闭自动色温）、`auto temperature`、`auto light`、`presence`、`video mode`、`match screen`、`link screens`、`sleep sync`、`keep awake`、`builtin display`，以及只读的 `lamp connected`、`lamp status`、`favorites`、`rotation preset`。命令：`toggle light`、`apply favorite "名称"`、`apply rotation preset`、`show control panel`。AppleScript 术语为英文。其他 App 首次发送命令时，macOS 会请求“自动化”权限。
+
+```applescript
+tell application "iScreen Menu"
+    set brightness to 60
+    set color temperature to 4000
+    apply favorite "Night Work"
+    get lamp status -- "Light on · 60% · 4000K"
+end tell
+```
+
+**快捷指令。** 操作：设置灯光、开启或关闭设置、获取设置、设置灯光亮度、设置色温、应用我的最爱、应用旋转预设、显示控制面板、获取灯光状态。切换灯光、应用我的最爱、灯光状态、旋转预设和控制面板也作为现成快捷指令提供给聚焦和 Siri。
+
+**控制中心（macOS 26）。** 在“控制中心 › 编辑控制 › iScreen Menu”中添加：台灯灯光、防止休眠、旋转预设、控制面板。它们是按钮而不是开关，不显示当前状态。控制项会通知正在运行的 App，因此 iScreen Menu 退出时不起作用。
 
 ## 验证与限制
 
