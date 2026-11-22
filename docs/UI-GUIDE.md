@@ -63,7 +63,7 @@ The rotation preset controls display configuration on its own. With **Enable Pre
 
 ## 7. Automation
 
-AppleScript, Shortcuts, and Control Center (macOS 26) change the same settings as the panel, and the panel and menu show the result. A setting that's dimmed in the panel can't be changed by automation either; the script or shortcut gets an error instead. Control Center controls are buttons without state and need the app to be running. See the README's Automation section for the full list and an AppleScript example.
+AppleScript, Shortcuts, and Control Center (macOS 26) change the same settings as the panel, and the panel and menu show the result. A setting that's dimmed in the panel can't be changed by automation either; the script or shortcut gets an error instead. Control Center controls are buttons without state and need the app to be running. The Lamp Levels widget shows the current brightness and color temperature as segmented bars; click a segment to set it. See the README's Automation section for the full list and an AppleScript example.
 
 ## Reporting problems
 

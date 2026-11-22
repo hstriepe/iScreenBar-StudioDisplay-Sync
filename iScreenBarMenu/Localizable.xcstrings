@@ -445,6 +445,16 @@
         }
       }
     },
+    "Direction" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "方向"
+          }
+        }
+      }
+    },
     "Displays" : {
       "localizations" : {
         "zh-Hans" : {
@@ -461,6 +471,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "显示屏与旋转"
+          }
+        }
+      }
+    },
+    "Down" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下"
           }
         }
       }
@@ -1122,6 +1142,16 @@
         }
       }
     },
+    "Set Brightness" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置亮度"
+          }
+        }
+      }
+    },
     "Set Color Temperature" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1230,6 +1260,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "状态"
+          }
+        }
+      }
+    },
+    "Step Brightness" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调节亮度"
+          }
+        }
+      }
+    },
+    "Step Color Temperature" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调节色温"
           }
         }
       }
@@ -1422,6 +1472,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "打开灯光并使用已保存的“我的最爱”的亮度和色温。"
+          }
+        }
+      }
+    },
+    "Up" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上"
           }
         }
       }

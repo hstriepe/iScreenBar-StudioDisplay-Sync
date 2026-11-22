@@ -1,6 +1,7 @@
 import AppIntents
 import AppKit
 import Foundation
+import WidgetKit
 
 // Automation surface shared by AppleScript (ScriptingSupport.swift), App Intents (below),
 // and the Control Center extension (Darwin notifications, Shared/ControlActions.swift).
@@ -70,6 +71,10 @@ protocol AutomationTarget: AnyObject {
     var isLampConnected: Bool { get }
     var lampBrightness: Int? { get }
     var lampTemperature: Int? { get }
+    /// Cheap reads for the widget state (no panel refresh).
+    var isLampPowerOn: Bool { get }
+    var isAutoTemperatureOn: Bool { get }
+    var isKeepAwakeActive: Bool { get }
     var favoriteNames: [String] { get }
     var rotationPresetName: String { get }
     func isOn(_ feature: AutomationFeature) -> Bool
@@ -103,7 +108,7 @@ func lampStatusSummary(_ target: AutomationTarget) -> String {
 // notification per action. Shared/ControlActions.swift defines the actions and their names.
 // If the system runs a control's intent in this process instead, it lands here directly.
 @MainActor
-func performControlAction(_ action: ControlAction) {
+func performControlAction(_ action: ControlAction) async {
     guard let target = automationTarget else { return }
     do {
         switch action {
@@ -115,12 +120,27 @@ func performControlAction(_ action: ControlAction) {
             try target.applyRotationPresetFromAutomation()
         case .showControlPanel:
             target.showControlPanel()
+        case .brightnessUp, .brightnessDown:
+            guard target.isLampConnected else { throw AutomationError.lampNotConnected }
+            guard let current = target.lampBrightness else { throw AutomationError.unavailable(String(localized: "Brightness")) }
+            let step = action == .brightnessUp ? LampState.brightnessStep : -LampState.brightnessStep
+            try target.setBrightness(max(1, min(100, current + step)))
+        case .warmer, .cooler:
+            guard target.isLampConnected else { throw AutomationError.lampNotConnected }
+            guard let current = target.lampTemperature else { throw AutomationError.unavailable(String(localized: "Color Temperature")) }
+            let step = action == .cooler ? LampState.temperatureStep : -LampState.temperatureStep
+            try target.setTemperature(max(2700, min(6500, current + step)))
+        case .setBrightness(let value):
+            try target.setBrightness(value)
+        case .setTemperature(let kelvin):
+            try target.setTemperature(kelvin)
         }
-        log("Control Center: \(action.rawValue)")
+        log("Control Center: \(action.identifier)")
     } catch {
-        log("Control Center: \(action.rawValue) failed: \(error.localizedDescription)")
+        log("Control Center: \(action.identifier) failed: \(error.localizedDescription)")
         NSSound.beep()
     }
+    publishLampState()
 }
 
 func installControlActionObserver() {
@@ -129,11 +149,40 @@ func installControlActionObserver() {
         CFNotificationCenterAddObserver(center, nil, { _, _, name, _, _ in
             guard let raw = name?.rawValue as String?,
                   let action = ControlAction(notificationName: raw) else { return }
-            DispatchQueue.main.async {
-                MainActor.assumeIsolated { performControlAction(action) }
-            }
+            Task { @MainActor in await performControlAction(action) }
         }, action.notificationName as CFString, nil, .deliverImmediately)
     }
+}
+
+// MARK: - Widget state
+
+private var publishedLampState: LampState?
+
+/// Publishes the lamp snapshot for the widget and reloads it when something changed.
+/// Called from the main loop and after Control Center actions; cheap when nothing changed.
+@MainActor
+func publishLampState() {
+    guard let target = automationTarget else { return }
+    let state = LampState(isAppRunning: true,
+                          isConnected: target.isLampConnected,
+                          isPowerOn: target.isLampPowerOn,
+                          isAutoTemperatureOn: target.isAutoTemperatureOn,
+                          isKeepAwakeOn: target.isKeepAwakeActive,
+                          brightness: target.lampBrightness,
+                          temperature: target.lampTemperature)
+    guard state != publishedLampState else { return }
+    guard state.publish() else {
+        log("Widget: couldn't publish lamp state")
+        return
+    }
+    publishedLampState = state
+    WidgetCenter.shared.reloadTimelines(ofKind: LampState.widgetKind)
+}
+
+/// On quit: the widget shows "not running" instead of stale values.
+func clearPublishedLampState() {
+    LampState().publish()
+    WidgetCenter.shared.reloadTimelines(ofKind: LampState.widgetKind)
 }
 
 // MARK: - App Intents (Shortcuts, Spotlight, Siri)

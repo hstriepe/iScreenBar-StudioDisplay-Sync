@@ -21,12 +21,102 @@
         }
       }
     },
+    "Auto Temp is on" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自动色温已开启"
+          }
+        }
+      }
+    },
+    "Brighter" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调亮"
+          }
+        }
+      }
+    },
+    "Brightness" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "亮度"
+          }
+        }
+      }
+    },
+    "Color Temp" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "色温"
+          }
+        }
+      }
+    },
+    "Color Temperature" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "色温"
+          }
+        }
+      }
+    },
     "Control Panel" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "控制面板"
+          }
+        }
+      }
+    },
+    "Cooler" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调冷"
+          }
+        }
+      }
+    },
+    "Dimmer" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调暗"
+          }
+        }
+      }
+    },
+    "Direction" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "方向"
+          }
+        }
+      }
+    },
+    "Down" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下"
           }
         }
       }
@@ -41,12 +131,62 @@
         }
       }
     },
+    "Lamp Brighter" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯调亮"
+          }
+        }
+      }
+    },
+    "Lamp Cooler" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯调冷"
+          }
+        }
+      }
+    },
+    "Lamp Dimmer" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯调暗"
+          }
+        }
+      }
+    },
+    "Lamp Levels" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯亮度与色温"
+          }
+        }
+      }
+    },
     "Lamp Light" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "台灯灯光"
+          }
+        }
+      }
+    },
+    "Lamp Warmer" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯调暖"
           }
         }
       }
@@ -61,12 +201,52 @@
         }
       }
     },
+    "Lowers the iScreenBar brightness by 10%." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "将 iScreenBar 亮度降低 10%。"
+          }
+        }
+      }
+    },
+    "Lowers the iScreenBar color temperature by 500 K." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "将 iScreenBar 色温降低 500 K。"
+          }
+        }
+      }
+    },
     "Opens the iScreenBar Menu control panel." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "打开 iScreenBar Menu 控制面板。"
+          }
+        }
+      }
+    },
+    "Raises the iScreenBar brightness by 10%." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "将 iScreenBar 亮度提高 10%。"
+          }
+        }
+      }
+    },
+    "Raises the iScreenBar color temperature by 500 K." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "将 iScreenBar 色温提高 500 K。"
           }
         }
       }
@@ -81,12 +261,62 @@
         }
       }
     },
+    "Set Brightness" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置亮度"
+          }
+        }
+      }
+    },
+    "Set Color Temperature" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置色温"
+          }
+        }
+      }
+    },
+    "Sets the iScreenBar brightness and color temperature." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "设置 iScreenBar 的亮度和色温。"
+          }
+        }
+      }
+    },
     "Show Control Panel" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "显示控制面板"
+          }
+        }
+      }
+    },
+    "Step Brightness" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调节亮度"
+          }
+        }
+      }
+    },
+    "Step Color Temperature" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调节色温"
           }
         }
       }
@@ -127,6 +357,49 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "打开或关闭 iScreenBar。"
+          }
+        }
+      }
+    },
+    "Up" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上"
+          }
+        }
+      }
+    },
+    "Warmer" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "调暖"
+          }
+        }
+      }
+    },
+    "iScreenBar" : {
+      "shouldTranslate" : false
+    },
+    "iScreenBar Menu isn't running" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iScreenBar Menu 未运行"
+          }
+        }
+      }
+    },
+    "iScreenBar not connected" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iScreenBar 未连接"
           }
         }
       }

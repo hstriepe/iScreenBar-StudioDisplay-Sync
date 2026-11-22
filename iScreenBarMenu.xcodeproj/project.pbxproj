@@ -7,12 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		15EE127ECBF4184B1F59D1C2 /* LampState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D798EAC94DE77138251E1A5 /* LampState.swift */; };
 		3611E17473A28C183D877C69 /* Help.rtf in Resources */ = {isa = PBXBuildFile; fileRef = D502FF983192CDA7BF301C3D /* Help.rtf */; };
 		39F7AB2463EDF3DA2CC086F8 /* ControlActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1FBC1FF4DB2E02C1AED963 /* ControlActions.swift */; };
 		54EB8F0D020A4361B2A3E01A /* ScriptingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5292EEA1431B41EC26529136 /* ScriptingSupport.swift */; };
 		5B2CE789EAE98CE157E5AE61 /* iScreenBar Menu Controls.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 93A2701C0D7E472F92CC7D31 /* iScreenBar Menu Controls.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5B7538CE4BDF5AC6F52A8C84 /* AppShortcuts.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 00063A6C6B6A8F75E0E00FF8 /* AppShortcuts.xcstrings */; };
 		5C5722D1936100D277103CB2 /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = B88814CF4B5B375498B495DE /* Controls.swift */; };
+		5DB21A5E3D4E4325BAABDE77 /* LampState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D798EAC94DE77138251E1A5 /* LampState.swift */; };
 		61BC4A20ABD6F81D1FC3F518 /* Automation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF9398B0182BBFA627F3586 /* Automation.swift */; };
 		84A5E704831377CA255F0849 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 965296E55828CE996BA4121B /* Localizable.xcstrings */; };
 		8964DB79D3BD91A8BD9F6C66 /* iScreenBarMenu.sdef in Resources */ = {isa = PBXBuildFile; fileRef = 439D1091E023518F9C3E540F /* iScreenBarMenu.sdef */; };
@@ -53,6 +55,7 @@
 		5292EEA1431B41EC26529136 /* ScriptingSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScriptingSupport.swift; sourceTree = "<group>"; };
 		59F5EE918944B4581EC02131 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Help.rtf; sourceTree = "<group>"; };
 		6BF9398B0182BBFA627F3586 /* Automation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Automation.swift; sourceTree = "<group>"; };
+		8D798EAC94DE77138251E1A5 /* LampState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LampState.swift; sourceTree = "<group>"; };
 		93A2701C0D7E472F92CC7D31 /* iScreenBar Menu Controls.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "iScreenBar Menu Controls.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		965296E55828CE996BA4121B /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		B64DD89FF4EFF1AE32696745 /* AppIcon.icon */ = {isa = PBXFileReference; lastKnownFileType = wrapper.icon; path = AppIcon.icon; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				FE1FBC1FF4DB2E02C1AED963 /* ControlActions.swift */,
+				8D798EAC94DE77138251E1A5 /* LampState.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -236,6 +240,7 @@
 			files = (
 				61BC4A20ABD6F81D1FC3F518 /* Automation.swift in Sources */,
 				E6271179BEB49E55F78BAF59 /* ControlActions.swift in Sources */,
+				5DB21A5E3D4E4325BAABDE77 /* LampState.swift in Sources */,
 				54EB8F0D020A4361B2A3E01A /* ScriptingSupport.swift in Sources */,
 				CAA12ABBAD43AAFAE3ECAF87 /* main.swift in Sources */,
 			);
@@ -247,6 +252,7 @@
 			files = (
 				39F7AB2463EDF3DA2CC086F8 /* ControlActions.swift in Sources */,
 				5C5722D1936100D277103CB2 /* Controls.swift in Sources */,
+				15EE127ECBF4184B1F59D1C2 /* LampState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -280,7 +286,7 @@
 				CODE_SIGN_ENTITLEMENTS = iScreenBarMenuControls/iScreenBarMenuControls.entitlements;
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 41;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -292,7 +298,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 0.5;
+				MARKETING_VERSION = 0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenBarMenu.Controls;
 				PRODUCT_NAME = iScreenBarMenuControls;
 				SDKROOT = macosx;
@@ -369,7 +375,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = iScreenBarMenuControls/iScreenBarMenuControls.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 41;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -381,7 +387,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 0.5;
+				MARKETING_VERSION = 0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenBarMenu.Controls;
 				PRODUCT_NAME = iScreenBarMenuControls;
 				SDKROOT = macosx;
@@ -397,7 +403,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 41;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				EXECUTABLE_NAME = iScreenBarMenu;
@@ -408,7 +414,7 @@
 					"@executable_path/../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 0.5;
+				MARKETING_VERSION = 0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenBarMenu;
 				PRODUCT_NAME = "iScreenBar Menu";
 				SDKROOT = macosx;
@@ -422,7 +428,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 39;
+				CURRENT_PROJECT_VERSION = 41;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				EXECUTABLE_NAME = iScreenBarMenu;
@@ -433,7 +439,7 @@
 					"@executable_path/../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 0.5;
+				MARKETING_VERSION = 0.6;
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenBarMenu;
 				PRODUCT_NAME = "iScreenBar Menu";
 				SDKROOT = macosx;

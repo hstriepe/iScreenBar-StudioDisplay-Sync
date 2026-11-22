@@ -24,7 +24,7 @@ See the [UI Guide](docs/UI-GUIDE.md) and the [Full Feature List](docs/FEATURES.m
 | Studio Display button | Black overlay that keeps windows in place; **the backlight stays on** |
 | Favorites and Mode Center | Saved light settings, optionally switched by the frontmost app; separate rotation preset applied when the Studio Display connects |
 | Keep Awake | Prevents system sleep until you turn it off or quit (asks for an administrator password) |
-| Automation | AppleScript, Shortcuts, and Control Center (macOS 26 and later) |
+| Automation | AppleScript, Shortcuts, Control Center, and a desktop widget (macOS 26 and later) |
 
 The menu bar icon is yellow when the lamp is on, gray when it's off, and red when something needs attention. Hover over it to see brightness and color temperature. The app has no Dock icon.
 
@@ -35,7 +35,7 @@ The interface is in English and Simplified Chinese and follows the macOS languag
 
 ## Requirements
 
-- Mac with macOS 14 or later; Control Center controls need macOS 26 or later
+- Mac with macOS 14 or later; Control Center controls and the widget need macOS 26 or later
 - Apple Studio Display
 - BenQ iScreenBar (USB VID 0x04A5 / PID 0x2501). Other ScreenBar models aren't supported
 
@@ -119,7 +119,9 @@ end tell
 
 **Shortcuts.** Actions: Set Light, Turn Setting On or Off, Get Setting, Set Lamp Brightness, Set Color Temperature, Apply Favorite, Apply Rotation Preset, Show Control Panel, and Get Lamp Status. Toggle Light, Apply Favorite, Lamp Status, Rotation Preset, and Control Panel are also offered as ready-made shortcuts for Spotlight and Siri.
 
-**Control Center (macOS 26 and later).** Add controls from Control Center › Edit Controls › iScreenBar Menu: Lamp Light, Keep Awake, Rotation Preset, and Control Panel. They're buttons, not switches, and don't show the current state. They do nothing while iScreenBar Menu is quit.
+**Control Center (macOS 26 and later).** Add controls from Control Center › Edit Controls › iScreenBar Menu: Lamp Light, Keep Awake, Rotation Preset, Control Panel, Lamp Dimmer / Lamp Brighter (10% steps), and Lamp Warmer / Lamp Cooler (500 K steps). They're buttons, not switches, and don't show the current state. They do nothing while iScreenBar Menu is quit.
+
+**Widget (macOS 26 and later).** Add **Lamp Levels** from Edit Widgets (desktop or Notification Center). It shows the lamp's brightness and color temperature as two bars of 10 segments; click a segment to set that level (brightness 10–100%, color temperature 2700–6500 K), or click the power button to switch the light. Widgets can't have real sliders, so you click rather than drag. The color temperature bar is unavailable while Auto Temp is on. While iScreenBar Menu is quit the widget says so and does nothing.
 
 ## Troubleshooting and limitations
 

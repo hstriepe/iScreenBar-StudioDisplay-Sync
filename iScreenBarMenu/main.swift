@@ -2005,6 +2005,7 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         pendingDisplayPolicyWorkItem?.cancel()
         _ = displayController.setStudioEnabled(true)
         _ = keepAwakeController.setActive(false)
+        clearPublishedLampState()
     }
 
     // MARK: - Status menu (left-click)
@@ -2670,6 +2671,9 @@ extension StatusIndicator: AutomationTarget {
     var isLampConnected: Bool { lamp.isConnected }
     var lampBrightness: Int? { lamp.isConnected ? lamp.currentBrightness : nil }
     var lampTemperature: Int? { lamp.isConnected ? lamp.currentTemperature : nil }
+    var isLampPowerOn: Bool { lamp.isPowerOn == true }
+    var isAutoTemperatureOn: Bool { isTimeTemperatureEnabled }
+    var isKeepAwakeActive: Bool { keepAwakeController.isActive }
     var favoriteNames: [String] { modeNames() }
     var rotationPresetName: String { loadRotationPreset().name }
 
@@ -3568,7 +3572,9 @@ private func pollDisplayAndLamp() {
 
 let pollingTimer = Timer.scheduledTimer(withTimeInterval: pollInterval, repeats: true) { _ in
     pollDisplayAndLamp()
+    MainActor.assumeIsolated { publishLampState() }
 }
 pollingTimer.tolerance = 0.05
 pollDisplayAndLamp()
+MainActor.assumeIsolated { publishLampState() }
 NSApplication.shared.run()

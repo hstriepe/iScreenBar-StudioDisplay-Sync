@@ -11,6 +11,9 @@ Local automation acts only on this Mac. AppleScript from other apps is gated by
 macOS Automation permission. Shortcuts actions run in the app. The Control
 Center extension is sandboxed and signals the app with Darwin notifications
 (`org.windholm.iScreenBarMenu.control.*`); any local process can post these, and
-they can only toggle the lamp, toggle Keep Awake (which still asks for an
-administrator password), apply the saved rotation preset, or open the panel.
+they can only toggle the lamp, set or step its brightness and color temperature,
+toggle Keep Awake (which still asks for an administrator password), apply the
+saved rotation preset, or open the panel. The app publishes the lamp's on/off,
+brightness, and color temperature as the state of
+`org.windholm.iScreenBarMenu.state` for the widget; any local process can read it.
 
