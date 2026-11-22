@@ -6,7 +6,7 @@ English · [简体中文](FEATURES.zh-CN.md)
 
 ## 1. Menu bar and status
 
-- Left-click the menu-bar icon for a standard menu with submenus; right-click (or Control-click) it to open or close the control panel.
+- Left-click the menu-bar icon to open or close the control panel (About…, Help…, and Quit at the bottom right); right-click (or Control-click) it for a standard menu with submenus.
 - The menu has Launch at Login (user LaunchAgent), Help… (a Help window), and Quit; the panel has a Quit button at the bottom right.
 - The icon is yellow when the lamp is on and gray when it is off.
 - It turns red when the USB connection or a lamp power command fails.

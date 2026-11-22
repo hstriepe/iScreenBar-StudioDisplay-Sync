@@ -746,10 +746,11 @@ private final class HelpWindowController: NSWindowController {
     }
 
     private static func loadHelpText() -> NSAttributedString {
-        guard let url = Bundle.main.url(forResource: "Help", withExtension: "rtf"),
-              let data = try? Data(contentsOf: url),
-              let text = NSMutableAttributedString(rtf: data, documentAttributes: nil) else {
-            log("Help.rtf not found in bundle")
+        // Help.rtfd (RTF + images, editable in TextEdit), localized per lproj.
+        guard let url = Bundle.main.url(forResource: "Help", withExtension: "rtfd"),
+              let text = try? NSMutableAttributedString(url: url, options: [.documentType: NSAttributedString.DocumentType.rtfd],
+                                                        documentAttributes: nil) else {
+            log("Help.rtfd not found in bundle")
             return NSAttributedString(string: String(localized: "Help isn't available."),
                                       attributes: [.foregroundColor: NSColor.labelColor,
                                                    .font: NSFont.systemFont(ofSize: 13)])
@@ -818,6 +819,9 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
     private let rotationModeButton = NSButton(title: String(localized: "Portrait Dual"), target: nil, action: nil)
     private var modeCenterWindow: NSWindow?
     private var helpWindowController: HelpWindowController?
+    private var panelStack: NSStackView?
+    private var displaySectionViews: [NSView] = []
+    private var rotationPresetViews: [NSView] = []
     private let bindAppButton = NSButton(title: String(localized: "Bind App"), target: nil, action: nil)
     private let brightnessFollowSwitch = FeatureButton(title: String(localized: "Match Screen"), symbol: "display", accentColor: activeControlColor)
     private let displayBrightnessLockSwitch = FeatureButton(title: String(localized: "Link Screens"), symbol: "rectangle.on.rectangle", accentColor: activeControlColor)
@@ -961,13 +965,13 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         if popover.isShown { refreshControls() }
     }
 
-    // Left-click opens the standard menu; right-click or Control-click opens the control panel.
+    // Left-click opens the control panel; right-click or Control-click opens the standard menu.
     @objc private func statusItemClicked() {
         let event = NSApp.currentEvent
         if event?.type == .rightMouseUp || event?.modifierFlags.contains(.control) == true {
-            togglePanel()
-        } else {
             showStatusMenu()
+        } else {
+            togglePanel()
         }
     }
 
@@ -994,6 +998,9 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         } else {
             lamp.requestStatus()
             refreshControls()
+            if let panelStack {
+                popover.contentSize = NSSize(width: UIStyle.panelWidth, height: ceil(panelStack.fittingSize.height))
+            }
             popover.show(relativeTo: button.bounds, of: button, preferredEdge: .minY)
         }
     }
@@ -2079,27 +2086,11 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
 
         let displayMenu = NSMenu()
         displayMenu.autoenablesItems = false
-        displayMenu.addItem(toggleItem(String(localized: "Built-in Display"), control: displayPowerSwitch))
-        let rotateMenu = NSMenu()
-        rotateMenu.autoenablesItems = false
-        let currentRotation = displayController.builtinDisplay().map { Int(CGDisplayRotation($0).rounded()) }
-        for degrees in [0, 90, 180, 270] {
-            let entry = actionItem("\(degrees)°", action: #selector(menuRotationChanged(_:)), tag: degrees)
-            entry.state = currentRotation == degrees ? .on : .off
-            entry.isEnabled = displayRotateButton.isEnabled
-            rotateMenu.addItem(entry)
+        if showsDisplaySection {
+            addDisplayControls(to: displayMenu)
+        } else {
+            displayMenu.addItem(toggleItem("Studio Display", control: studioPowerSwitch))
         }
-        let rotateItem = submenuItem(String(localized: "Rotate Built-in"), rotateMenu)
-        rotateItem.isEnabled = displayRotateButton.isEnabled
-        displayMenu.addItem(rotateItem)
-        displayMenu.addItem(toggleItem("Studio Display", control: studioPowerSwitch))
-        displayMenu.addItem(.separator())
-        let preset = loadRotationPreset()
-        let applyPreset = actionItem(String(localized: "Apply “\(preset.name)”"), action: #selector(applyRotationPreset))
-        applyPreset.isEnabled = rotationModeButton.isEnabled
-        displayMenu.addItem(applyPreset)
-        displayMenu.addItem(toggleItem(String(localized: "Apply Automatically When Studio Display Connects"),
-                                       control: displayAutoPresetSwitch))
         menu.addItem(submenuItem(String(localized: "Displays"), displayMenu))
 
         let favoritesMenu = NSMenu()
@@ -2130,6 +2121,30 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         quit.target = self
         menu.addItem(quit)
         return menu
+    }
+
+    private func addDisplayControls(to displayMenu: NSMenu) {
+        displayMenu.addItem(toggleItem(String(localized: "Built-in Display"), control: displayPowerSwitch))
+        let rotateMenu = NSMenu()
+        rotateMenu.autoenablesItems = false
+        let currentRotation = displayController.builtinDisplay().map { Int(CGDisplayRotation($0).rounded()) }
+        for degrees in [0, 90, 180, 270] {
+            let entry = actionItem("\(degrees)°", action: #selector(menuRotationChanged(_:)), tag: degrees)
+            entry.state = currentRotation == degrees ? .on : .off
+            entry.isEnabled = displayRotateButton.isEnabled
+            rotateMenu.addItem(entry)
+        }
+        let rotateItem = submenuItem(String(localized: "Rotate Built-in"), rotateMenu)
+        rotateItem.isEnabled = displayRotateButton.isEnabled
+        displayMenu.addItem(rotateItem)
+        displayMenu.addItem(toggleItem("Studio Display", control: studioPowerSwitch))
+        displayMenu.addItem(.separator())
+        let preset = loadRotationPreset()
+        let applyPreset = actionItem(String(localized: "Apply “\(preset.name)”"), action: #selector(applyRotationPreset))
+        applyPreset.isEnabled = rotationModeButton.isEnabled
+        displayMenu.addItem(applyPreset)
+        displayMenu.addItem(toggleItem(String(localized: "Apply Automatically When Studio Display Connects"),
+                                       control: displayAutoPresetSwitch))
     }
 
     private func actionItem(_ title: String, action: Selector, tag: Int = 0) -> NSMenuItem {
@@ -2191,7 +2206,14 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         log(enable ? "Launch at login on (LaunchAgent written)" : "Launch at login off (LaunchAgent removed)")
     }
 
+    @objc private func showAbout() {
+        if popover.isShown { popover.performClose(nil) }
+        NSApp.activate(ignoringOtherApps: true)
+        NSApp.orderFrontStandardAboutPanel(nil)
+    }
+
     @objc private func showHelp() {
+        if popover.isShown { popover.performClose(nil) }
         let controller = helpWindowController ?? HelpWindowController()
         helpWindowController = controller
         controller.present()
@@ -2310,16 +2332,6 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         brightnessValueLabel.textColor = .secondaryLabelColor
         temperatureValueLabel.font = .monospacedDigitSystemFont(ofSize: 11, weight: .medium)
         temperatureValueLabel.textColor = .secondaryLabelColor
-
-        let title = NSTextField(labelWithString: "iScreenBar Menu")
-        title.font = .systemFont(ofSize: 15, weight: .semibold)
-        let subtitle = NSTextField(labelWithString: "Screen and Light Controller")
-        subtitle.font = .systemFont(ofSize: 11)
-        subtitle.textColor = .secondaryLabelColor
-        let header = NSStackView(views: [title, subtitle])
-        header.orientation = .vertical
-        header.alignment = .leading
-        header.spacing = 2
 
         let brightnessRow = sliderRow(symbol: "sun.max", title: String(localized: "Brightness"), slider: brightnessSlider, valueLabel: brightnessValueLabel)
         let temperatureRow = sliderRow(symbol: "thermometer.medium", title: String(localized: "Color Temp"), slider: temperatureSlider, valueLabel: temperatureValueLabel)
@@ -2440,16 +2452,24 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         rotationPresetHeader.widthAnchor.constraint(equalToConstant: UIStyle.contentWidth).isActive = true
         presetContainer.setViews([presetTitle, modeButton, rotationPresetHeader, rotationModeButton], in: .top)
 
+        let aboutButton = NSButton(title: String(localized: "About…"), target: self, action: #selector(showAbout))
+        let helpButton = NSButton(title: String(localized: "Help…"), target: self, action: #selector(showHelp))
         let quitButton = NSButton(title: String(localized: "Quit"), target: self, action: #selector(quitApp))
-        quitButton.bezelStyle = .rounded
-        quitButton.controlSize = .small
-        quitButton.font = UIStyle.captionFont
-        let footer = NSStackView(views: [flexibleSpace(), quitButton])
+        for button in [aboutButton, helpButton, quitButton] {
+            button.bezelStyle = .rounded
+            button.controlSize = .small
+            button.font = UIStyle.captionFont
+        }
+        let footer = NSStackView(views: [flexibleSpace(), aboutButton, helpButton, quitButton])
         footer.orientation = .horizontal
+        footer.spacing = 6
         footer.widthAnchor.constraint(equalToConstant: UIStyle.contentWidth).isActive = true
 
-        let stack = NSStackView(views: [header, separator(), featureContainer, separator(), adjustmentContainer,
-                                       separator(), ambientContainer, separator(), presenceContainer, separator(), displayContainer,
+        let displaySeparator = separator()
+        displaySectionViews = [displaySeparator, displayContainer]
+        rotationPresetViews = [rotationPresetHeader, rotationModeButton]
+        let stack = NSStackView(views: [featureContainer, separator(), adjustmentContainer,
+                                       separator(), ambientContainer, separator(), presenceContainer, displaySeparator, displayContainer,
                                        separator(), presetContainer, footer])
         stack.orientation = .vertical
         stack.alignment = .leading
@@ -2460,8 +2480,12 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
             view.widthAnchor.constraint(equalToConstant: UIStyle.contentWidth).isActive = true
         }
 
+        // Panel height fits the content (localized labels can change row heights); recomputed on open.
+        panelStack = stack
+        updateDisplaySectionVisibility()
+        let panelHeight = ceil(stack.fittingSize.height)
         let controller = NSViewController()
-        controller.view = NSView(frame: NSRect(x: 0, y: 0, width: UIStyle.panelWidth, height: 656))
+        controller.view = NSView(frame: NSRect(x: 0, y: 0, width: UIStyle.panelWidth, height: panelHeight))
         controller.view.addSubview(stack)
         NSLayoutConstraint.activate([
             stack.leadingAnchor.constraint(equalTo: controller.view.leadingAnchor),
@@ -2470,7 +2494,8 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
             stack.bottomAnchor.constraint(lessThanOrEqualTo: controller.view.bottomAnchor)
         ])
         popover.contentViewController = controller
-        popover.contentSize = NSSize(width: UIStyle.panelWidth, height: 656)
+        popover.contentSize = NSSize(width: UIStyle.panelWidth, height: panelHeight)
+        log("Control panel height: \(Int(panelHeight)) pt")
         popover.behavior = .transient
     }
 
@@ -2551,7 +2576,21 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         return divider
     }
 
+    /// Display and rotation controls only act on a built-in display (or a second screen). A desktop Mac with
+    /// just the Studio Display has nothing to switch or rotate, so the section is hidden there.
+    private var showsDisplaySection: Bool {
+        displayController.builtinDisplay() != nil || displayController.externalDisplays().count > 1
+    }
+
+    private func updateDisplaySectionVisibility() {
+        let hidden = !showsDisplaySection
+        for view in displaySectionViews + rotationPresetViews where view.isHidden != hidden {
+            view.isHidden = hidden
+        }
+    }
+
     private func refreshControls() {
+        updateDisplaySectionVisibility()
         let displayControlsAllowed = isDisplaySessionSafe && !isConsoleSessionLocked()
         let studioID = displayController.studioTarget()
         studioPowerSwitch.state = studioID != nil && !displayController.isStudioCovered ? .on : .off
@@ -2654,7 +2693,9 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         } else {
             iconColor = .systemGray
         }
-        let configuration = NSImage.SymbolConfiguration(paletteColors: [iconColor])
+        // 15 pt is ~2 px larger than the default status-item symbol size.
+        let configuration = NSImage.SymbolConfiguration(pointSize: 15, weight: .regular)
+            .applying(NSImage.SymbolConfiguration(paletteColors: [iconColor]))
         let symbol = NSImage(systemSymbolName: "sun.min.fill", accessibilityDescription: String(localized: "iScreenBar status"))?
             .withSymbolConfiguration(configuration)
         symbol?.isTemplate = false

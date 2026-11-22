@@ -8,8 +8,10 @@ Button names below are the English UI labels. With the app in Chinese, see the C
 
 ## Opening the menu and the panel
 
-- **Left-click** the menu bar icon for a standard menu. It covers the everyday controls: Light; Brightness (25/50/75/100%); Color Temperature (Auto Temp or 2700/4000/5000/6500K); Lamp (Auto Light, Presence, Video Mode, Match Screen, Link Screens, Sleep Sync, Wake Screen on Presence); Ambient Rules; Displays (Built-in Display, Rotate Built-in 0°/90°/180°/270°, Studio Display, apply or auto-apply the rotation preset); Favorites (light presets and Mode Center…); and Keep Awake. Below those are **Control Panel…**, **Launch at Login**, **Help…** (opens the Help window), and **Quit iScreenBar Menu** (⌘Q).
-- **Right-click** (or Control-click) the icon for the control panel described below. Its **Quit** button is at the bottom right.
+- **Left-click** the icon for the control panel described below. **About…** (app name and version), **Help…**, and **Quit** are at the bottom right.
+- **Right-click** (or Control-click) the menu bar icon for a standard menu. It covers the everyday controls: Light; Brightness (25/50/75/100%); Color Temperature (Auto Temp or 2700/4000/5000/6500K); Lamp (Auto Light, Presence, Video Mode, Match Screen, Link Screens, Sleep Sync, Wake Screen on Presence); Ambient Rules; Displays (Built-in Display, Rotate Built-in 0°/90°/180°/270°, Studio Display, apply or auto-apply the rotation preset); Favorites (light presets and Mode Center…); and Keep Awake. Below those are **Control Panel…**, **Launch at Login**, **Help…** (opens the Help window), and **Quit iScreenBar Menu** (⌘Q).
+
+![Control panel (left-click) and menu (right-click)](images/panel-and-menu.png)
 
 The Help window describes the menu, every panel section, Launch at Login, troubleshooting, and privacy, in the app's current language. It follows the system light/dark Appearance, even if you switch while it's open.
 
@@ -56,6 +58,10 @@ On the left is the away delay (3/5/10 minutes); on the right is the sensitivity 
 **Built-in** controls the MacBook's built-in display. It can only be turned off while an external display is connected; unplugging the Studio Display forces the built-in display back on. **Rotate** cycles through 0°, 90°, and 270°, and reverts if you don't confirm within 5 seconds.
 
 **Studio Display** covers the screen with a pure black overlay. Windows don't move, but the backlight stays powered. Double-click the black screen or click the button again to restore.
+
+On a Mac with no built-in display (Mac mini, Mac Studio) and only the Studio Display connected, this section and the Rotation Preset rows are hidden, since there's nothing to switch or rotate. Studio Display stays available in the menu under **Displays**. Connect a second display and the section returns.
+
+<img src="images/panel-displays.png" alt="Control panel with the Displays & Rotation section" width="310">
 
 ## 6. Light Presets and Rotation Preset
 

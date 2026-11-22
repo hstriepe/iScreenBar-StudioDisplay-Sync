@@ -21,7 +21,7 @@ See the [UI Guide](docs/UI-GUIDE.md) and the [Full Feature List](docs/FEATURES.m
 | Match Screen / Link Screens | Lamp follows the Studio Display's brightness; MacBook and Studio Display brightness stay linked, keeping the offsets you set |
 | Ambient Rules | Turns the lamp **off** when the room is bright and **on** when it's dark, using the Studio Display's light sensor and two thresholds you capture. It switches the lamp; it doesn't dim it |
 | Auto Temp | Cooler by day, warmer at night, by local time; it doesn't measure the room's color temperature |
-| Built-in Display | On/off, rotation (panel button cycles 0°/90°/270°, menu offers 0°/90°/180°/270°) with a 5-second confirm, forced back on when the external display is unplugged |
+| Built-in Display | On/off, rotation (panel button cycles 0°/90°/270°, menu offers 0°/90°/180°/270°) with a 5-second confirm, forced back on when the external display is unplugged. Hidden on a Mac with no built-in display and only the Studio Display |
 | Studio Display button | Black overlay that keeps windows in place; **the backlight stays on** |
 | Favorites and Mode Center | Saved light settings, optionally switched by the frontmost app; separate rotation preset applied when the Studio Display connects |
 | Keep Awake | Prevents system sleep until you turn it off or quit (asks for an administrator password) |
@@ -29,8 +29,8 @@ See the [UI Guide](docs/UI-GUIDE.md) and the [Full Feature List](docs/FEATURES.m
 
 The menu bar icon is yellow when the lamp is on, gray when it's off, and red when something needs attention. Hover over it to see brightness and color temperature. The app has no Dock icon.
 
-- **Left-click** the icon for a standard menu: Light, Brightness, Color Temperature, Lamp, Ambient Rules, Displays, Favorites, Keep Awake, Control Panel…, Launch at Login, Help…, and Quit.
-- **Right-click** (or Control-click) for the full control panel. Its **Quit** button is at the bottom right.
+- **Left-click** the icon for the full control panel. **About…**, **Help…**, and **Quit** are at the bottom right.
+- **Right-click** (or Control-click) for a standard menu: Light, Brightness, Color Temperature, Lamp, Ambient Rules, Displays, Favorites, Keep Awake, Control Panel…, Launch at Login, Help…, and Quit.
 
 The interface is in English and Simplified Chinese and follows the macOS language. To use Chinese for this app only, choose it under System Settings › General › Language & Region › Applications, then restart the app.
 
@@ -49,7 +49,7 @@ Tested on an Apple Silicon MacBook Pro with macOS 26 and 27, a Studio Display (i
 1. Download the latest DMG from [Releases](https://github.com/hstriepe/iScreenBar-StudioDisplay-Sync/releases). Release builds are signed with a Developer ID and notarized by Apple.
 2. Open the DMG and drag **iScreenBar Menu** to `/Applications`.
 3. Open the app once from Finder. This also lets Shortcuts and Control Center find it.
-4. Left-click the menu bar icon and choose **Launch at Login**.
+4. Right-click the menu bar icon and choose **Launch at Login**.
 
 Launch at Login adds a user LaunchAgent pointing at the app's current location. It takes effect at the next login, and until then nothing is written to `~/Library/Logs/iScreenBarMenu.log`. If you move the app later, turn Launch at Login off and on again. Quitting keeps the app closed until the next login; launchd only restarts it after a crash.
 
@@ -85,7 +85,7 @@ If a much older version using the `local.qiu.iScreenBarStudioSync` agent is stil
 
 ### Ambient Rules
 
-1. Open the control panel (right-click the icon).
+1. Open the control panel (click the icon).
 2. With the room as bright as it gets when you don't need the lamp, click **Bright: Off**.
 3. With the room as dark as it gets when you do need the lamp, click **Dim: On**.
 4. Turn on **Enable** next to the heading. It stays disabled until at least one threshold is saved.
