@@ -56,6 +56,9 @@
             <property name="sleep sync" code="iSSy" type="boolean" description="Lamp turns off and on with the Studio Display (Sleep Sync).">
                 <cocoa key="scriptSleepSync"/>
             </property>
+            <property name="wake screen" code="iWkP" type="boolean" description="Wake the display when the lamp's presence detection turns the lamp back on (Wake Screen). Needs presence and sleep sync.">
+                <cocoa key="scriptWakeScreen"/>
+            </property>
             <property name="keep awake" code="iKAw" type="boolean" description="Keep the Mac awake (Keep Awake). Turning it on asks for an administrator password.">
                 <cocoa key="scriptKeepAwake"/>
             </property>

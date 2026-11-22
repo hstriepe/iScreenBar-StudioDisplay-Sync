@@ -17,6 +17,7 @@ enum AutomationFeature: String, CaseIterable {
     case matchScreen
     case linkScreens
     case sleepSync
+    case wakeScreen
     case keepAwake
     case builtinDisplay
 
@@ -30,6 +31,7 @@ enum AutomationFeature: String, CaseIterable {
         case .matchScreen: return String(localized: "Match Screen")
         case .linkScreens: return String(localized: "Link Screens")
         case .sleepSync: return String(localized: "Sleep Sync")
+        case .wakeScreen: return String(localized: "Wake Screen")
         case .keepAwake: return String(localized: "Keep Awake")
         case .builtinDisplay: return String(localized: "Built-in Display")
         }
@@ -219,6 +221,7 @@ extension AutomationFeature: AppEnum {
         .matchScreen: DisplayRepresentation(title: "Match Screen", image: .init(systemName: "display")),
         .linkScreens: DisplayRepresentation(title: "Link Screens", image: .init(systemName: "rectangle.on.rectangle")),
         .sleepSync: DisplayRepresentation(title: "Sleep Sync", image: .init(systemName: "moon.zzz")),
+        .wakeScreen: DisplayRepresentation(title: "Wake Screen", image: .init(systemName: "figure.walk.arrival")),
         .keepAwake: DisplayRepresentation(title: "Keep Awake", image: .init(systemName: "cup.and.saucer")),
         .builtinDisplay: DisplayRepresentation(title: "Built-in Display", image: .init(systemName: "laptopcomputer")),
     ]

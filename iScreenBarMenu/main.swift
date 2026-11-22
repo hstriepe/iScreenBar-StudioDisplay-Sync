@@ -3,6 +3,7 @@ import CoreGraphics
 import Darwin
 import Foundation
 import IOKit.hid
+import IOKit.pwr_mgt
 import ObjectiveC.runtime
 import UniformTypeIdentifiers
 
@@ -14,6 +15,10 @@ private let studioDisplayProductIDs: Set<UInt32> = [0xAE46, 0xAE3A]
 // USB product IDs of the Studio Display HID interfaces (ambient light sensor). Firmware 17.0 changed 0x1118 to 0x1114.
 private let studioDisplaySensorProductIDs = [0x1118, 0x1114]
 private let pollInterval: TimeInterval = 0.25
+// Wake on presence: a lamp power-on within this many seconds of the app's own power command counts as the app's.
+private let presenceWakeOwnCommandWindow: TimeInterval = 3
+// If the display is still asleep this long after a presence wake request, give up and apply normal sleep sync.
+private let presenceWakeTimeout: TimeInterval = 10
 
 // Internal so Automation.swift and ScriptingSupport.swift can log too.
 func log(_ message: String) {
@@ -805,6 +810,7 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
     private let presenceSwitch = FeatureButton(title: String(localized: "Presence"), symbol: "figure.seated.side", accentColor: activeControlColor)
     private let presenceDelayPopup = NSPopUpButton(frame: .zero, pullsDown: false)
     private let presenceSensitivityPopup = NSPopUpButton(frame: .zero, pullsDown: false)
+    private let presenceWakeSwitch = AccentSwitch()
     private var presenceDelaySeconds = 180
     private var presenceSensitivity = 2
     private let videoModeSwitch = FeatureButton(title: String(localized: "Video Mode"), symbol: "video", accentColor: activeControlColor)
@@ -836,6 +842,7 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
     private(set) var isBrightnessFollowEnabled: Bool
     private(set) var isDisplayBrightnessLockEnabled: Bool
     private(set) var isPowerSyncEnabled: Bool
+    private(set) var isPresenceWakeEnabled: Bool
     private(set) var isTimeTemperatureEnabled: Bool
     private(set) var ambientCloseThreshold: Int?
     private(set) var ambientOpenThreshold: Int?
@@ -873,6 +880,7 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         isBrightnessFollowEnabled = UserDefaults.standard.bool(forKey: "brightnessFollowEnabled")
         isDisplayBrightnessLockEnabled = UserDefaults.standard.bool(forKey: "displayBrightnessLockEnabled")
         isPowerSyncEnabled = UserDefaults.standard.object(forKey: "powerSyncEnabled") as? Bool ?? true
+        isPresenceWakeEnabled = UserDefaults.standard.bool(forKey: "presenceWakeEnabled")
         isTimeTemperatureEnabled = UserDefaults.standard.bool(forKey: "timeTemperatureEnabled")
         ambientCloseThreshold = UserDefaults.standard.object(forKey: "ambientCloseThreshold") as? Int
         ambientOpenThreshold = UserDefaults.standard.object(forKey: "ambientOpenThreshold") as? Int
@@ -1151,6 +1159,8 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
     }
 
     func suspendPresenceForScreenSleep() {
+        // Wake Screen: presence detection keeps running so the lamp turning itself on can wake the display (ADR 0008).
+        guard !isPresenceWakeEnabled else { return }
         if isScreenSleepPresenceLockActive {
             if lamp.isPresenceDetectionEnabled == true {
                 presenceWasEnabledBeforeScreenSleep = true
@@ -1621,6 +1631,16 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         UserDefaults.standard.set(isPowerSyncEnabled, forKey: "powerSyncEnabled")
         update(isAsleep: isAsleep, healthy: isHealthy)
         log(isPowerSyncEnabled ? "Sleep sync on" : "Sleep sync off")
+        refreshControls()
+    }
+
+    @objc private func presenceWakeChanged() {
+        isPresenceWakeEnabled = presenceWakeSwitch.state == .on
+        UserDefaults.standard.set(isPresenceWakeEnabled, forKey: "presenceWakeEnabled")
+        // Presence paused by an earlier display sleep goes back on now; turning it off lets the poll loop pause it again.
+        if isPresenceWakeEnabled { restorePresenceAfterScreenWake() }
+        log(isPresenceWakeEnabled ? "Wake screen on presence on" : "Wake screen on presence off")
+        refreshControls()
     }
 
     @objc private func keepAwakeChanged() {
@@ -2049,6 +2069,9 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         for control in [brightnessFollowSwitch, displayBrightnessLockSwitch, powerSyncSwitch] {
             lampMenu.addItem(toggleItem(control.title, control: control))
         }
+        let presenceWakeItem = toggleItem(String(localized: "Wake Screen on Presence"), control: presenceWakeSwitch)
+        presenceWakeItem.indentationLevel = 1
+        lampMenu.addItem(presenceWakeItem)
         menu.addItem(submenuItem(String(localized: "Lamp"), lampMenu))
 
         updateAmbientControlAvailability()
@@ -2215,6 +2238,9 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         presenceSensitivityPopup.selectItem(withTag: presenceSensitivity)
         presenceSensitivityPopup.target = self
         presenceSensitivityPopup.action = #selector(presenceSensitivityChanged)
+        presenceWakeSwitch.target = self
+        presenceWakeSwitch.action = #selector(presenceWakeChanged)
+        presenceWakeSwitch.toolTip = String(localized: "Wake the display when presence detection turns the lamp back on. Needs Presence and Sleep Sync")
         videoModeSwitch.target = self
         videoModeSwitch.action = #selector(videoModeChanged)
         modeButton.image = NSImage(systemSymbolName: "chevron.up.chevron.down", accessibilityDescription: nil)
@@ -2342,7 +2368,15 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         presetContainer.spacing = UIStyle.sectionSpacing
 
         let presenceTitle = sectionLabel(String(localized: "Presence Detection"))
-        let presenceContainer = NSStackView(views: [presenceTitle, presenceOptions])
+        let presenceWakeLabel = NSTextField(labelWithString: String(localized: "Wake Screen"))
+        presenceWakeLabel.font = UIStyle.bodyFont
+        presenceWakeLabel.textColor = .secondaryLabelColor
+        let presenceHeader = NSStackView(views: [presenceTitle, flexibleSpace(), presenceWakeLabel, presenceWakeSwitch])
+        presenceHeader.orientation = .horizontal
+        presenceHeader.alignment = .centerY
+        presenceHeader.spacing = 6
+        presenceHeader.widthAnchor.constraint(equalToConstant: UIStyle.contentWidth).isActive = true
+        let presenceContainer = NSStackView(views: [presenceHeader, presenceOptions])
         presenceContainer.orientation = .vertical
         presenceContainer.alignment = .leading
         presenceContainer.spacing = UIStyle.sectionSpacing
@@ -2564,6 +2598,7 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         displayBrightnessLockSwitch.state = isDisplayBrightnessLockEnabled ? .on : .off
         displayBrightnessLockSwitch.isEnabled = displayControlsAllowed && studioDisplayID() != nil && activeBuiltinDisplayID() != nil
         powerSyncSwitch.state = isPowerSyncEnabled ? .on : .off
+        presenceWakeSwitch.state = isPresenceWakeEnabled ? .on : .off
         keepAwakeSwitch.state = keepAwakeController.isActive ? .on : .off
         timeTemperatureSwitch.state = isTimeTemperatureEnabled ? .on : .off
         updateAmbientStatusLabel()
@@ -2606,6 +2641,8 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         updateAmbientControlAvailability()
         presenceDelayPopup.isEnabled = enabled
         presenceSensitivityPopup.isEnabled = enabled
+        // Turning it off stays possible even without Sleep Sync, so the setting is never stuck on.
+        presenceWakeSwitch.isEnabled = enabled && (isPowerSyncEnabled || isPresenceWakeEnabled)
     }
 
     private func updateIcon(healthy: Bool) {
@@ -2656,6 +2693,7 @@ extension StatusIndicator: AutomationTarget {
         case .matchScreen: return brightnessFollowSwitch
         case .linkScreens: return displayBrightnessLockSwitch
         case .sleepSync: return powerSyncSwitch
+        case .wakeScreen: return presenceWakeSwitch
         case .keepAwake: return keepAwakeSwitch
         case .builtinDisplay: return displayPowerSwitch
         }
@@ -2663,7 +2701,7 @@ extension StatusIndicator: AutomationTarget {
 
     private func requiresLamp(_ feature: AutomationFeature) -> Bool {
         switch feature {
-        case .light, .autoTemperature, .autoLight, .presence, .videoMode, .sleepSync: return true
+        case .light, .autoTemperature, .autoLight, .presence, .videoMode, .sleepSync, .wakeScreen: return true
         case .matchScreen, .linkScreens, .keepAwake, .builtinDisplay: return false
         }
     }
@@ -2753,6 +2791,7 @@ private final class LampController {
     private(set) var statusRevision = 0
     private var lastTemperatureValues: (Int, Int)?
     private var lastStatusHex: String?
+    private(set) var lastPowerCommandAt = Date.distantPast
 
     var isConnected: Bool { device != nil }
 
@@ -2778,6 +2817,7 @@ private final class LampController {
     }
 
     func setPower(on: Bool) -> Bool {
+        lastPowerCommandAt = Date()
         if sendPowerReport(on: on) {
             isPowerOn = on
             log("Lamp \(on ? "on" : "off")")
@@ -3174,6 +3214,25 @@ var ambientOpenCandidateSince: Date?
 var ambientProxySamples: [(Date, Int)] = []
 var ambientProxySourceName: String?
 var lastLoggedAmbientProxy: Int?
+var presenceWakeRequestedAt: Date?
+var lampSeenOffDuringSleep = false
+var presenceUserActivityAssertion: IOPMAssertionID = IOPMAssertionID(kIOPMNullAssertionID)
+
+/// Declares local user activity, which wakes a sleeping display like a key press (without unlocking).
+private func declarePresenceUserActivity() -> Bool {
+    let result = IOPMAssertionDeclareUserActivity("iScreenBar presence detected" as CFString,
+                                                  kIOPMUserActiveLocal, &presenceUserActivityAssertion)
+    if result != kIOReturnSuccess {
+        log(String(format: "IOPMAssertionDeclareUserActivity failed: 0x%08X", result))
+    }
+    return result == kIOReturnSuccess
+}
+
+private func releasePresenceUserActivity() {
+    guard presenceUserActivityAssertion != IOPMAssertionID(kIOPMNullAssertionID) else { return }
+    IOPMAssertionRelease(presenceUserActivityAssertion)
+    presenceUserActivityAssertion = IOPMAssertionID(kIOPMNullAssertionID)
+}
 
 private func setAmbientLampLock(_ active: Bool) {
     ambientTurnedLampOff = active
@@ -3275,16 +3334,43 @@ private func pollDisplayAndLamp() {
 
     // Sleep sync has top priority: while the screen is off, ambient light, presence detection, or the lamp's own logic
     // must not turn the lamp back on. Checking continuously also covers the lamp turning itself on after the screen goes off.
+    // Exception (ADR 0008): with Wake Screen on, the lamp's presence detection turning it on wakes the display instead.
+    if !isAsleep {
+        lampSeenOffDuringSleep = false
+    } else if lamp.isPowerOn == false {
+        lampSeenOffDuringSleep = true
+    }
     if powerSyncEnabled, isAsleep {
         statusIndicator.suspendPresenceForScreenSleep()
         if lamp.isPowerOn == true {
-            let turnedOff = lamp.setPower(on: false)
-            helperTurnedLampOff = helperTurnedLampOff || turnedOff
-            if turnedOff {
-                log("Sleep sync overrode lamp turning itself back on")
+            // Only an off → on change during this sleep counts; on the first asleep tick the lamp is still on from before.
+            let lampTurnedItselfOn = lampSeenOffDuringSleep &&
+                Date().timeIntervalSince(lamp.lastPowerCommandAt) >= presenceWakeOwnCommandWindow
+            let mayWakeDisplay = statusIndicator.isPresenceWakeEnabled && lamp.isPresenceDetectionEnabled == true &&
+                !ambientTurnedLampOff && lampTurnedItselfOn
+            if let requestedAt = presenceWakeRequestedAt,
+               Date().timeIntervalSince(requestedAt) < presenceWakeTimeout {
+                // Waiting for the display to wake.
+            } else if presenceWakeRequestedAt == nil, mayWakeDisplay {
+                presenceWakeRequestedAt = Date()
+                log(declarePresenceUserActivity()
+                    ? "Presence detection turned the lamp on; waking the display"
+                    : "Presence detection turned the lamp on, but the display wake request failed")
+            } else {
+                let turnedOff = lamp.setPower(on: false)
+                helperTurnedLampOff = helperTurnedLampOff || turnedOff
+                if turnedOff {
+                    log(presenceWakeRequestedAt == nil
+                        ? "Sleep sync overrode lamp turning itself back on"
+                        : "Display stayed asleep after the presence wake request; sleep sync turned the lamp off")
+                }
+                statusIndicator.update(isAsleep: true, healthy: turnedOff)
             }
-            statusIndicator.update(isAsleep: true, healthy: turnedOff)
         }
+    }
+    if !isAsleep, presenceWakeRequestedAt != nil {
+        presenceWakeRequestedAt = nil
+        releasePresenceUserActivity()
     }
 
     if wasAmbientCloseThreshold != nil, ambientCloseThreshold == nil, ambientTurnedLampOff {

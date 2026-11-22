@@ -1496,6 +1496,36 @@
         }
       }
     },
+    "Wake Screen" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "唤醒屏幕"
+          }
+        }
+      }
+    },
+    "Wake Screen on Presence" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "入座时唤醒屏幕"
+          }
+        }
+      }
+    },
+    "Wake the display when presence detection turns the lamp back on. Needs Presence and Sleep Sync" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "入座检测重新开灯时唤醒显示器。需要开启入座检测和熄屏同步"
+          }
+        }
+      }
+    },
     "Was on; paused while the ambient off-lock is active and restored automatically afterward" : {
       "localizations" : {
         "zh-Hans" : {

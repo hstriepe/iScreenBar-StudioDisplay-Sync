@@ -8,7 +8,7 @@ Button names below are the English UI labels. With the app in Chinese, see the C
 
 ## Opening the menu and the panel
 
-- **Left-click** the menu bar icon for a standard menu. It covers the everyday controls: Light; Brightness (25/50/75/100%); Color Temperature (Auto Temp or 2700/4000/5000/6500K); Lamp (Auto Light, Presence, Video Mode, Match Screen, Link Screens, Sleep Sync); Ambient Rules; Displays (Built-in Display, Rotate Built-in 0°/90°/180°/270°, Studio Display, apply or auto-apply the rotation preset); Favorites (light presets and Mode Center…); and Keep Awake. Below those are **Control Panel…**, **Launch at Login**, **Help…** (opens the Help window), and **Quit iScreenBar Menu** (⌘Q).
+- **Left-click** the menu bar icon for a standard menu. It covers the everyday controls: Light; Brightness (25/50/75/100%); Color Temperature (Auto Temp or 2700/4000/5000/6500K); Lamp (Auto Light, Presence, Video Mode, Match Screen, Link Screens, Sleep Sync, Wake Screen on Presence); Ambient Rules; Displays (Built-in Display, Rotate Built-in 0°/90°/180°/270°, Studio Display, apply or auto-apply the rotation preset); Favorites (light presets and Mode Center…); and Keep Awake. Below those are **Control Panel…**, **Launch at Login**, **Help…** (opens the Help window), and **Quit iScreenBar Menu** (⌘Q).
 - **Right-click** (or Control-click) the icon for the control panel described below. Its **Quit** button is at the bottom right.
 
 The Help window describes the menu, every panel section, Launch at Login, troubleshooting, and privacy, in the app's current language. It follows the system light/dark Appearance, even if you switch while it's open.
@@ -48,6 +48,8 @@ The rules only turn the lamp on and off; they don't dim it. **Enable** stays una
 ## 4. Presence Detection
 
 On the left is the away delay (3/5/10 minutes); on the right is the sensitivity (Low/Medium/High). While the ambient off-lock is active or the screen is off, the app temporarily pauses presence detection and restores the previous state afterward.
+
+**Wake Screen** (switch next to the heading, off by default) changes the screen-off part: presence detection keeps running while the Studio Display sleeps, and when you come back after the away delay and the lamp turns itself on, the display wakes too. It needs Presence and Sleep Sync, and is unavailable while Sleep Sync is off. A locked Mac shows the lock screen. Someone passing within the sensor's range can also wake the display; lower the sensitivity if that happens. If the display doesn't wake within 10 seconds, Sleep Sync turns the lamp off again.
 
 ## 5. Displays & Rotation
 

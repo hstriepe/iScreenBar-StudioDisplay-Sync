@@ -114,6 +114,11 @@ extension NSApplication {
         set { scriptSet(.sleepSync, newValue) }
     }
 
+    @objc var scriptWakeScreen: Bool {
+        get { scriptIsOn(.wakeScreen) }
+        set { scriptSet(.wakeScreen, newValue) }
+    }
+
     @objc var scriptKeepAwake: Bool {
         get { scriptIsOn(.keepAwake) }
         set { scriptSet(.keepAwake, newValue) }

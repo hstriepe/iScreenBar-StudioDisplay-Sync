@@ -29,6 +29,7 @@ English · [简体中文](FEATURES.zh-CN.md)
 - When the Studio Display wakes, the lamp turns back on if this app turned it off.
 - While the screen is off, sleep sync has top priority: lamp auto-light, presence detection, or other logic must not turn the lamp back on.
 - The **Sleep Sync** button turns this feature on or off.
+- Exception, **Wake Screen** (off by default): presence detection keeps running while the screen is off. If the lamp turns itself on (no power command from the app in the last 3 seconds) while presence detection is on and no ambient off-lock is active, the app declares user activity to wake the display, like a key press. A locked Mac shows the lock screen. If the display is still asleep after 10 seconds, sleep sync turns the lamp off again and doesn't retry until the next wake.
 - During lock and wake, all built-in display topology changes are paused to avoid conflicts with WindowServer's unlock transition.
 
 ## 4. iScreenBar brightness follows the Studio Display
@@ -78,6 +79,7 @@ English · [简体中文](FEATURES.zh-CN.md)
 - Sensitivity: Low, Medium, or High.
 - Settings are sent to the lamp when it supports them; if sending fails, the local choice is kept and logged.
 - Works with the ambient off-lock so the lamp doesn't turn back on as soon as you move after it switched off.
+- **Wake Screen** (switch next to the section heading): when you return after the away delay while the display sleeps, the lamp turning itself on wakes the display. Needs Presence and Sleep Sync. The lamp reports no separate "person detected" event, so the signal is the lamp's power state, polled every 2 seconds. Display sleep only; it does nothing while the Mac itself sleeps.
 
 ## 9. Video mode
 
@@ -221,7 +223,7 @@ English · [简体中文](FEATURES.zh-CN.md)
 
 ## 19. Automation
 
-- **AppleScript:** scripting dictionary `iScreenBarMenu.sdef`. Properties for Light, Brightness, Color Temperature, Auto Temp, Auto Light, Presence, Video Mode, Match Screen, Link Screens, Sleep Sync, Keep Awake, and the built-in display, plus read-only lamp connection, status, favorites, and rotation preset name. Commands: `toggle light`, `apply favorite`, `apply rotation preset`, `show control panel`. Failures return a script error with the reason (for example, lamp not connected).
+- **AppleScript:** scripting dictionary `iScreenBarMenu.sdef`. Properties for Light, Brightness, Color Temperature, Auto Temp, Auto Light, Presence, Video Mode, Match Screen, Link Screens, Sleep Sync, Wake Screen, Keep Awake, and the built-in display, plus read-only lamp connection, status, favorites, and rotation preset name. Commands: `toggle light`, `apply favorite`, `apply rotation preset`, `show control panel`. Failures return a script error with the reason (for example, lamp not connected).
 - **Shortcuts (App Intents, macOS 14+):** Set Light, Turn Setting On or Off, Get Setting, Set Lamp Brightness, Set Color Temperature, Apply Favorite, Apply Rotation Preset, Show Control Panel, Get Lamp Status. Five ready-made shortcuts for Spotlight and Siri. Localized in English and Simplified Chinese.
 - **Control Center (macOS 26):** a sandboxed widget extension with eight buttons: Lamp Light (toggle), Keep Awake (toggle), Rotation Preset, Control Panel, Lamp Dimmer / Lamp Brighter (±10%), Lamp Warmer / Lamp Cooler (±500 K). They don't show state and only work while the app is running.
 - **Lamp Levels widget (macOS 26, desktop / Notification Center, medium):** power button plus two 10-segment bars for brightness (10–100%) and color temperature (2700, 3100, 3500, 4000, 4400, 4800, 5200, 5700, 6100, 6500 K). Clicking a segment sets that value (WidgetKit has no sliders). It shows the current level: the app publishes a small lamp snapshot through the Darwin notification system, so no app group is needed. Color temperature is disabled while Auto Temp is on; the widget shows "isn't running" when the app is quit.

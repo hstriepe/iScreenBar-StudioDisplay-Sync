@@ -17,6 +17,7 @@ Studio Display 休眠时，iScreenBar Menu 关闭台灯，唤醒时重新打开�
 | 快捷控制 | 灯光、自动感光、入座检测、视频模式、亮度跟随、熄屏同步、自动色温、双屏亮度、防止休眠 |
 | 灯光 | 亮度与色温（2700–6500K）；可回读在灯体上直接做的调整 |
 | 熄屏同步 | Studio Display 休眠时关灯，唤醒后恢复 |
+| 唤醒屏幕 | 可选：回到座位、灯体入座检测把灯打开时，同时唤醒休眠的 Studio Display |
 | 亮度跟随 / 双屏亮度 | 台灯跟随 Studio Display 亮度；MacBook 与 Studio Display 亮度联动，保持你设定的差值 |
 | 环境光规则 | 使用 Studio Display 光线传感器和你记录的两个阈值：室内明亮时**关灯**，昏暗时**开灯**。只开关台灯，不调暗 |
 | 自动色温 | 按本地时间白天偏冷、夜间偏暖；不测量室内色温 |
@@ -96,6 +97,7 @@ cd iScreenBar-StudioDisplay-Sync
 ### 其他说明
 
 - 熄屏同步优先：显示器休眠时，室内变暗也不会开灯。
+- **唤醒屏幕**（入座检测设置标题旁的开关，或“台灯 › 入座时唤醒屏幕”）是唯一的例外。开启入座检测和熄屏同步后，显示器休眠期间入座检测保持运行；离席超过离席时间后回到座位、灯体自行开灯时，软件会唤醒显示器。Mac 已锁定时显示锁定屏幕，不会解锁。仅在显示器休眠时有效，整机睡眠时无效；它只根据灯被打开来判断，因此有人从侦测范围内经过也可能唤醒屏幕。若 10 秒内显示器未被唤醒，熄屏同步会重新关灯。环境关灯锁定期间入座检测保持暂停，不会唤醒。
 - 关闭亮度跟随后，台灯保持当前亮度。
 - 旋转预设开启时，每次连接 Studio Display 都会应用保存的角度；关闭时，内建显示器回到 0°，重新连接后也保持 0°。
 - 拔出外接显示器时强制恢复内建显示器。除此之外，App 不会在锁屏、休眠或唤醒期间重新配置显示器。
@@ -106,7 +108,7 @@ cd iScreenBar-StudioDisplay-Sync
 
 iScreenBar Menu 可通过 AppleScript、快捷指令以及（macOS 26 及更高版本上的）控制中心操作。每项设置的效果与控制面板按钮完全相同，限制也相同：灯光设置需要连接 iScreenBar，Mac 锁定时无法调整显示器，开启防止休眠需要输入管理员密码。若 App 未运行，快捷指令和 AppleScript 会自动启动它。
 
-**AppleScript。** 在“脚本编辑器”中打开词典（文件 › 打开词典… › iScreenBar Menu）。属性：`light`、`brightness`（1–100）、`color temperature`（2700–6500 K，需先关闭自动色温）、`auto temperature`、`auto light`、`presence`、`video mode`、`match screen`、`link screens`、`sleep sync`、`keep awake`、`builtin display`，以及只读的 `lamp connected`、`lamp status`、`favorites`、`rotation preset`。命令：`toggle light`、`apply favorite "名称"`、`apply rotation preset`、`show control panel`。AppleScript 术语为英文。其他 App 首次发送命令时，macOS 会请求“自动化”权限。
+**AppleScript。** 在“脚本编辑器”中打开词典（文件 › 打开词典… › iScreenBar Menu）。属性：`light`、`brightness`（1–100）、`color temperature`（2700–6500 K，需先关闭自动色温）、`auto temperature`、`auto light`、`presence`、`video mode`、`match screen`、`link screens`、`sleep sync`、`wake screen`、`keep awake`、`builtin display`，以及只读的 `lamp connected`、`lamp status`、`favorites`、`rotation preset`。命令：`toggle light`、`apply favorite "名称"`、`apply rotation preset`、`show control panel`。AppleScript 术语为英文。其他 App 首次发送命令时，macOS 会请求“自动化”权限。
 
 ```applescript
 tell application "iScreenBar Menu"
