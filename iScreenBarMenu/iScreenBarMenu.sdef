@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE dictionary SYSTEM "file://localhost/System/Library/DTDs/sdef.dtd">
-<dictionary title="iScreen Menu Terminology">
+<dictionary title="iScreenBar Menu Terminology">
     <suite name="Standard Suite" code="????" description="Common classes and commands for all applications.">
-        <command name="quit" code="aevtquit" description="Quit iScreen Menu.">
+        <command name="quit" code="aevtquit" description="Quit iScreenBar Menu.">
             <cocoa class="NSQuitCommand"/>
         </command>
         <class name="application" code="capp" description="The application's top-level scripting object.">
@@ -18,8 +18,8 @@
         </class>
     </suite>
 
-    <suite name="iScreen Menu Suite" code="iScM" description="Control the iScreenBar lamp, displays, and keep-awake. Each setting works like its control panel button.">
-        <class-extension extends="application" description="iScreen Menu settings and lamp state.">
+    <suite name="iScreenBar Menu Suite" code="iScM" description="Control the iScreenBar lamp, displays, and keep-awake. Each setting works like its control panel button.">
+        <class-extension extends="application" description="iScreenBar Menu settings and lamp state.">
             <property name="lamp connected" code="iCon" type="boolean" access="r" description="Is the iScreenBar connected?">
                 <cocoa key="scriptLampConnected"/>
             </property>

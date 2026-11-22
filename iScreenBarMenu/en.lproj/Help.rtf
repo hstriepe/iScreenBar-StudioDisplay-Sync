@@ -11,10 +11,10 @@
 \pard\pardeftab720\sa267\partightenfactor0
 
 \f0\b\fs40 \cf0 \expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 iScreen Menu Help\
+\outl0\strokewidth0 \strokec2 iScreenBar Menu Help\
 \pard\pardeftab720\sa260\partightenfactor0
 
-\f1\b0\fs26 \cf0 iScreen Menu keeps a BenQ iScreenBar lamp in step with an Apple Studio Display, and adds controls for the MacBook's built-in display and for keeping the Mac awake. It runs in the menu bar and has no Dock icon.\
+\f1\b0\fs26 \cf0 iScreenBar Menu keeps a BenQ iScreenBar lamp in step with an Apple Studio Display, and adds controls for the MacBook's built-in display and for keeping the Mac awake. It runs in the menu bar and has no Dock icon.\
 \pard\pardeftab720\sa248\partightenfactor0
 
 \f0\b\fs30 \cf0 Menu and control panel\
@@ -125,23 +125,23 @@ Changes aren't instant: turning off, or turning on quickly, needs about 30 secon
 \f0\b\fs30 \cf0 Automation\
 \pard\pardeftab720\sa260\partightenfactor0
 
-\f1\b0\fs26 \cf0 You can control iScreen Menu from AppleScript, Shortcuts, and, on macOS 26, Control Center. Each setting works like its panel button, with the same limits. For example, lamp settings need the iScreenBar connected, and Keep Awake asks for a password.\
+\f1\b0\fs26 \cf0 You can control iScreenBar Menu from AppleScript, Shortcuts, and, on macOS 26, Control Center. Each setting works like its panel button, with the same limits. For example, lamp settings need the iScreenBar connected, and Keep Awake asks for a password.\
 \pard\pardeftab720\sa260\partightenfactor0
 
-\f1\b0\fs26 \cf0 AppleScript: in Script Editor, choose File > Open Dictionary and pick iScreen Menu. Example: tell application "iScreen Menu" to set brightness to 60.\
+\f1\b0\fs26 \cf0 AppleScript: in Script Editor, choose File > Open Dictionary and pick iScreenBar Menu. Example: tell application "iScreenBar Menu" to set brightness to 60.\
 \pard\pardeftab720\sa260\partightenfactor0
 
-\f1\b0\fs26 \cf0 Shortcuts: search for iScreen Menu to find actions such as Set Light, Turn Setting On or Off, Apply Favorite, and Get Lamp Status.\
+\f1\b0\fs26 \cf0 Shortcuts: search for iScreenBar Menu to find actions such as Set Light, Turn Setting On or Off, Apply Favorite, and Get Lamp Status.\
 \pard\pardeftab720\sa260\partightenfactor0
 
-\f1\b0\fs26 \cf0 Control Center: choose Edit Controls and add Lamp Light, Keep Awake, Rotation Preset, or Control Panel. These are buttons, not switches, and only work while iScreen Menu is running.\
+\f1\b0\fs26 \cf0 Control Center: choose Edit Controls and add Lamp Light, Keep Awake, Rotation Preset, or Control Panel. These are buttons, not switches, and only work while iScreenBar Menu is running.\
 \pardeftab720\sa248\partightenfactor0
 
 \f0\b\fs30 \cf0 Launch at Login and Quit\
 \pard\pardeftab720\sa260\partightenfactor0
 
 \fs26 \cf0 Launch at Login
-\f1\b0  starts iScreen Menu when you log in. It does this with a user LaunchAgent, ~/Library/LaunchAgents/org.windholm.iScreenMenu.plist. 
+\f1\b0  starts iScreenBar Menu when you log in. It does this with a user LaunchAgent, ~/Library/LaunchAgents/org.windholm.iScreenBarMenu.plist. 
 \f0\b Quit
 \f1\b0  keeps the app closed until you log in again. It is restarted automatically only if it crashes.\
 \pard\pardeftab720\sa248\partightenfactor0
@@ -150,7 +150,7 @@ Changes aren't instant: turning off, or turning on quickly, needs about 30 secon
 \pard\tx220\tx720\pardeftab720\li720\fi-720\partightenfactor0
 \ls4\ilvl0
 \f1\b0\fs26 \cf0 \kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
-\outl0\strokewidth0 \strokec2 When the app is started at login, it writes its log to ~/Library/Logs/iScreenMenu.log.\
+\outl0\strokewidth0 \strokec2 When the app is started at login, it writes its log to ~/Library/Logs/iScreenBarMenu.log.\
 \ls4\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
 \outl0\strokewidth0 \strokec2 Don't run the official BenQ app at the same time, because both would change the lamp's settings.\
 \ls4\ilvl0\kerning1\expnd0\expndtw0 \outl0\strokewidth0 {\listtext	\uc0\u8226 	}\expnd0\expndtw0\kerning0
@@ -165,5 +165,5 @@ Changes aren't instant: turning off, or turning on quickly, needs about 30 secon
 \f0\b\fs30 \cf0 Privacy\
 \pard\pardeftab720\sa260\partightenfactor0
 
-\f1\b0\fs26 \cf0 iScreen Menu doesn't use the network. It talks to the lamp over USB and stores its settings on this Mac only.\
+\f1\b0\fs26 \cf0 iScreenBar Menu doesn't use the network. It talks to the lamp over USB and stores its settings on this Mac only.\
 }

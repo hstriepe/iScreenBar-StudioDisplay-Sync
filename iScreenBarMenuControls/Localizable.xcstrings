@@ -61,12 +61,12 @@
         }
       }
     },
-    "Opens the iScreen Menu control panel." : {
+    "Opens the iScreenBar Menu control panel." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "打开 iScreen Menu 控制面板。"
+            "value" : "打开 iScreenBar Menu 控制面板。"
           }
         }
       }
@@ -111,12 +111,12 @@
         }
       }
     },
-    "Turns iScreen Menu's Keep Awake on or off." : {
+    "Turns iScreenBar Menu's Keep Awake on or off." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "开启或关闭 iScreen Menu 的防止休眠。"
+            "value" : "开启或关闭 iScreenBar Menu 的防止休眠。"
           }
         }
       }

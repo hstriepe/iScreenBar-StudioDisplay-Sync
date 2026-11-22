@@ -1,4 +1,4 @@
-# iScreen Menu Feature List
+# iScreenBar Menu Feature List
 
 English · [简体中文](FEATURES.zh-CN.md)
 
@@ -12,7 +12,7 @@ English · [简体中文](FEATURES.zh-CN.md)
 - It turns red when the USB connection or a lamp power command fails.
 - Hovering over the icon shows the iScreenBar's current brightness and color temperature.
 - Opening the panel reads the lamp state, so the UI matches the actual lamp.
-- Starts at login through a user-level LaunchAgent (`org.windholm.iScreenMenu`); no administrator rights needed. Quit stays quit until the next login; launchd restarts the app only after a crash.
+- Starts at login through a user-level LaunchAgent (`org.windholm.iScreenBarMenu`); no administrator rights needed. Quit stays quit until the next login; launchd restarts the app only after a crash.
 - The interface is in English and Simplified Chinese and follows the macOS language (including the per-app language setting).
 
 ## 2. Basic iScreenBar control
@@ -123,7 +123,7 @@ English · [简体中文](FEATURES.zh-CN.md)
 - When the lamp is unplugged, loses power, or HID commands fail, the icon turns red and the event is logged.
 - After the lamp is plugged back in, the app rebuilds the HID manager, reads the state again, and restores sleep sync and the Match Screen lock.
 - When the Studio Display disconnects, the app keeps running and rebuilds display monitoring and the ambient light sensor connection when it returns.
-- All key states and errors are written to `~/Library/Logs/iScreenMenu.log`.
+- All key states and errors are written to `~/Library/Logs/iScreenBarMenu.log`.
 
 ## 14. Interface and interaction
 
@@ -218,7 +218,7 @@ English · [简体中文](FEATURES.zh-CN.md)
 
 ## 19. Automation
 
-- **AppleScript:** scripting dictionary `iScreenMenu.sdef`. Properties for Light, Brightness, Color Temperature, Auto Temp, Auto Light, Presence, Video Mode, Match Screen, Link Screens, Sleep Sync, Keep Awake, and the built-in display, plus read-only lamp connection, status, favorites, and rotation preset name. Commands: `toggle light`, `apply favorite`, `apply rotation preset`, `show control panel`. Failures return a script error with the reason (for example, lamp not connected).
+- **AppleScript:** scripting dictionary `iScreenBarMenu.sdef`. Properties for Light, Brightness, Color Temperature, Auto Temp, Auto Light, Presence, Video Mode, Match Screen, Link Screens, Sleep Sync, Keep Awake, and the built-in display, plus read-only lamp connection, status, favorites, and rotation preset name. Commands: `toggle light`, `apply favorite`, `apply rotation preset`, `show control panel`. Failures return a script error with the reason (for example, lamp not connected).
 - **Shortcuts (App Intents, macOS 14+):** Set Light, Turn Setting On or Off, Get Setting, Set Lamp Brightness, Set Color Temperature, Apply Favorite, Apply Rotation Preset, Show Control Panel, Get Lamp Status. Five ready-made shortcuts for Spotlight and Siri. Localized in English and Simplified Chinese.
 - **Control Center (macOS 26):** a sandboxed widget extension with four buttons: Lamp Light (toggle), Keep Awake (toggle), Rotation Preset, Control Panel. They don't show state and only work while the app is running.
 - Every path sets the panel control and runs its own action, so automation has the same side effects, saving, and limits as clicking the button.

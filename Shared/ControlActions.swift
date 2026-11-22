@@ -12,7 +12,7 @@ enum ControlAction: String, CaseIterable {
     case applyRotationPreset
     case showControlPanel
 
-    private static let prefix = "org.windholm.iScreenMenu.control."
+    private static let prefix = "org.windholm.iScreenBarMenu.control."
 
     var notificationName: String { Self.prefix + rawValue }
 

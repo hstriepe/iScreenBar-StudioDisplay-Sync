@@ -12,7 +12,7 @@ func performControlAction(_ action: ControlAction) {
 }
 
 @main
-struct IScreenMenuControls: WidgetBundle {
+struct IScreenBarMenuControls: WidgetBundle {
     var body: some Widget {
         LightControl()
         KeepAwakeControl()
@@ -23,7 +23,7 @@ struct IScreenMenuControls: WidgetBundle {
 
 struct LightControl: ControlWidget {
     var body: some ControlWidgetConfiguration {
-        StaticControlConfiguration(kind: "org.windholm.iScreenMenu.Controls.light") {
+        StaticControlConfiguration(kind: "org.windholm.iScreenBarMenu.Controls.light") {
             ControlWidgetButton(action: ToggleLightControlIntent()) {
                 Label("Light", systemImage: "sun.min.fill")
             }
@@ -35,19 +35,19 @@ struct LightControl: ControlWidget {
 
 struct KeepAwakeControl: ControlWidget {
     var body: some ControlWidgetConfiguration {
-        StaticControlConfiguration(kind: "org.windholm.iScreenMenu.Controls.keepAwake") {
+        StaticControlConfiguration(kind: "org.windholm.iScreenBarMenu.Controls.keepAwake") {
             ControlWidgetButton(action: ToggleKeepAwakeControlIntent()) {
                 Label("Keep Awake", systemImage: "cup.and.saucer")
             }
         }
         .displayName("Keep Awake")
-        .description("Turns iScreen Menu's Keep Awake on or off.")
+        .description("Turns iScreenBar Menu's Keep Awake on or off.")
     }
 }
 
 struct RotationPresetControl: ControlWidget {
     var body: some ControlWidgetConfiguration {
-        StaticControlConfiguration(kind: "org.windholm.iScreenMenu.Controls.rotationPreset") {
+        StaticControlConfiguration(kind: "org.windholm.iScreenBarMenu.Controls.rotationPreset") {
             ControlWidgetButton(action: ApplyRotationPresetControlIntent()) {
                 Label("Rotation Preset", systemImage: "rotate.right")
             }
@@ -59,12 +59,12 @@ struct RotationPresetControl: ControlWidget {
 
 struct ControlPanelControl: ControlWidget {
     var body: some ControlWidgetConfiguration {
-        StaticControlConfiguration(kind: "org.windholm.iScreenMenu.Controls.controlPanel") {
+        StaticControlConfiguration(kind: "org.windholm.iScreenBarMenu.Controls.controlPanel") {
             ControlWidgetButton(action: ShowControlPanelControlIntent()) {
                 Label("Control Panel", systemImage: "slider.horizontal.3")
             }
         }
         .displayName("Control Panel")
-        .description("Opens the iScreen Menu control panel.")
+        .description("Opens the iScreenBar Menu control panel.")
     }
 }

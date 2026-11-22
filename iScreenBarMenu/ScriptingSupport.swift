@@ -1,7 +1,7 @@
 import AppKit
 import Foundation
 
-// AppleScript support (iScreenMenu.sdef). Properties are KVC keys on NSApplication;
+// AppleScript support (iScreenBarMenu.sdef). Properties are KVC keys on NSApplication;
 // commands use method handlers via <responds-to>. Cocoa Scripting calls these on the
 // main thread. Errors go back to the script through the current NSScriptCommand.
 

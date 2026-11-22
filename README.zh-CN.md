@@ -1,4 +1,4 @@
-# iScreen Menu
+# iScreenBar Menu
 
 [English](README.md) · 简体中文
 
@@ -41,16 +41,25 @@ cd iScreenBar-StudioDisplay-Sync
 ./scripts/install.sh
 ```
 
-脚本使用 Xcode 工程本机编译、临时签名，安装到 `~/Applications/iScreen Menu.app`，创建用户级 LaunchAgent，登录后自动运行。菜单中的**登录时启动**可开关该 LaunchAgent。退出 App 后在下次登录前保持退出，launchd 只在崩溃后重启。若安装过旧版本，请重新运行 `./scripts/install.sh`（或注销后重新登录），以免退出后被自动重新启动。安装无需管理员密码；防止休眠的强制层另需管理员授权。
+脚本使用 Xcode 工程本机编译、临时签名，安装到 `~/Applications/iScreenBar Menu.app`，创建用户级 LaunchAgent，登录后自动运行。菜单中的**登录时启动**可开关该 LaunchAgent。退出 App 后在下次登录前保持退出，launchd 只在崩溃后重启。若安装过旧版本，请重新运行 `./scripts/install.sh`（或注销后重新登录），以免退出后被自动重新启动。安装无需管理员密码；防止休眠的强制层另需管理员授权。
 
 ### 不使用脚本安装
 
-1. 在 Xcode 中构建，或运行 `./scripts/build.sh`，得到 `build/iScreen Menu.app`。
-2. 将 `iScreen Menu.app` 拖到 `/Applications` 或 `~/Applications`。
+1. 在 Xcode 中构建，或运行 `./scripts/build.sh`，得到 `build/iScreenBar Menu.app`。
+2. 将 `iScreenBar Menu.app` 拖到 `/Applications` 或 `~/Applications`。
 3. 在访达中打开一次。这样快捷指令和控制中心也能找到它。
 4. 左键点击菜单栏图标，选择**登录时启动**。这会写入与脚本相同的 LaunchAgent，指向 App 当前所在位置。
 
-与脚本不同，这样不会立即启动 LaunchAgent，而是在下次登录时生效；在此之前不会写入 `~/Library/Logs/iScreenMenu.log`。之后若移动了 App，请关闭再重新打开“登录时启动”。运行 `build/` 中的副本时不要开启“登录时启动”，否则每次登录都会启动该副本。若仍有使用 `local.qiu.iScreenBarStudioSync` 的旧版本在运行，请注销并重新登录一次。
+与脚本不同，这样不会立即启动 LaunchAgent，而是在下次登录时生效；在此之前不会写入 `~/Library/Logs/iScreenBarMenu.log`。之后若移动了 App，请关闭再重新打开“登录时启动”。运行 `build/` 中的副本时不要开启“登录时启动”，否则每次登录都会启动该副本。若仍有使用 `local.qiu.iScreenBarStudioSync` 的旧版本在运行，请注销并重新登录一次。
+
+### 从 iScreen Menu（0.4 及更早版本）升级
+
+0.5 版将 App 从 **iScreen Menu** 更名为 **iScreenBar Menu**（Bundle ID `org.windholm.iScreenBarMenu`）。运行 `./scripts/install.sh` 会停止旧 App，将 `~/Applications/iScreen Menu.app` 移到废纸篓，并移除其 `org.windholm.iScreenMenu` LaunchAgent。首次启动时，App 会从旧名称复制设置（我的最爱、旋转预设、阈值等），并替换旧的“登录时启动”项。以下内容需要手动更新：
+
+- 控制中心：移除旧的 iScreen Menu 控制项，再从 iScreenBar Menu 重新添加。
+- AppleScript：将 `tell application "iScreen Menu"` 改为 `tell application "iScreenBar Menu"`。
+- 快捷指令：将 iScreen Menu 的操作替换为 iScreenBar Menu 的操作。
+- 日志改为 `~/Library/Logs/iScreenBarMenu.log`；旧的 `iScreenMenu.log` 可以删除。
 
 日常灯控直接通过 USB HID 执行，不依赖官方 App。建议避免两个软件同时自动写入灯光设置。相机自动视频模式和灯体硬件记忆尚未完全对齐，不宣称完整替代官方所有功能。
 
@@ -64,12 +73,12 @@ cd iScreenBar-StudioDisplay-Sync
 
 ## 自动化
 
-iScreen Menu 可通过 AppleScript、快捷指令以及（macOS 26 上的）控制中心操作。每项设置的效果与控制面板按钮完全相同，限制也相同：灯光设置需要连接 iScreenBar，Mac 锁定时无法调整显示器，开启防止休眠需要输入管理员密码。App 必须在运行；若未运行，快捷指令和 AppleScript 会自动启动它。
+iScreenBar Menu 可通过 AppleScript、快捷指令以及（macOS 26 上的）控制中心操作。每项设置的效果与控制面板按钮完全相同，限制也相同：灯光设置需要连接 iScreenBar，Mac 锁定时无法调整显示器，开启防止休眠需要输入管理员密码。App 必须在运行；若未运行，快捷指令和 AppleScript 会自动启动它。
 
-**AppleScript。** 在“脚本编辑器”中打开词典（文件 › 打开词典… › iScreen Menu）。属性：`light`、`brightness`（1–100）、`color temperature`（2700–6500 K，需先关闭自动色温）、`auto temperature`、`auto light`、`presence`、`video mode`、`match screen`、`link screens`、`sleep sync`、`keep awake`、`builtin display`，以及只读的 `lamp connected`、`lamp status`、`favorites`、`rotation preset`。命令：`toggle light`、`apply favorite "名称"`、`apply rotation preset`、`show control panel`。AppleScript 术语为英文。其他 App 首次发送命令时，macOS 会请求“自动化”权限。
+**AppleScript。** 在“脚本编辑器”中打开词典（文件 › 打开词典… › iScreenBar Menu）。属性：`light`、`brightness`（1–100）、`color temperature`（2700–6500 K，需先关闭自动色温）、`auto temperature`、`auto light`、`presence`、`video mode`、`match screen`、`link screens`、`sleep sync`、`keep awake`、`builtin display`，以及只读的 `lamp connected`、`lamp status`、`favorites`、`rotation preset`。命令：`toggle light`、`apply favorite "名称"`、`apply rotation preset`、`show control panel`。AppleScript 术语为英文。其他 App 首次发送命令时，macOS 会请求“自动化”权限。
 
 ```applescript
-tell application "iScreen Menu"
+tell application "iScreenBar Menu"
     set brightness to 60
     set color temperature to 4000
     apply favorite "Night Work"
@@ -79,14 +88,14 @@ end tell
 
 **快捷指令。** 操作：设置灯光、开启或关闭设置、获取设置、设置灯光亮度、设置色温、应用我的最爱、应用旋转预设、显示控制面板、获取灯光状态。切换灯光、应用我的最爱、灯光状态、旋转预设和控制面板也作为现成快捷指令提供给聚焦和 Siri。
 
-**控制中心（macOS 26）。** 在“控制中心 › 编辑控制 › iScreen Menu”中添加：台灯灯光、防止休眠、旋转预设、控制面板。它们是按钮而不是开关，不显示当前状态。控制项会通知正在运行的 App，因此 iScreen Menu 退出时不起作用。
+**控制中心（macOS 26）。** 在“控制中心 › 编辑控制 › iScreenBar Menu”中添加：台灯灯光、防止休眠、旋转预设、控制面板。它们是按钮而不是开关，不显示当前状态。控制项会通知正在运行的 App，因此 iScreenBar Menu 退出时不起作用。
 
 ## 验证与限制
 
 ```bash
 ./scripts/check.sh
-tail -f ~/Library/Logs/iScreenMenu.log
-launchctl print gui/$(id -u)/org.windholm.iScreenMenu
+tail -f ~/Library/Logs/iScreenBarMenu.log
+launchctl print gui/$(id -u)/org.windholm.iScreenBarMenu
 ```
 
 2026-10-05 的“关闭内屏后拔掉外屏恢复”已由使用者实际确认；2026-10-06 的旋转预设关闭回 0°已构建部署，仍待新一轮插拔验收。构建通过、系统状态回读不代表面板确实发光。
@@ -101,9 +110,9 @@ launchctl print gui/$(id -u)/org.windholm.iScreenMenu
 ./scripts/build.sh
 ```
 
-卸载将 App 和 LaunchAgent 移至废纸篓，保留日志。构建产物位于 `build/iScreen Menu.app`。
+卸载将 App 和 LaunchAgent 移至废纸篓，保留日志。构建产物位于 `build/iScreenBar Menu.app`。
 
-开发时用 Xcode 打开 `iScreenMenu.xcodeproj`。工程由 `project.yml` 通过 [XcodeGen](https://github.com/yonaskolb/XcodeGen) 生成；修改 `project.yml` 后运行 `xcodegen generate`，并同时提交两者。界面文字通过 `iScreenMenu/Localizable.xcstrings` 本地化（英文为源语言，含简体中文翻译）。默认使用临时签名；如需用自己的证书签名，请在不纳入 Git 的 `Config/Signing.local.xcconfig` 中设置（参见 `Config/Signing.xcconfig`）。
+开发时用 Xcode 打开 `iScreenBarMenu.xcodeproj`。工程由 `project.yml` 通过 [XcodeGen](https://github.com/yonaskolb/XcodeGen) 生成；修改 `project.yml` 后运行 `xcodegen generate`，并同时提交两者。界面文字通过 `iScreenBarMenu/Localizable.xcstrings` 本地化（英文为源语言，含简体中文翻译）。默认使用临时签名；如需用自己的证书签名，请在不纳入 Git 的 `Config/Signing.local.xcconfig` 中设置（参见 `Config/Signing.xcconfig`）。
 
 目前为本机临时签名，无 Developer ID 公证或自动更新。
 

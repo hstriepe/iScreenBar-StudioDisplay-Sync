@@ -5,31 +5,38 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>iScreen Menu</string>
+	<string>iScreenBar Menu</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIconFile</key>
+	<string>AppIcon</string>
+	<key>CFBundleIconName</key>
+	<string>AppIcon</string>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-	<key>CFBundleInfoDictionaryVersion</key>
-	<string>6.0</string>
 	<key>CFBundleLocalizations</key>
 	<array>
 		<string>en</string>
 		<string>zh-Hans</string>
 	</array>
 	<key>CFBundleName</key>
-	<string>$(PRODUCT_NAME)</string>
+	<string>iScreenBar Menu</string>
 	<key>CFBundlePackageType</key>
-	<string>XPC!</string>
+	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>NSExtension</key>
-	<dict>
-		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.widgetkit-extension</string>
-	</dict>
+	<key>LSApplicationCategoryType</key>
+	<string>public.app-category.utilities</string>
+	<key>LSUIElement</key>
+	<true/>
+	<key>NSAppleScriptEnabled</key>
+	<true/>
+	<key>NSAppleEventsUsageDescription</key>
+	<string>iScreenBar Menu uses Apple Events to be controlled by other apps.</string>
+	<key>OSAScriptingDefinition</key>
+	<string>iScreenBarMenu.sdef</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2026 rogerbush007-a11y, mods Harald Striepe</string>
 </dict>

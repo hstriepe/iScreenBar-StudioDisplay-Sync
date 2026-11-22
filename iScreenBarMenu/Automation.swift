@@ -46,7 +46,7 @@ enum AutomationError: Error, LocalizedError, CustomLocalizedStringResourceConver
     var errorDescription: String? {
         switch self {
         case .notReady:
-            return String(localized: "iScreen Menu isn't ready yet.")
+            return String(localized: "iScreenBar Menu isn't ready yet.")
         case .lampNotConnected:
             return String(localized: "The iScreenBar isn't connected.")
         case .autoTemperatureOn:
@@ -220,7 +220,7 @@ struct SetLightIntent: AppIntent {
 
 struct SetSettingIntent: AppIntent {
     static var title: LocalizedStringResource = "Turn Setting On or Off"
-    static var description = IntentDescription("Turns an iScreen Menu setting on or off, or toggles it, like its control panel button.")
+    static var description = IntentDescription("Turns an iScreenBar Menu setting on or off, or toggles it, like its control panel button.")
 
     @Parameter(title: "Setting")
     var feature: AutomationFeature
@@ -242,7 +242,7 @@ struct SetSettingIntent: AppIntent {
 
 struct GetSettingIntent: AppIntent {
     static var title: LocalizedStringResource = "Get Setting"
-    static var description = IntentDescription("Returns whether an iScreen Menu setting is on.")
+    static var description = IntentDescription("Returns whether an iScreenBar Menu setting is on.")
 
     @Parameter(title: "Setting")
     var feature: AutomationFeature
@@ -325,7 +325,7 @@ struct ApplyRotationPresetIntent: AppIntent {
 
 struct ShowControlPanelIntent: AppIntent {
     static var title: LocalizedStringResource = "Show Control Panel"
-    static var description = IntentDescription("Opens the iScreen Menu control panel below the menu bar icon.")
+    static var description = IntentDescription("Opens the iScreenBar Menu control panel below the menu bar icon.")
 
     @MainActor
     func perform() async throws -> some IntentResult {
@@ -345,7 +345,7 @@ struct GetLampStatusIntent: AppIntent {
     }
 }
 
-struct IScreenMenuShortcuts: AppShortcutsProvider {
+struct IScreenBarMenuShortcuts: AppShortcutsProvider {
     static var appShortcuts: [AppShortcut] {
         AppShortcut(
             intent: SetLightIntent(state: .toggle),

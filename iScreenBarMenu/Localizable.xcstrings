@@ -816,12 +816,12 @@
         }
       }
     },
-    "Opens the iScreen Menu control panel below the menu bar icon." : {
+    "Opens the iScreenBar Menu control panel below the menu bar icon." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "在菜单栏图标下方打开 iScreen Menu 控制面板。"
+            "value" : "在菜单栏图标下方打开 iScreenBar Menu 控制面板。"
           }
         }
       }
@@ -926,12 +926,12 @@
         }
       }
     },
-    "Quit iScreen Menu" : {
+    "Quit iScreenBar Menu" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "退出 iScreen Menu"
+            "value" : "退出 iScreenBar Menu"
           }
         }
       }
@@ -946,12 +946,12 @@
         }
       }
     },
-    "Returns whether an iScreen Menu setting is on." : {
+    "Returns whether an iScreenBar Menu setting is on." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "返回 iScreen Menu 的某项设置是否已开启。"
+            "value" : "返回 iScreenBar Menu 的某项设置是否已开启。"
           }
         }
       }
@@ -1386,12 +1386,12 @@
         }
       }
     },
-    "Turns an iScreen Menu setting on or off, or toggles it, like its control panel button." : {
+    "Turns an iScreenBar Menu setting on or off, or toggles it, like its control panel button." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "开启、关闭或切换 iScreen Menu 的某项设置，效果与控制面板按钮相同。"
+            "value" : "开启、关闭或切换 iScreenBar Menu 的某项设置，效果与控制面板按钮相同。"
           }
         }
       }
@@ -1456,22 +1456,22 @@
         }
       }
     },
-    "iScreen Menu Help" : {
+    "iScreenBar Menu Help" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iScreen Menu 帮助"
+            "value" : "iScreenBar Menu 帮助"
           }
         }
       }
     },
-    "iScreen Menu isn't ready yet." : {
+    "iScreenBar Menu isn't ready yet." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "iScreen Menu 尚未就绪。"
+            "value" : "iScreenBar Menu 尚未就绪。"
           }
         }
       }

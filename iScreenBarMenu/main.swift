@@ -620,13 +620,15 @@ private final class DisplayController {
 // it keeps the stdout log redirect and avoids a second login mechanism that could start a duplicate instance.
 private enum LoginItem {
     // The LaunchAgent label is the bundle ID (scripts/install.sh uses the same value).
-    static let label = Bundle.main.bundleIdentifier ?? "org.windholm.iScreenMenu"
-    private static let legacyLabel = "local.qiu.iScreenBarStudioSync"
+    static let label = Bundle.main.bundleIdentifier ?? "org.windholm.iScreenBarMenu"
+    // Earlier labels: local.qiu.iScreenBarStudioSync (before the bundle ID change),
+    // org.windholm.iScreenMenu (before the rename to iScreenBar Menu, 0.4 and earlier).
+    private static let legacyLabels = ["local.qiu.iScreenBarStudioSync", "org.windholm.iScreenMenu"]
 
     private static var homeDirectory: URL { FileManager.default.homeDirectoryForCurrentUser }
     private static var plistURL: URL { agentURL(for: label) }
     private static var logURL: URL {
-        homeDirectory.appendingPathComponent("Library/Logs/iScreenMenu.log")
+        homeDirectory.appendingPathComponent("Library/Logs/iScreenBarMenu.log")
     }
 
     private static func agentURL(for label: String) -> URL {
@@ -670,20 +672,25 @@ private enum LoginItem {
         }
     }
 
-    // Installs made before the bundle ID change used the label local.qiu.iScreenBarStudioSync (with KeepAlive=true,
-    // which relaunches the app after Quit). Remove that file and carry the login preference over to the current label.
+    // Earlier installs used another label (local.qiu.iScreenBarStudioSync also had KeepAlive=true, which relaunches
+    // the app after Quit; org.windholm.iScreenMenu points at the old app's executable). Remove those files and carry
+    // the login preference over to the current label.
     // A job that is already loaded is not touched; scripts/install.sh boots it out.
     static func replaceLegacyAgentIfNeeded() {
-        let legacyURL = agentURL(for: legacyLabel)
-        guard legacyLabel != label, FileManager.default.fileExists(atPath: legacyURL.path) else { return }
-        do {
-            try FileManager.default.removeItem(at: legacyURL)
-        } catch {
-            log("Failed to remove legacy LaunchAgent: \(error.localizedDescription)")
-            return
+        for legacyLabel in legacyLabels where legacyLabel != label {
+            let legacyURL = agentURL(for: legacyLabel)
+            guard FileManager.default.fileExists(atPath: legacyURL.path) else { continue }
+            do {
+                try FileManager.default.removeItem(at: legacyURL)
+            } catch {
+                log("Failed to remove legacy LaunchAgent \(legacyLabel): \(error.localizedDescription)")
+                continue
+            }
+            let enabled = isEnabled || setEnabled(true)
+            log(enabled
+                ? "Replaced legacy LaunchAgent \(legacyLabel) with \(label)"
+                : "Removed legacy LaunchAgent \(legacyLabel); new one could not be written")
         }
-        let enabled = isEnabled || setEnabled(true)
-        log(enabled ? "Replaced legacy LaunchAgent with \(label)" : "Removed legacy LaunchAgent; new one could not be written")
     }
 }
 
@@ -695,7 +702,7 @@ private final class HelpWindowController: NSWindowController {
         let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 560, height: 600),
                               styleMask: [.titled, .closable, .miniaturizable, .resizable],
                               backing: .buffered, defer: false)
-        window.title = String(localized: "iScreen Menu Help")
+        window.title = String(localized: "iScreenBar Menu Help")
         window.minSize = NSSize(width: 380, height: 320)
         window.isReleasedWhenClosed = false
         window.setFrameAutosaveName("HelpWindow")
@@ -760,7 +767,7 @@ private func installHiddenMainMenu() {
     let mainMenu = NSMenu()
     let appItem = NSMenuItem()
     let appMenu = NSMenu()
-    appMenu.addItem(NSMenuItem(title: String(localized: "Quit iScreen Menu"),
+    appMenu.addItem(NSMenuItem(title: String(localized: "Quit iScreenBar Menu"),
                                action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
     appItem.submenu = appMenu
     mainMenu.addItem(appItem)
@@ -936,7 +943,7 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         let brightnessText = healthy ? lamp.currentBrightness.map { "\($0)%" } ?? "--%" : "--%"
         let temperatureText = healthy ? lamp.currentTemperature.map { "\($0)K" } ?? "----K" : "----K"
         item.button?.toolTip = "\(brightnessText) · \(temperatureText)"
-        item.button?.setAccessibilityLabel("iScreen Menu \(status)")
+        item.button?.setAccessibilityLabel("iScreenBar Menu \(status)")
         if displayController.isStudioCovered,
            (displayController.studioTarget() == nil || isConsoleSessionLocked()) {
             _ = displayController.setStudioEnabled(true)
@@ -2080,7 +2087,7 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         menu.addItem(actionItem(String(localized: "Help…"), action: #selector(showHelp)))
 
         menu.addItem(.separator())
-        let quit = NSMenuItem(title: String(localized: "Quit iScreen Menu"), action: #selector(quitApp), keyEquivalent: "q")
+        let quit = NSMenuItem(title: String(localized: "Quit iScreenBar Menu"), action: #selector(quitApp), keyEquivalent: "q")
         quit.target = self
         menu.addItem(quit)
         return menu
@@ -2262,7 +2269,7 @@ private final class StatusIndicator: NSObject, NSMenuDelegate {
         temperatureValueLabel.font = .monospacedDigitSystemFont(ofSize: 11, weight: .medium)
         temperatureValueLabel.textColor = .secondaryLabelColor
 
-        let title = NSTextField(labelWithString: "iScreen Menu")
+        let title = NSTextField(labelWithString: "iScreenBar Menu")
         title.font = .systemFont(ofSize: 15, weight: .semibold)
         let subtitle = NSTextField(labelWithString: "Screen and Light Controller")
         subtitle.font = .systemFont(ofSize: 11)
@@ -3104,6 +3111,26 @@ private func isConsoleSessionLocked() -> Bool {
     guard let session = CGSessionCopyCurrentDictionary() as? [String: Any] else { return true }
     return session["CGSSessionScreenIsLocked"] as? Bool ?? false
 }
+
+// Up to 0.4 the app was "iScreen Menu" with bundle ID org.windholm.iScreenMenu. Copy its settings once into the
+// current domain (keys already set here win); the old domain is left in place. Runs before anything reads defaults.
+private func importPreRenameSettingsIfNeeded() {
+    let oldDomain = "org.windholm.iScreenMenu"
+    let doneKey = "importedPreRenameSettings"
+    let defaults = UserDefaults.standard
+    guard let currentDomain = Bundle.main.bundleIdentifier, currentDomain != oldDomain,
+          !defaults.bool(forKey: doneKey) else { return }
+    defaults.set(true, forKey: doneKey)
+    guard let old = defaults.persistentDomain(forName: oldDomain), !old.isEmpty else { return }
+    let current = defaults.persistentDomain(forName: currentDomain) ?? [:]
+    var copied = 0
+    for (key, value) in old where current[key] == nil {
+        defaults.set(value, forKey: key)
+        copied += 1
+    }
+    log("Imported \(copied) settings from \(oldDomain)")
+}
+importPreRenameSettingsIfNeeded()
 
 var displayID = studioDisplayID()
 private let lamp = LampController()

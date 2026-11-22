@@ -1,4 +1,4 @@
-# iScreen Menu
+# iScreenBar Menu
 
 English · [简体中文](README.zh-CN.md)
 
@@ -41,16 +41,25 @@ cd iScreenBar-StudioDisplay-Sync
 ./scripts/install.sh
 ```
 
-The script builds the Xcode project with an ad-hoc (local) signature, installing the application to `~/Applications/iScreen Menu.app`. It also creates a user-level LaunchAgent so the app runs automatically at login. **Launch at Login** in the menu turns that LaunchAgent on or off. Quitting the app keeps it quit until the next login; launchd only restarts it after a crash. If you installed an earlier version, run `./scripts/install.sh` again (or log out and back in) so Quit is not undone by an automatic relaunch. No administrator password is required for the installation; however, the optional "prevent sleep" feature requires administrator authorization.
+The script builds the Xcode project with an ad-hoc (local) signature, installing the application to `~/Applications/iScreenBar Menu.app`. It also creates a user-level LaunchAgent so the app runs automatically at login. **Launch at Login** in the menu turns that LaunchAgent on or off. Quitting the app keeps it quit until the next login; launchd only restarts it after a crash. If you installed an earlier version, run `./scripts/install.sh` again (or log out and back in) so Quit is not undone by an automatic relaunch. No administrator password is required for the installation; however, the optional "prevent sleep" feature requires administrator authorization.
 
 ### Installing without the script
 
-1. Build the app, either in Xcode or with `./scripts/build.sh`, which produces `build/iScreen Menu.app`.
-2. Drag `iScreen Menu.app` into `/Applications` or `~/Applications`.
+1. Build the app, either in Xcode or with `./scripts/build.sh`, which produces `build/iScreenBar Menu.app`.
+2. Drag `iScreenBar Menu.app` into `/Applications` or `~/Applications`.
 3. Open it once from Finder. This also lets Shortcuts and Control Center find it.
 4. Left-click the menu bar icon and choose **Launch at Login**. This writes the same LaunchAgent the script creates, pointing at the app's current location.
 
-Unlike the script, this doesn't start the LaunchAgent right away. It takes effect at the next login, and until then nothing is written to `~/Library/Logs/iScreenMenu.log`. If you move the app afterward, turn Launch at Login off and on again. Don't turn on Launch at Login while running the copy in `build/`, or that copy will start at every login. If an older version with the `local.qiu.iScreenBarStudioSync` agent is still running, log out and back in once.
+Unlike the script, this doesn't start the LaunchAgent right away. It takes effect at the next login, and until then nothing is written to `~/Library/Logs/iScreenBarMenu.log`. If you move the app afterward, turn Launch at Login off and on again. Don't turn on Launch at Login while running the copy in `build/`, or that copy will start at every login. If an older version with the `local.qiu.iScreenBarStudioSync` agent is still running, log out and back in once.
+
+### Upgrading from iScreen Menu (0.4 and earlier)
+
+Version 0.5 renamed the app from **iScreen Menu** to **iScreenBar Menu** (bundle ID `org.windholm.iScreenBarMenu`). Running `./scripts/install.sh` stops the old app, moves `~/Applications/iScreen Menu.app` to the Trash, and removes its `org.windholm.iScreenMenu` LaunchAgent. On first launch, the app copies your settings (favorites, rotation preset, thresholds) from the old name and replaces the old Launch at Login entry. Some things need updating by hand:
+
+- Control Center: remove the old iScreen Menu controls and add them again from iScreenBar Menu.
+- AppleScript: change `tell application "iScreen Menu"` to `tell application "iScreenBar Menu"`.
+- Shortcuts: actions from iScreen Menu must be replaced with the iScreenBar Menu actions.
+- The log moves to `~/Library/Logs/iScreenBarMenu.log`; the old `iScreenMenu.log` can be deleted.
 
 Daily light control is handled directly via USB HID, independent of the official application. It is recommended to avoid running both this software and the official application simultaneously, as both may attempt to write light settings automatically. Please note that the automatic video mode (linked to the camera) and the hardware-based memory of the light bar are not yet fully synchronized; therefore, this software is not intended as a complete replacement for all official features.
 
@@ -64,12 +73,12 @@ Daily light control is handled directly via USB HID, independent of the official
 
 ## Automation
 
-iScreen Menu can be controlled from AppleScript, Shortcuts, and (on macOS 26) Control Center. Each setting works exactly like its control panel button, including the same limits: lamp settings need a connected iScreenBar, display settings are unavailable while the Mac is locked, and turning on Keep Awake asks for an administrator password. The app must be running; Shortcuts and AppleScript launch it if it isn't.
+iScreenBar Menu can be controlled from AppleScript, Shortcuts, and (on macOS 26) Control Center. Each setting works exactly like its control panel button, including the same limits: lamp settings need a connected iScreenBar, display settings are unavailable while the Mac is locked, and turning on Keep Awake asks for an administrator password. The app must be running; Shortcuts and AppleScript launch it if it isn't.
 
-**AppleScript.** Open the dictionary in Script Editor (File › Open Dictionary… › iScreen Menu). Properties: `light`, `brightness` (1–100), `color temperature` (2700–6500 K; Auto Temp must be off), `auto temperature`, `auto light`, `presence`, `video mode`, `match screen`, `link screens`, `sleep sync`, `keep awake`, `builtin display`, and read-only `lamp connected`, `lamp status`, `favorites`, `rotation preset`. Commands: `toggle light`, `apply favorite "Name"`, `apply rotation preset`, `show control panel`. The first time another app sends commands, macOS asks for Automation permission.
+**AppleScript.** Open the dictionary in Script Editor (File › Open Dictionary… › iScreenBar Menu). Properties: `light`, `brightness` (1–100), `color temperature` (2700–6500 K; Auto Temp must be off), `auto temperature`, `auto light`, `presence`, `video mode`, `match screen`, `link screens`, `sleep sync`, `keep awake`, `builtin display`, and read-only `lamp connected`, `lamp status`, `favorites`, `rotation preset`. Commands: `toggle light`, `apply favorite "Name"`, `apply rotation preset`, `show control panel`. The first time another app sends commands, macOS asks for Automation permission.
 
 ```applescript
-tell application "iScreen Menu"
+tell application "iScreenBar Menu"
     set brightness to 60
     set color temperature to 4000
     apply favorite "Night Work"
@@ -79,14 +88,14 @@ end tell
 
 **Shortcuts.** Actions: Set Light, Turn Setting On or Off, Get Setting, Set Lamp Brightness, Set Color Temperature, Apply Favorite, Apply Rotation Preset, Show Control Panel, and Get Lamp Status. Toggle Light, Apply Favorite, Lamp Status, Rotation Preset, and Control Panel are also offered as ready-made shortcuts for Spotlight and Siri.
 
-**Control Center (macOS 26).** Add controls from Control Center › Edit Controls › iScreen Menu: Lamp Light, Keep Awake, Rotation Preset, and Control Panel. They're buttons, not switches, and don't show the current state. A control signals the running app, so it does nothing while iScreen Menu is quit.
+**Control Center (macOS 26).** Add controls from Control Center › Edit Controls › iScreenBar Menu: Lamp Light, Keep Awake, Rotation Preset, and Control Panel. They're buttons, not switches, and don't show the current state. A control signals the running app, so it does nothing while iScreenBar Menu is quit.
 
 ## Verification and Limitations
 
 ```bash
 ./scripts/check.sh
-tail -f ~/Library/Logs/iScreenMenu.log
-launchctl print gui/$(id -u)/org.windholm.iScreenMenu
+tail -f ~/Library/Logs/iScreenBarMenu.log
+launchctl print gui/$(id -u)/org.windholm.iScreenBarMenu
 ```
 
 Restoring the internal display when the external display is unplugged while the internal display is turned off (2026-10-05) has been confirmed by a user on real hardware. Returning to 0° when the rotation preset is turned off (2026-10-06) has been built and deployed, but still needs another round of plug/unplug testing. Note that a successful build or a successful read-back of system state does not guarantee that the light panel is actually emitting light.
@@ -101,9 +110,9 @@ Display control relies on private macOS APIs—SkyLight, MonitorPanel, and Displ
 ./scripts/build.sh
 ```
 
-Uninstallation moves the app and the `LaunchAgent` to the Trash, while preserving log files. Build artifacts are located in `build/iScreen Menu.app`.
+Uninstallation moves the app and the `LaunchAgent` to the Trash, while preserving log files. Build artifacts are located in `build/iScreenBar Menu.app`.
 
-For development, open `iScreenMenu.xcodeproj` in Xcode. The project is generated from `project.yml` with [XcodeGen](https://github.com/yonaskolb/XcodeGen); after changing `project.yml`, run `xcodegen generate` and commit both. UI text is localized through `iScreenMenu/Localizable.xcstrings` (English source, Simplified Chinese translation). Builds are signed ad-hoc by default; to sign with your own certificate, put your settings in a git-ignored `Config/Signing.local.xcconfig` (see `Config/Signing.xcconfig`).
+For development, open `iScreenBarMenu.xcodeproj` in Xcode. The project is generated from `project.yml` with [XcodeGen](https://github.com/yonaskolb/XcodeGen); after changing `project.yml`, run `xcodegen generate` and commit both. UI text is localized through `iScreenBarMenu/Localizable.xcstrings` (English source, Simplified Chinese translation). Builds are signed ad-hoc by default; to sign with your own certificate, put your settings in a git-ignored `Config/Signing.local.xcconfig` (see `Config/Signing.xcconfig`).
 
 Currently, the app uses a local, temporary signature; it lacks a Developer ID notarization and does not support automatic updates.
 
