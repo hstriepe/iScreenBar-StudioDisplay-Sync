@@ -23,6 +23,9 @@
 
 图标黄色表示灯亮，灰色表示灯灭，红色提示异常；悬停显示亮度和色温。App 不占 Dock 位置。
 
+- **左键点击**图标打开标准菜单：灯光、亮度、色温、台灯模式、环境光规则、显示器（内屏开关、0°/90°/180°/270° 旋转、Studio Display、旋转预设）、我的最爱、防止休眠、控制面板…、登录时启动、帮助…、退出。
+- **右键点击**（或按住 Control 点击）图标打开完整控制面板，右下角有**退出**按钮。
+
 界面支持英文和简体中文，跟随 macOS 语言设置。若只想让本 App 使用中文，可在“系统设置 › 通用 › 语言与地区 › 应用程序”中选择，然后重启 App。
 
 ## 安装
@@ -38,7 +41,7 @@ cd iScreenBar-StudioDisplay-Sync
 ./scripts/install.sh
 ```
 
-脚本使用 Xcode 工程本机编译、临时签名，安装到 `~/Applications/iScreen Menu.app`，创建用户级 LaunchAgent，登录后自动运行。安装无需管理员密码；防止休眠的强制层另需管理员授权。
+脚本使用 Xcode 工程本机编译、临时签名，安装到 `~/Applications/iScreen Menu.app`，创建用户级 LaunchAgent，登录后自动运行。菜单中的**登录时启动**可开关该 LaunchAgent。退出 App 后在下次登录前保持退出，launchd 只在崩溃后重启。若安装过旧版本，请重新运行 `./scripts/install.sh`（或注销后重新登录），以免退出后被自动重新启动。安装无需管理员密码；防止休眠的强制层另需管理员授权。
 
 日常灯控直接通过 USB HID 执行，不依赖官方 App。建议避免两个软件同时自动写入灯光设置。相机自动视频模式和灯体硬件记忆尚未完全对齐，不宣称完整替代官方所有功能。
 
@@ -54,8 +57,8 @@ cd iScreenBar-StudioDisplay-Sync
 
 ```bash
 ./scripts/check.sh
-tail -f ~/Library/Logs/iScreenBarStudioSync.log
-launchctl print gui/$(id -u)/local.qiu.iScreenBarStudioSync
+tail -f ~/Library/Logs/iScreenMenu.log
+launchctl print gui/$(id -u)/org.windholm.iScreenMenu
 ```
 
 2026-10-05 的“关闭内屏后拔掉外屏恢复”已由使用者实际确认；2026-10-06 的旋转预设关闭回 0°已构建部署，仍待新一轮插拔验收。构建通过、系统状态回读不代表面板确实发光。

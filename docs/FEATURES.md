@@ -122,7 +122,7 @@ English · [简体中文](FEATURES.zh-CN.md)
 - When the lamp is unplugged, loses power, or HID commands fail, the icon turns red and the event is logged.
 - After the lamp is plugged back in, the app rebuilds the HID manager, reads the state again, and restores sleep sync and the Match Screen lock.
 - When the Studio Display disconnects, the app keeps running and rebuilds display monitoring and the ambient light sensor connection when it returns.
-- All key states and errors are written to `~/Library/Logs/iScreenBarStudioSync.log`.
+- All key states and errors are written to `~/Library/Logs/iScreenMenu.log`.
 
 ## 14. Interface and interaction
 

@@ -23,6 +23,9 @@ See the [UI Guide](docs/UI-GUIDE.md) and the [Full Feature List](docs/FEATURES.m
 
 The icon appears yellow when the light is on, gray when it is off, and red to indicate an issue. Hovering over the icon displays the current brightness and color temperature. The app does not occupy a space in the Dock.
 
+- **Left-click** the icon for a standard menu: Light, Brightness, Color Temperature, Lamp modes, Ambient Rules, Displays (built-in on/off, rotation 0°/90°/180°/270°, Studio Display, rotation preset), Favorites, Keep Awake, Control Panel…, Launch at Login, Help…, and Quit.
+- **Right-click** (or Control-click) the icon for the full control panel, which has a **Quit** button at the bottom right.
+
 The interface is in English and Simplified Chinese and follows the macOS language. To use Chinese for this app only, choose it under System Settings › General › Language & Region › Applications, then restart the app.
 
 ## Installation
@@ -38,7 +41,7 @@ cd iScreenBar-StudioDisplay-Sync
 ./scripts/install.sh
 ```
 
-The script builds the Xcode project with an ad-hoc (local) signature, installing the application to `~/Applications/iScreen Menu.app`. It also creates a user-level LaunchAgent to ensure the app runs automatically upon login. No administrator password is required for the installation; however, the optional "prevent sleep" feature requires administrator authorization.
+The script builds the Xcode project with an ad-hoc (local) signature, installing the application to `~/Applications/iScreen Menu.app`. It also creates a user-level LaunchAgent so the app runs automatically at login. **Launch at Login** in the menu turns that LaunchAgent on or off. Quitting the app keeps it quit until the next login; launchd only restarts it after a crash. If you installed an earlier version, run `./scripts/install.sh` again (or log out and back in) so Quit is not undone by an automatic relaunch. No administrator password is required for the installation; however, the optional "prevent sleep" feature requires administrator authorization.
 
 Daily light control is handled directly via USB HID, independent of the official application. It is recommended to avoid running both this software and the official application simultaneously, as both may attempt to write light settings automatically. Please note that the automatic video mode (linked to the camera) and the hardware-based memory of the light bar are not yet fully synchronized; therefore, this software is not intended as a complete replacement for all official features.
 
@@ -54,8 +57,8 @@ Daily light control is handled directly via USB HID, independent of the official
 
 ```bash
 ./scripts/check.sh
-tail -f ~/Library/Logs/iScreenBarStudioSync.log
-launchctl print gui/$(id -u)/local.qiu.iScreenBarStudioSync
+tail -f ~/Library/Logs/iScreenMenu.log
+launchctl print gui/$(id -u)/org.windholm.iScreenMenu
 ```
 
 Restoring the internal display when the external display is unplugged while the internal display is turned off (2026-10-05) has been confirmed by a user on real hardware. Returning to 0° when the rotation preset is turned off (2026-10-06) has been built and deployed, but still needs another round of plug/unplug testing. Note that a successful build or a successful read-back of system state does not guarantee that the light panel is actually emitting light.

@@ -71,6 +71,16 @@
         }
       }
     },
+    "Ambient Rules" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "环境光规则"
+          }
+        }
+      }
+    },
     "Ambient light not calibrated yet" : {
       "localizations" : {
         "zh-Hans" : {
@@ -221,6 +231,16 @@
         }
       }
     },
+    "Built-in Display" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "内建显示器"
+          }
+        }
+      }
+    },
     "Built-in display toggle" : {
       "localizations" : {
         "zh-Hans" : {
@@ -291,6 +311,36 @@
         }
       }
     },
+    "Color Temperature" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "色温"
+          }
+        }
+      }
+    },
+    "Control Panel…" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "控制面板…"
+          }
+        }
+      }
+    },
+    "Couldn't Change Launch at Login" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法更改登录时启动"
+          }
+        }
+      }
+    },
     "Couldn't Switch Studio Display" : {
       "localizations" : {
         "zh-Hans" : {
@@ -317,6 +367,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "昏暗开灯"
+          }
+        }
+      }
+    },
+    "Displays" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "显示器"
           }
         }
       }
@@ -361,6 +421,36 @@
         }
       }
     },
+    "Favorites" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "我的最爱"
+          }
+        }
+      }
+    },
+    "Help is coming soon. Left-click the menu bar icon for this menu; right-click it for the control panel." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "帮助内容即将推出。左键点击菜单栏图标打开此菜单；右键点击打开控制面板。"
+          }
+        }
+      }
+    },
+    "Help…" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "帮助…"
+          }
+        }
+      }
+    },
     "High" : {
       "localizations" : {
         "zh-Hans" : {
@@ -397,6 +487,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "保留旋转"
+          }
+        }
+      }
+    },
+    "Lamp" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯"
+          }
+        }
+      }
+    },
+    "Launch at Login" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "登录时启动"
           }
         }
       }
@@ -641,6 +751,26 @@
         }
       }
     },
+    "Quit" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "退出"
+          }
+        }
+      }
+    },
+    "Quit iScreen Menu" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "退出 iScreen Menu"
+          }
+        }
+      }
+    },
     "Revert" : {
       "localizations" : {
         "zh-Hans" : {
@@ -683,6 +813,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "旋转 %lld°"
+          }
+        }
+      }
+    },
+    "Rotate Built-in" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "旋转内屏"
           }
         }
       }
@@ -787,6 +927,16 @@
         }
       }
     },
+    "The login item in ~/Library/LaunchAgents couldn't be updated." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法更新 ~/Library/LaunchAgents 中的登录项。"
+          }
+        }
+      }
+    },
     "Turn off auto light" : {
       "localizations" : {
         "zh-Hans" : {
@@ -883,6 +1033,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "睡前放松"
+          }
+        }
+      }
+    },
+    "iScreen Menu Help" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iScreen Menu 帮助"
           }
         }
       }

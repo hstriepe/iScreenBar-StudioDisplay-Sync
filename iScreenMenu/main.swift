@@ -615,7 +615,78 @@ private final class DisplayController {
     }
 }
 
-private final class StatusIndicator: NSObject {
+// Launch at login is the same user LaunchAgent that scripts/install.sh writes (not SMAppService):
+// it keeps the stdout log redirect and avoids a second login mechanism that could start a duplicate instance.
+private enum LoginItem {
+    // The LaunchAgent label is the bundle ID (scripts/install.sh uses the same value).
+    static let label = Bundle.main.bundleIdentifier ?? "org.windholm.iScreenMenu"
+    private static let legacyLabel = "local.qiu.iScreenBarStudioSync"
+
+    private static var homeDirectory: URL { FileManager.default.homeDirectoryForCurrentUser }
+    private static var plistURL: URL { agentURL(for: label) }
+    private static var logURL: URL {
+        homeDirectory.appendingPathComponent("Library/Logs/iScreenMenu.log")
+    }
+
+    private static func agentURL(for label: String) -> URL {
+        homeDirectory.appendingPathComponent("Library/LaunchAgents/\(label).plist")
+    }
+
+    static var isEnabled: Bool { FileManager.default.fileExists(atPath: plistURL.path) }
+
+    @discardableResult
+    static func setEnabled(_ enabled: Bool) -> Bool {
+        let fileManager = FileManager.default
+        if !enabled {
+            guard isEnabled else { return true }
+            do {
+                try fileManager.removeItem(at: plistURL)
+                return true
+            } catch {
+                log("Failed to remove LaunchAgent: \(error.localizedDescription)")
+                return false
+            }
+        }
+        guard let executable = Bundle.main.executablePath else { return false }
+        let contents: [String: Any] = [
+            "Label": label,
+            "ProgramArguments": [executable],
+            "RunAtLoad": true,
+            // Restart after a crash, but a normal Quit (exit 0) stays quit.
+            "KeepAlive": ["SuccessfulExit": false],
+            "StandardOutPath": logURL.path,
+            "StandardErrorPath": logURL.path
+        ]
+        do {
+            try fileManager.createDirectory(at: plistURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try fileManager.createDirectory(at: logURL.deletingLastPathComponent(), withIntermediateDirectories: true)
+            let data = try PropertyListSerialization.data(fromPropertyList: contents, format: .xml, options: 0)
+            try data.write(to: plistURL, options: .atomic)
+            return true
+        } catch {
+            log("Failed to write LaunchAgent: \(error.localizedDescription)")
+            return false
+        }
+    }
+
+    // Installs made before the bundle ID change used the label local.qiu.iScreenBarStudioSync (with KeepAlive=true,
+    // which relaunches the app after Quit). Remove that file and carry the login preference over to the current label.
+    // A job that is already loaded is not touched; scripts/install.sh boots it out.
+    static func replaceLegacyAgentIfNeeded() {
+        let legacyURL = agentURL(for: legacyLabel)
+        guard legacyLabel != label, FileManager.default.fileExists(atPath: legacyURL.path) else { return }
+        do {
+            try FileManager.default.removeItem(at: legacyURL)
+        } catch {
+            log("Failed to remove legacy LaunchAgent: \(error.localizedDescription)")
+            return
+        }
+        let enabled = isEnabled || setEnabled(true)
+        log(enabled ? "Replaced legacy LaunchAgent with \(label)" : "Removed legacy LaunchAgent; new one could not be written")
+    }
+}
+
+private final class StatusIndicator: NSObject, NSMenuDelegate {
     private let presenceDelayOptions = [180, 300, 600]
     private let item: NSStatusItem
     private let lamp: LampController
@@ -729,8 +800,10 @@ private final class StatusIndicator: NSObject {
         item.button?.title = ""
         item.button?.imagePosition = .imageOnly
         item.button?.target = self
-        item.button?.action = #selector(togglePanel)
+        item.button?.action = #selector(statusItemClicked)
+        item.button?.sendAction(on: [.leftMouseUp, .rightMouseUp])
         migrateDisplayPresetIfNeeded()
+        LoginItem.replaceLegacyAgentIfNeeded()
         configurePanel()
         NotificationCenter.default.addObserver(self, selector: #selector(applicationWillTerminate),
                                                name: NSApplication.willTerminateNotification, object: nil)
@@ -772,6 +845,32 @@ private final class StatusIndicator: NSObject {
             _ = displayController.setStudioEnabled(true)
         }
         if popover.isShown { refreshControls() }
+    }
+
+    // Left-click opens the standard menu; right-click or Control-click opens the control panel.
+    @objc private func statusItemClicked() {
+        let event = NSApp.currentEvent
+        if event?.type == .rightMouseUp || event?.modifierFlags.contains(.control) == true {
+            togglePanel()
+        } else {
+            showStatusMenu()
+        }
+    }
+
+    private func showStatusMenu() {
+        guard let button = item.button else { return }
+        if popover.isShown { popover.performClose(nil) }
+        lamp.requestStatus()
+        let menu = buildStatusMenu()
+        menu.delegate = self
+        item.menu = menu
+        button.performClick(nil)
+    }
+
+    // Detach the menu once it closes so the next click reaches statusItemClicked again.
+    func menuDidClose(_ menu: NSMenu) {
+        guard menu === item.menu else { return }
+        DispatchQueue.main.async { [weak self] in self?.item.menu = nil }
     }
 
     @objc private func togglePanel() {
@@ -1636,7 +1735,18 @@ private final class StatusIndicator: NSObject {
         guard isDisplaySessionSafe, !isConsoleSessionLocked() else { return }
         guard let builtin = displayController.builtinDisplay(), CGDisplayIsOnline(builtin) != 0 else { return }
         let current = Int(CGDisplayRotation(builtin).rounded())
-        let next = current == 0 ? 90 : (current == 90 ? 270 : 0)
+        rotateBuiltinWithConfirmation(to: current == 0 ? 90 : (current == 90 ? 270 : 0))
+    }
+
+    @objc private func menuRotationChanged(_ sender: NSMenuItem) {
+        rotateBuiltinWithConfirmation(to: sender.tag)
+    }
+
+    private func rotateBuiltinWithConfirmation(to next: Int) {
+        guard isDisplaySessionSafe, !isConsoleSessionLocked() else { return }
+        guard let builtin = displayController.builtinDisplay(), CGDisplayIsOnline(builtin) != 0 else { return }
+        let current = Int(CGDisplayRotation(builtin).rounded())
+        guard next != current else { return }
         popover.performClose(nil)
         guard displayController.rotateBuiltin(to: next) else {
             log("Built-in rotation failed; skipping confirmation")
@@ -1777,6 +1887,178 @@ private final class StatusIndicator: NSObject {
         pendingDisplayPolicyWorkItem?.cancel()
         _ = displayController.setStudioEnabled(true)
         _ = keepAwakeController.setActive(false)
+    }
+
+    // MARK: - Status menu (left-click)
+
+    private func buildStatusMenu() -> NSMenu {
+        refreshControls()
+        let menu = NSMenu()
+        menu.autoenablesItems = false
+        let lampConnected = lamp.isConnected
+
+        menu.addItem(toggleItem(String(localized: "Light"), control: powerSwitch))
+
+        let brightnessMenu = NSMenu()
+        brightnessMenu.autoenablesItems = false
+        for value in [25, 50, 75, 100] {
+            let entry = actionItem("\(value)%", action: #selector(menuBrightnessChanged(_:)), tag: value)
+            entry.state = lamp.currentBrightness == value ? .on : .off
+            entry.isEnabled = lampConnected
+            brightnessMenu.addItem(entry)
+        }
+        menu.addItem(submenuItem(String(localized: "Brightness"), brightnessMenu))
+
+        let temperatureMenu = NSMenu()
+        temperatureMenu.autoenablesItems = false
+        temperatureMenu.addItem(toggleItem(String(localized: "Auto Temp"), control: timeTemperatureSwitch))
+        temperatureMenu.addItem(.separator())
+        for value in [2700, 4000, 5000, 6500] {
+            let entry = actionItem("\(value)K", action: #selector(menuTemperatureChanged(_:)), tag: value)
+            entry.state = !isTimeTemperatureEnabled && lamp.currentTemperature == value ? .on : .off
+            entry.isEnabled = temperatureSlider.isEnabled
+            temperatureMenu.addItem(entry)
+        }
+        menu.addItem(submenuItem(String(localized: "Color Temperature"), temperatureMenu))
+
+        let lampMenu = NSMenu()
+        lampMenu.autoenablesItems = false
+        for control in [autoLightSwitch, presenceSwitch, videoModeSwitch] {
+            lampMenu.addItem(toggleItem(control.title, control: control))
+        }
+        lampMenu.addItem(.separator())
+        for control in [brightnessFollowSwitch, displayBrightnessLockSwitch, powerSyncSwitch] {
+            lampMenu.addItem(toggleItem(control.title, control: control))
+        }
+        menu.addItem(submenuItem(String(localized: "Lamp"), lampMenu))
+
+        menu.addItem(toggleItem(String(localized: "Ambient Rules"), control: ambientEnableSwitch))
+
+        let displayMenu = NSMenu()
+        displayMenu.autoenablesItems = false
+        displayMenu.addItem(toggleItem(String(localized: "Built-in Display"), control: displayPowerSwitch))
+        let rotateMenu = NSMenu()
+        rotateMenu.autoenablesItems = false
+        let currentRotation = displayController.builtinDisplay().map { Int(CGDisplayRotation($0).rounded()) }
+        for degrees in [0, 90, 180, 270] {
+            let entry = actionItem("\(degrees)°", action: #selector(menuRotationChanged(_:)), tag: degrees)
+            entry.state = currentRotation == degrees ? .on : .off
+            entry.isEnabled = displayRotateButton.isEnabled
+            rotateMenu.addItem(entry)
+        }
+        let rotateItem = submenuItem(String(localized: "Rotate Built-in"), rotateMenu)
+        rotateItem.isEnabled = displayRotateButton.isEnabled
+        displayMenu.addItem(rotateItem)
+        displayMenu.addItem(toggleItem("Studio Display", control: studioPowerSwitch))
+        displayMenu.addItem(.separator())
+        let preset = loadRotationPreset()
+        let applyPreset = actionItem(String(localized: "Apply “\(preset.name)”"), action: #selector(applyRotationPreset))
+        applyPreset.isEnabled = rotationModeButton.isEnabled
+        displayMenu.addItem(applyPreset)
+        displayMenu.addItem(toggleItem(String(localized: "Apply Automatically When Studio Display Connects"),
+                                       control: displayAutoPresetSwitch))
+        menu.addItem(submenuItem(String(localized: "Displays"), displayMenu))
+
+        let favoritesMenu = NSMenu()
+        favoritesMenu.autoenablesItems = false
+        for (index, title) in modeNames().enumerated() {
+            let entry = actionItem(title, action: #selector(presetChanged(_:)), tag: index)
+            entry.state = title == modeButton.title ? .on : .off
+            entry.isEnabled = lampConnected
+            favoritesMenu.addItem(entry)
+        }
+        favoritesMenu.addItem(.separator())
+        favoritesMenu.addItem(actionItem(String(localized: "Mode Center…"), action: #selector(showModeCenter)))
+        menu.addItem(submenuItem(String(localized: "Favorites"), favoritesMenu))
+
+        menu.addItem(toggleItem(String(localized: "Keep Awake"), control: keepAwakeSwitch))
+
+        menu.addItem(.separator())
+        menu.addItem(actionItem(String(localized: "Control Panel…"), action: #selector(openPanelFromMenu)))
+
+        menu.addItem(.separator())
+        let login = actionItem(String(localized: "Launch at Login"), action: #selector(toggleLaunchAtLogin))
+        login.state = LoginItem.isEnabled ? .on : .off
+        menu.addItem(login)
+        menu.addItem(actionItem(String(localized: "Help…"), action: #selector(showHelp)))
+
+        menu.addItem(.separator())
+        let quit = NSMenuItem(title: String(localized: "Quit iScreen Menu"), action: #selector(quitApp), keyEquivalent: "q")
+        quit.target = self
+        menu.addItem(quit)
+        return menu
+    }
+
+    private func actionItem(_ title: String, action: Selector, tag: Int = 0) -> NSMenuItem {
+        let entry = NSMenuItem(title: title, action: action, keyEquivalent: "")
+        entry.target = self
+        entry.tag = tag
+        return entry
+    }
+
+    private func submenuItem(_ title: String, _ submenu: NSMenu) -> NSMenuItem {
+        let entry = NSMenuItem(title: title, action: nil, keyEquivalent: "")
+        entry.submenu = submenu
+        return entry
+    }
+
+    // Mirrors a panel toggle; choosing it flips the control and runs the control's own handler.
+    private func toggleItem(_ title: String, control: NSButton) -> NSMenuItem {
+        let entry = actionItem(title, action: #selector(menuToggleChanged(_:)))
+        entry.representedObject = control
+        entry.state = control.state
+        entry.isEnabled = control.isEnabled
+        return entry
+    }
+
+    @objc private func menuToggleChanged(_ sender: NSMenuItem) {
+        guard let control = sender.representedObject as? NSButton, let action = control.action else { return }
+        control.state = control.state == .on ? .off : .on
+        NSApp.sendAction(action, to: control.target, from: control)
+    }
+
+    @objc private func menuBrightnessChanged(_ sender: NSMenuItem) {
+        brightnessSlider.doubleValue = Double(sender.tag)
+        brightnessChanged()
+    }
+
+    @objc private func menuTemperatureChanged(_ sender: NSMenuItem) {
+        temperatureSlider.doubleValue = Double(sender.tag)
+        temperatureChanged()
+    }
+
+    @objc private func openPanelFromMenu() {
+        // Wait for the menu to finish closing before anchoring the popover to the status button.
+        DispatchQueue.main.async { [weak self] in
+            guard let self, !self.popover.isShown else { return }
+            self.togglePanel()
+        }
+    }
+
+    @objc private func toggleLaunchAtLogin() {
+        let enable = !LoginItem.isEnabled
+        guard LoginItem.setEnabled(enable) else {
+            let alert = NSAlert()
+            alert.messageText = String(localized: "Couldn't Change Launch at Login")
+            alert.informativeText = String(localized: "The login item in ~/Library/LaunchAgents couldn't be updated.")
+            NSApp.activate(ignoringOtherApps: true)
+            alert.runModal()
+            return
+        }
+        log(enable ? "Launch at login on (LaunchAgent written)" : "Launch at login off (LaunchAgent removed)")
+    }
+
+    @objc private func showHelp() {
+        let alert = NSAlert()
+        alert.messageText = String(localized: "iScreen Menu Help")
+        alert.informativeText = String(localized: "Help is coming soon. Left-click the menu bar icon for this menu; right-click it for the control panel.")
+        NSApp.activate(ignoringOtherApps: true)
+        alert.runModal()
+    }
+
+    @objc private func quitApp() {
+        log("Quit requested")
+        NSApp.terminate(nil)
     }
 
     private func configurePanel() {
@@ -2006,9 +2288,17 @@ private final class StatusIndicator: NSObject {
         rotationPresetHeader.widthAnchor.constraint(equalToConstant: UIStyle.contentWidth).isActive = true
         presetContainer.setViews([presetTitle, modeButton, rotationPresetHeader, rotationModeButton], in: .top)
 
+        let quitButton = NSButton(title: String(localized: "Quit"), target: self, action: #selector(quitApp))
+        quitButton.bezelStyle = .rounded
+        quitButton.controlSize = .small
+        quitButton.font = UIStyle.captionFont
+        let footer = NSStackView(views: [flexibleSpace(), quitButton])
+        footer.orientation = .horizontal
+        footer.widthAnchor.constraint(equalToConstant: UIStyle.contentWidth).isActive = true
+
         let stack = NSStackView(views: [header, separator(), featureContainer, separator(), adjustmentContainer,
                                        separator(), ambientContainer, separator(), presenceContainer, separator(), displayContainer,
-                                       separator(), presetContainer])
+                                       separator(), presetContainer, footer])
         stack.orientation = .vertical
         stack.alignment = .leading
         stack.spacing = 8
@@ -2019,7 +2309,7 @@ private final class StatusIndicator: NSObject {
         }
 
         let controller = NSViewController()
-        controller.view = NSView(frame: NSRect(x: 0, y: 0, width: UIStyle.panelWidth, height: 626))
+        controller.view = NSView(frame: NSRect(x: 0, y: 0, width: UIStyle.panelWidth, height: 656))
         controller.view.addSubview(stack)
         NSLayoutConstraint.activate([
             stack.leadingAnchor.constraint(equalTo: controller.view.leadingAnchor),
@@ -2028,7 +2318,7 @@ private final class StatusIndicator: NSObject {
             stack.bottomAnchor.constraint(lessThanOrEqualTo: controller.view.bottomAnchor)
         ])
         popover.contentViewController = controller
-        popover.contentSize = NSSize(width: UIStyle.panelWidth, height: 626)
+        popover.contentSize = NSSize(width: UIStyle.panelWidth, height: 656)
         popover.behavior = .transient
     }
 

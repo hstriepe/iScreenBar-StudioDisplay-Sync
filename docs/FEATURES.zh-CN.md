@@ -122,7 +122,7 @@
 - 灯被拔出、断电或 HID 指令失效时，图标变红并写入日志。
 - 灯重新插入后重建 HID Manager、重新读取状态，并恢复熄屏同步和亮度跟随锁定。
 - Studio Display 断开时程序继续驻留，连回后自动重建显示监听和环境光传感器连接。
-- 所有关键状态和异常写入 `~/Library/Logs/iScreenBarStudioSync.log`。
+- 所有关键状态和异常写入 `~/Library/Logs/iScreenMenu.log`。
 
 ## 14. 界面与交互
 
