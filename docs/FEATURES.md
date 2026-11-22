@@ -69,6 +69,7 @@ English · [简体中文](FEATURES.zh-CN.md)
 - While the ambient off-lock is active, lamp auto-light and presence detection cannot turn the lamp back on.
 - If presence detection was on before the turn-off, it is paused temporarily and restored when the ambient off-lock is released.
 - Sleep sync takes priority over ambient rules: while the screen is off, a darker room does not turn the lamp on.
+- The rules only switch the lamp on and off; they don't change brightness. For dimming that follows the room, use Match Screen with the Studio Display's automatic brightness, or lamp auto-light.
 
 ## 8. Presence / away detection
 
@@ -139,12 +140,14 @@ English · [简体中文](FEATURES.zh-CN.md)
 
 - All switches, thresholds, presets, app bindings, and brightness lock states are stored locally in `UserDefaults`.
 - No account, cloud service, network API, or analytics.
+- Release builds are a Developer ID–signed, notarized DMG on the GitHub Releases page; install by dragging the app to `/Applications` and turning on Launch at Login.
 - The install script builds the Xcode project locally with an ad-hoc signature, installs to `~/Applications`, and creates a user-level LaunchAgent. Full Xcode is required.
 - The uninstall script stops the service and moves the installed app and LaunchAgent to the Trash; logs are kept for troubleshooting.
 
 ## 16. Implementation limits and risks
 
-- Verified on an Apple Silicon Mac with macOS 26, Apple Studio Display, and BenQ iScreenBar `VID 0x04A5 / PID 0x2501`.
+- Verified on an Apple Silicon Mac with macOS 26 and 27, Apple Studio Display (including firmware 17.0), and BenQ iScreenBar `VID 0x04A5 / PID 0x2501`.
+- The Studio Display light sensor is matched by USB ID; firmware 17.0 changed it from `0x1118` to `0x1114`, and both are accepted.
 - iScreenBar control uses device-specific 33-byte HID reports; other models are not guaranteed to work.
 - Display brightness uses DisplayServices; built-in display on/off, rotation, and main display settings use the private macOS SkyLight/MonitorPanel interfaces.
 - macOS updates can change private interface behavior, so display topology features need retesting on real hardware.
@@ -183,7 +186,7 @@ English · [简体中文](FEATURES.zh-CN.md)
 - **Two-way MacBook / Studio Display brightness lock**: change either display and the other follows by the same difference, optionally driving the lamp as well.
 - **Studio Display ambient thresholds**: capture a "bright: off" point and a "dim: on" point separately; the lamp switches automatically using a median, duration, and priority rules.
 - **Auto color temperature**: changes smoothly between 3000K and 5500K over the day instead of relying only on manual levels or fixed modes.
-- **MacBook built-in display management**: on/off, 0°/90°/270° rotation, main display setting, layout presets, and safe recovery after the external display disconnects.
+- **MacBook built-in display management**: on/off, 0°/90°/180°/270° rotation, main display setting, layout presets, and safe recovery after the external display disconnects.
 - **Visible health status**: the menu-bar icon shows lamp on, off, and error as yellow, gray, and red, and shows brightness and color temperature on hover.
 - **Clear rule priority**: explicit exclusion and restore rules between lock/screen-off, ambient off-lock, presence detection, auto-light, and Match Screen.
 - **USB fault tolerance and logs**: rebuilds the HID manager after the lamp is unplugged and replugged, and keeps a local log for troubleshooting.
@@ -204,7 +207,7 @@ English · [简体中文](FEATURES.zh-CN.md)
 - The protocol for reading, overwriting, and recalling the lamp's "favorite" hardware memory from the official app.
 - All official presence-detection time options and the sensitivity mapping across firmware versions.
 - Exact behavior of official per-app modes when apps quit, go full screen, across multiple Spaces, and with multiple user sessions.
-- Developer ID signing, notarization, automatic updates, and a one-click install for regular users.
+- Automatic updates (releases are Developer ID–signed and notarized, but updating is manual).
 
 ### 18.5 In one sentence
 

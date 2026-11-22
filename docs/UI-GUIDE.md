@@ -43,6 +43,8 @@ Click **Bright: Off** when the room is bright enough, and **Dim: On** when you n
 
 "Ambient" is a filtered, relative value from the Studio Display sensor, not a calibrated light meter. Turning off and fast turning on each need about 30 seconds of sustained readings; the gradual turn-on takes about 45 seconds. Between the two points the lamp may keep its current state. Sleep Sync has priority: a darker room cannot turn the lamp on while the display is asleep.
 
+The rules only turn the lamp on and off; they don't dim it. **Enable** stays unavailable until at least one threshold is saved. For dimming that follows the room, use **Match Screen** with the Studio Display's automatic brightness, or **Auto Light**.
+
 ## 4. Presence Detection
 
 On the left is the away delay (3/5/10 minutes); on the right is the sensitivity (Low/Medium/High). While the ambient off-lock is active or the screen is off, the app temporarily pauses presence detection and restores the previous state afterward.
@@ -63,6 +65,6 @@ The rotation preset controls display configuration on its own. With **Enable Pre
 
 AppleScript, Shortcuts, and Control Center (macOS 26) change the same settings as the panel, and the panel and menu show the result. A setting that's dimmed in the panel can't be changed by automation either; the script or shortcut gets an error instead. Control Center controls are buttons without state and need the app to be running. See the README's Automation section for the full list and an AppleScript example.
 
-## Verification status
+## Reporting problems
 
-Restoring the built-in display when the external display is unplugged was confirmed by a user on 2026-10-05. The change that returns to 0° when the rotation auto preset is turned off has been deployed but still needs plug/unplug retesting. Behavior may differ across firmware and macOS versions; when reporting a problem, include the macOS version, device models, steps, and a redacted log.
+Behavior may differ across firmware and macOS versions. When reporting a problem, include the macOS version, device models and firmware, steps, and a redacted log.
