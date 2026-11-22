@@ -9,7 +9,8 @@ import UniformTypeIdentifiers
 private let benqVendorID = 0x04A5
 private let iScreenBarProductID = 0x2501
 private let appleDisplayVendorID: UInt32 = 0x0610
-private let studioDisplayProductID: UInt32 = 0xAE46
+// Studio Display models report different model numbers (0xAE46, 0xAE3A observed).
+private let studioDisplayProductIDs: Set<UInt32> = [0xAE46, 0xAE3A]
 private let pollInterval: TimeInterval = 0.25
 
 private func log(_ message: String) {
@@ -2604,7 +2605,7 @@ private func studioDisplayID() -> CGDirectDisplayID? {
         CGDisplayIsBuiltin($0) == 0 &&
             CGDisplayIsOnline($0) != 0 &&
             CGDisplayVendorNumber($0) == appleDisplayVendorID &&
-            CGDisplayModelNumber($0) == studioDisplayProductID
+            studioDisplayProductIDs.contains(CGDisplayModelNumber($0))
     }
 }
 
