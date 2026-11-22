@@ -2,7 +2,6 @@
 build/
 backups/
 *.new
-iScreenBarStudioSync
 *.log
 .swiftpm/
 xcuserdata/
