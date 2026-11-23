@@ -4,6 +4,7 @@ import Foundation
 
 // Entry point. The app's types live in App/, Hardware/, Models/, UI/, StatusIndicator/, Sync/ and Automation/.
 importPreRenameSettingsIfNeeded()
+migrateLightModesIfNeeded()
 
 private let initialDisplayID = studioDisplayID()
 private let lamp = LampController()

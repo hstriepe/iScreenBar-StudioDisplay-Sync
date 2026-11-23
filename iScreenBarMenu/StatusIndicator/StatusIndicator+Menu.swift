@@ -61,12 +61,7 @@ extension StatusIndicator {
 
         let favoritesMenu = NSMenu()
         favoritesMenu.autoenablesItems = false
-        for (index, title) in modeNames().enumerated() {
-            let entry = actionItem(title, action: #selector(presetChanged(_:)), tag: index)
-            entry.state = title == modeButton.title ? .on : .off
-            entry.isEnabled = lampConnected
-            favoritesMenu.addItem(entry)
-        }
+        modeMenuItems(enabled: lampConnected).forEach(favoritesMenu.addItem)
         favoritesMenu.addItem(.separator())
         favoritesMenu.addItem(actionItem(String(localized: "Mode Center…"), action: #selector(showModeCenter)))
         menu.addItem(submenuItem(String(localized: "Favorites"), favoritesMenu))

@@ -44,12 +44,42 @@
         }
       }
     },
+    "A mode sets the lamp's brightness, color temperature, and video mode." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "模式设置台灯的亮度、色温和视频模式。"
+          }
+        }
+      }
+    },
     "About…" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "关于…"
+          }
+        }
+      }
+    },
+    "Add" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "添加"
+          }
+        }
+      }
+    },
+    "Add a mode from the current lamp settings" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "用当前台灯设置添加模式"
           }
         }
       }
@@ -114,12 +144,42 @@
         }
       }
     },
+    "App" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用"
+          }
+        }
+      }
+    },
+    "App Associations" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用关联"
+          }
+        }
+      }
+    },
     "Applies the saved built-in display rotation preset." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "应用已保存的内建显示器旋转预设。"
+          }
+        }
+      }
+    },
+    "Apply" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用模式"
           }
         }
       }
@@ -171,6 +231,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "应用“%@”"
+          }
+        }
+      }
+    },
+    "Associate" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "关联"
           }
         }
       }
@@ -231,36 +301,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "自动启用前"
-          }
-        }
-      }
-    },
-    "Bind" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "绑定"
-          }
-        }
-      }
-    },
-    "Bind App" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "绑定应用"
-          }
-        }
-      }
-    },
-    "Bound: %@" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "已绑定 %@"
           }
         }
       }
@@ -335,12 +375,32 @@
         }
       }
     },
-    "Choose an App to Bind" : {
+    "Choose a Mode" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "选择要绑定的应用"
+            "value" : "选择模式"
+          }
+        }
+      }
+    },
+    "Choose an app and associate it with the selected mode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择一个应用并关联到所选模式"
+          }
+        }
+      }
+    },
+    "Choose an app to use “%@”" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择使用“%@”的应用"
           }
         }
       }
@@ -445,6 +505,36 @@
         }
       }
     },
+    "Delete" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除"
+          }
+        }
+      }
+    },
+    "Delete the selected mode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除所选模式"
+          }
+        }
+      }
+    },
+    "Delete “%@”?" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "删除“%@”？"
+          }
+        }
+      }
+    },
     "Dim: On" : {
       "localizations" : {
         "zh-Hans" : {
@@ -491,6 +581,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "下"
+          }
+        }
+      }
+    },
+    "Edit Mode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑模式"
+          }
+        }
+      }
+    },
+    "Edit…" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "编辑…"
           }
         }
       }
@@ -592,6 +702,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "高"
+          }
+        }
+      }
+    },
+    "It has no bundle identifier." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "它没有 Bundle ID。"
+          }
+        }
+      }
+    },
+    "Its app associations are removed too." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "它的应用关联也会一并移除。"
           }
         }
       }
@@ -766,6 +896,16 @@
         }
       }
     },
+    "Mode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "模式"
+          }
+        }
+      }
+    },
     "Mode Center" : {
       "localizations" : {
         "zh-Hans" : {
@@ -786,12 +926,32 @@
         }
       }
     },
-    "My Mode" : {
+    "Modes" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "我的模式"
+            "value" : "模式"
+          }
+        }
+      }
+    },
+    "Move Down" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "下移"
+          }
+        }
+      }
+    },
+    "Move Up" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "上移"
           }
         }
       }
@@ -806,12 +966,22 @@
         }
       }
     },
-    "New Scene Mode" : {
+    "Name" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "新增场景模式"
+            "value" : "名称"
+          }
+        }
+      }
+    },
+    "New Mode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新模式"
           }
         }
       }
@@ -946,16 +1116,6 @@
         }
       }
     },
-    "Quickly switch between lighting presets" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "快速切换预设灯光场景"
-          }
-        }
-      }
-    },
     "Quit" : {
       "localizations" : {
         "zh-Hans" : {
@@ -972,6 +1132,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "退出 iScreenBar Menu"
+          }
+        }
+      }
+    },
+    "Remove" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移除"
+          }
+        }
+      }
+    },
+    "Remove the selected association" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "移除所选关联"
           }
         }
       }
@@ -1102,16 +1282,6 @@
         }
       }
     },
-    "Save New Mode" : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "保存新模式"
-          }
-        }
-      }
-    },
     "Save Rotation Preset" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1128,16 +1298,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "记录内屏开关、旋转角度和主屏角色。"
-          }
-        }
-      }
-    },
-    "Saves the current brightness, color temperature, and video mode." : {
-      "localizations" : {
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "记录当前亮度、色温和视频模式。"
           }
         }
       }
@@ -1314,12 +1474,42 @@
         }
       }
     },
+    "The mode is applied when the app comes to the front." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "应用切换到前台时套用该模式。"
+          }
+        }
+      }
+    },
     "There's no favorite named “%@”." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "“我的最爱”中没有“%@”。"
+          }
+        }
+      }
+    },
+    "This app can't be associated" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无法关联此应用"
+          }
+        }
+      }
+    },
+    "This can't be undone." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "此操作无法撤销。"
           }
         }
       }
@@ -1492,6 +1682,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "上"
+          }
+        }
+      }
+    },
+    "Use Current Lamp Settings" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "使用当前台灯设置"
+          }
+        }
+      }
+    },
+    "Video" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "视频"
           }
         }
       }

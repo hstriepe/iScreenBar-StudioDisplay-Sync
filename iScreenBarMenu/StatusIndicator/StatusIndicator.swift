@@ -21,12 +21,11 @@ final class StatusIndicator: NSObject, NSMenuDelegate {
     let videoModeSwitch = FeatureButton(title: String(localized: "Video Mode"), symbol: "video", accentColor: activeControlColor)
     let modeButton = NSButton(title: String(localized: "Favorite"), target: nil, action: nil)
     let rotationModeButton = NSButton(title: String(localized: "Portrait Dual"), target: nil, action: nil)
-    var modeCenterWindow: NSWindow?
+    var modeCenterController: ModeCenterWindowController?
     var helpWindowController: HelpWindowController?
     var panelStack: NSStackView?
     var displaySectionViews: [NSView] = []
     var rotationPresetViews: [NSView] = []
-    let bindAppButton = NSButton(title: String(localized: "Bind App"), target: nil, action: nil)
     let brightnessFollowSwitch = FeatureButton(title: String(localized: "Match Screen"), symbol: "display", accentColor: activeControlColor)
     let displayBrightnessLockSwitch = FeatureButton(title: String(localized: "Link Screens"), symbol: "rectangle.on.rectangle", accentColor: activeControlColor)
     let powerSyncSwitch = FeatureButton(title: String(localized: "Sleep Sync"), symbol: "moon.zzz", accentColor: activeControlColor)

@@ -98,15 +98,14 @@ English · [简体中文](FEATURES.zh-CN.md)
 - No color temperature is written while the lamp is off or the Studio Display is asleep.
 - Turning Auto Temp off keeps the current color temperature.
 
-## 11. Light presets
+## 11. Light modes
 
-- Built-in **Favorite** default: 47% / 5500K / video mode off.
-- Built-in **Night Work**: 30% / 4000K / video mode off.
-- Built-in **Wind Down**: 20% / 3000K / video mode off.
-- Save the current brightness, color temperature, and video mode as a custom scene.
-- **Mode Center** lists the available modes for quick use.
-- Applying a preset turns the lamp on, writes brightness and color temperature, sets video mode, and turns off iScreenBar Match Screen.
-- Bind the current light mode to a macOS app; the matching mode is applied when that app comes to the front.
+- A light mode saves a name, brightness, color temperature, and video mode. There can be any number of modes.
+- Default modes (created on first launch; editable and deletable like any other): **Favorite** 47% / 5500K, **Night Work** 30% / 4000K, **Wind Down** 20% / 3000K, all with video mode off.
+- **Mode Center** lists the modes. **+** adds one (prefilled with the current lamp settings), **−** deletes one (at least one stays), **Edit…** or a double-click changes name, brightness, color temperature, and video mode (**Use Current Lamp Settings** copies the lamp's values), **Apply** applies it. Drag a row or use the ▲▼ buttons to reorder; the panel and Favorites menu use the same order.
+- Applying a mode turns the lamp on, writes brightness and color temperature, sets video mode, and turns off iScreenBar Match Screen.
+- **App Associations** in Mode Center: **+** picks an app and associates it with the selected mode, the pop-up changes the mode, **−** removes it. The associated mode is applied when that app comes to the front (nothing is restored when it leaves). Deleting a mode removes its associations.
+- Settings from 0.8 and earlier (the single custom mode and app bindings) are converted once on first launch.
 
 ## 12. MacBook built-in display on/off and rotation
 

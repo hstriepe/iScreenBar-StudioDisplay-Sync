@@ -50,12 +50,7 @@ extension StatusIndicator {
         modeButton.font = UIStyle.bodyFont
         modeButton.target = self
         modeButton.action = #selector(showModeMenu)
-        bindAppButton.image = NSImage(systemSymbolName: "app.badge", accessibilityDescription: nil)
-        bindAppButton.imagePosition = .imageLeading
-        bindAppButton.bezelStyle = .roundRect
-        bindAppButton.controlSize = .small
-        bindAppButton.target = self
-        bindAppButton.action = #selector(bindCurrentModeToApp)
+        refreshModeButtonTitle()
         brightnessFollowSwitch.target = self
         brightnessFollowSwitch.action = #selector(brightnessFollowChanged)
         displayBrightnessLockSwitch.target = self

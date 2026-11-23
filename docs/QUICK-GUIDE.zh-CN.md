@@ -26,7 +26,7 @@ iScreenBar Menu 是一款菜单栏 App，让 BenQ iScreenBar 与 Apple Studio Di
 | 亮度跟随 / 双屏亮度 | 台灯跟随显示器亮度；MacBook 与 Studio Display 亮度联动 |
 | 环境光规则 | 根据 Studio Display 光线传感器，室内明亮时关灯，昏暗时开灯 |
 | 自动色温 | 按本地时间白天偏冷、夜间偏暖 |
-| 我的最爱 | 保存灯光设置，可按前台 App 自动切换 |
+| 我的最爱 / 模式中心 | 可添加、编辑、排序和删除的灯光模式；关联的 App 切到前台时自动应用其模式 |
 | 内建显示器 | 开关与旋转；拔出 Studio Display 时强制恢复 |
 | 防止休眠 | 在关闭或退出前阻止 Mac 休眠 |
 | 自动化 | AppleScript、快捷指令、控制中心控制项和桌面小组件 |
@@ -40,4 +40,4 @@ iScreenBar Menu 是一款菜单栏 App，让 BenQ iScreenBar 与 Apple Studio Di
 
 ## 更多
 
-[README](../README.zh-CN.md)（安装、升级、故障排除）· [使用指南](UI-GUIDE.zh-CN.md)（每个控件）· [完整功能清单](FEATURES.zh-CN.md) · App 中的**帮助…**
+仓库：[README](../README.zh-CN.md)（安装、升级、故障排除）· [使用指南](UI-GUIDE.zh-CN.md)（每个控件）· [完整功能清单](FEATURES.zh-CN.md) · App 中的**帮助…**

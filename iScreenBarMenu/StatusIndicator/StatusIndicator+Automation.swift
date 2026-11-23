@@ -34,7 +34,7 @@ extension StatusIndicator: AutomationTarget {
     var isLampPowerOn: Bool { lamp.isPowerOn == true }
     var isAutoTemperatureOn: Bool { isTimeTemperatureEnabled }
     var isKeepAwakeActive: Bool { keepAwakeController.isActive }
-    var favoriteNames: [String] { modeNames() }
+    var favoriteNames: [String] { ModeStore.modes.map(\.name) }
     var rotationPresetName: String { loadRotationPreset().name }
 
     func isOn(_ feature: AutomationFeature) -> Bool {
@@ -75,16 +75,16 @@ extension StatusIndicator: AutomationTarget {
     }
 
     func applyFavorite(named name: String) throws {
-        let names = modeNames()
-        // Built-in favorites also match their English names, whatever the UI language.
-        let englishBuiltins = ["Favorite", "Night Work", "Wind Down"]
-        let index = names.firstIndex { $0.caseInsensitiveCompare(name) == .orderedSame }
-            ?? englishBuiltins.firstIndex { $0.caseInsensitiveCompare(name) == .orderedSame }
-        guard let index else { throw AutomationError.unknownFavorite(name) }
+        let modes = ModeStore.modes
+        // The default modes also match their English names, whatever the UI language they were created in.
+        let englishDefaults: [String: String] = ["favorite": String(localized: "Favorite"),
+                                                 "night work": String(localized: "Night Work"),
+                                                 "wind down": String(localized: "Wind Down")]
+        let mode = modes.first { $0.name.caseInsensitiveCompare(name) == .orderedSame }
+            ?? englishDefaults[name.lowercased()].flatMap { localized in modes.first { $0.name == localized } }
+        guard let mode else { throw AutomationError.unknownFavorite(name) }
         guard lamp.isConnected else { throw AutomationError.lampNotConnected }
-        let entry = NSMenuItem(title: names[index], action: nil, keyEquivalent: "")
-        entry.tag = index
-        presetChanged(entry)
+        applyMode(mode)
     }
 
     func applyRotationPresetFromAutomation() throws {
