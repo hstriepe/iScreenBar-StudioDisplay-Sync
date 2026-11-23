@@ -47,6 +47,8 @@ final class StatusIndicator: NSObject, NSMenuDelegate {
     let displayAutoPresetSwitch = AccentSwitch()
     let displayController = DisplayController()
     var isBrightnessFollowEnabled: Bool
+    /// Set when Match Screen should re-lock its offset to the lamp's new brightness (a mode was applied while on).
+    var brightnessFollowReanchorRequested = false
     var isDisplayBrightnessLockEnabled: Bool
     var isPowerSyncEnabled: Bool
     var isPresenceWakeEnabled: Bool

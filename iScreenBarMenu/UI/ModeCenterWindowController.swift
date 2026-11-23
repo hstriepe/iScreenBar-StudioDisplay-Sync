@@ -4,8 +4,8 @@ import UniformTypeIdentifiers
 // Mode Center: lists the light modes (add, edit, delete, apply) and the app → mode associations (add, change, remove).
 // All data lives in ModeStore; the tables are reloaded from it after every change.
 final class ModeCenterWindowController: NSWindowController, NSTableViewDataSource, NSTableViewDelegate {
-    /// Current lamp brightness, color temperature, video mode; nil while the lamp hasn't reported.
-    var currentLampSettings: () -> (brightness: Int, temperature: Int, videoMode: Bool)? = { nil }
+    /// The lamp's current settings and toggles as an unnamed mode; nil while the lamp hasn't reported.
+    var currentLampSettings: () -> LightMode? = { nil }
     var applyMode: (LightMode) -> Void = { _ in }
     /// Called after modes or bindings changed (so the panel can refresh its mode title).
     var modesChanged: () -> Void = {}
@@ -27,26 +27,31 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
     private let temperatureSlider = NSSlider(value: 4000, minValue: 2700, maxValue: 6500, target: nil, action: nil)
     private let temperatureLabel = NSTextField(labelWithString: "")
     private let videoCheckbox = NSButton(checkboxWithTitle: String(localized: "Video Mode"), target: nil, action: nil)
+    private let matchScreenCheckbox = NSButton(checkboxWithTitle: String(localized: "Match Screen"), target: nil, action: nil)
+    private let autoLightCheckbox = NSButton(checkboxWithTitle: String(localized: "Auto Light"), target: nil, action: nil)
+    private let presenceCheckbox = NSButton(checkboxWithTitle: String(localized: "Presence"), target: nil, action: nil)
+    private let autoTemperatureCheckbox = NSButton(checkboxWithTitle: String(localized: "Auto Temp"), target: nil, action: nil)
 
     private static let modeColumn = NSUserInterfaceItemIdentifier("mode")
     private static let brightnessColumn = NSUserInterfaceItemIdentifier("brightness")
     private static let temperatureColumn = NSUserInterfaceItemIdentifier("temperature")
     private static let videoColumn = NSUserInterfaceItemIdentifier("video")
+    private static let togglesColumn = NSUserInterfaceItemIdentifier("toggles")
     private static let appColumn = NSUserInterfaceItemIdentifier("app")
     private static let appModeColumn = NSUserInterfaceItemIdentifier("appMode")
     private static let modeRowType = NSPasteboard.PasteboardType("org.windholm.iScreenBarMenu.mode-row")
 
     init() {
-        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 560, height: 540),
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 660, height: 540),
                               styleMask: [.titled, .closable, .miniaturizable, .resizable],
                               backing: .buffered, defer: false)
         window.title = String(localized: "Mode Center")
-        window.minSize = NSSize(width: 480, height: 440)
+        window.minSize = NSSize(width: 580, height: 440)
         window.isReleasedWhenClosed = false
-        window.setFrameAutosaveName("ModeCenterWindow")
+        window.setFrameAutosaveName("ModeCenterWindow2")
         super.init(window: window)
         window.contentView = makeContentView()
-        if !window.setFrameUsingName("ModeCenterWindow") { window.center() }
+        if !window.setFrameUsingName("ModeCenterWindow2") { window.center() }
     }
 
     required init?(coder: NSCoder) { nil }
@@ -77,10 +82,11 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
 
     private func makeContentView() -> NSView {
         configureTable(modesTable, columns: [
-            (Self.modeColumn, String(localized: "Name"), 200),
+            (Self.modeColumn, String(localized: "Name"), 150),
             (Self.brightnessColumn, String(localized: "Brightness"), 80),
             (Self.temperatureColumn, String(localized: "Color Temp"), 90),
-            (Self.videoColumn, String(localized: "Video"), 60)
+            (Self.videoColumn, String(localized: "Video"), 50),
+            (Self.togglesColumn, String(localized: "Also Sets"), 170)
         ])
         modesTable.target = self
         modesTable.doubleAction = #selector(editSelectedMode)
@@ -241,6 +247,7 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
             case Self.modeColumn: return textCell(mode.name)
             case Self.brightnessColumn: return textCell("\(mode.brightness)%")
             case Self.temperatureColumn: return textCell("\(mode.temperature)K")
+            case Self.togglesColumn: return textCell(mode.toggleSummary)
             default: return textCell(mode.videoMode ? String(localized: "On") : "–")
             }
         }
@@ -385,11 +392,11 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
     }
 
     private func addMode() {
-        let current = currentLampSettings()
-        let mode = LightMode(name: String(localized: "New Mode"),
-                             brightness: current?.brightness ?? 50,
-                             temperature: current?.temperature ?? 4000,
-                             videoMode: current?.videoMode ?? false)
+        var mode = currentLampSettings()
+            ?? LightMode(name: "", brightness: 50, temperature: 4000, videoMode: false,
+                         matchScreen: false, autoLight: false, presence: false, autoTemperature: false)
+        mode.id = UUID()
+        mode.name = String(localized: "New Mode")
         edit(mode, isNew: true)
     }
 
@@ -429,11 +436,17 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
         brightnessSlider.integerValue = mode.brightness
         temperatureSlider.integerValue = mode.temperature
         videoCheckbox.state = mode.videoMode ? .on : .off
+        // Modes from before 0.10 have no saved toggles; start from the lamp's current state.
+        let current = currentLampSettings()
+        setToggleCheckboxes(matchScreen: mode.matchScreen ?? current?.matchScreen ?? false,
+                            autoLight: mode.autoLight ?? current?.autoLight ?? false,
+                            presence: mode.presence ?? current?.presence ?? false,
+                            autoTemperature: mode.autoTemperature ?? current?.autoTemperature ?? false)
         sliderChanged(nil)
 
         let alert = NSAlert()
         alert.messageText = isNew ? String(localized: "New Mode") : String(localized: "Edit Mode")
-        alert.informativeText = String(localized: "A mode sets the lamp's brightness, color temperature, and video mode.")
+        alert.informativeText = String(localized: "A mode sets the lamp's brightness, color temperature, and video mode, and turns the checked features on and the others off.")
         alert.accessoryView = makeEditorView()
         alert.addButton(withTitle: isNew ? String(localized: "Add") : String(localized: "Save"))
         alert.addButton(withTitle: String(localized: "Cancel"))
@@ -445,7 +458,11 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
                                    name: name.isEmpty ? String(localized: "New Mode") : name,
                                    brightness: self.brightnessSlider.integerValue,
                                    temperature: self.roundedTemperature,
-                                   videoMode: self.videoCheckbox.state == .on)
+                                   videoMode: self.videoCheckbox.state == .on,
+                                   matchScreen: self.matchScreenCheckbox.state == .on,
+                                   autoLight: self.autoLightCheckbox.state == .on,
+                                   presence: self.presenceCheckbox.state == .on,
+                                   autoTemperature: self.autoTemperatureCheckbox.state == .on)
             var all = ModeStore.modes
             if let index = all.firstIndex(where: { $0.id == mode.id }) {
                 all[index] = edited
@@ -482,12 +499,23 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
         useCurrent.bezelStyle = .rounded
         useCurrent.controlSize = .small
         useCurrent.isEnabled = currentLampSettings() != nil
+        for checkbox in [matchScreenCheckbox, autoLightCheckbox, presenceCheckbox, autoTemperatureCheckbox] {
+            checkbox.target = self
+            checkbox.action = #selector(toggleCheckboxChanged(_:))
+        }
+        matchScreenCheckbox.toolTip = String(localized: "Lamp brightness follows the Studio Display, starting from this brightness")
+        autoLightCheckbox.toolTip = String(localized: "The lamp sets its own brightness; the brightness above is not used")
+        autoTemperatureCheckbox.toolTip = String(localized: "Color temperature follows the time of day; the color temperature above is not used")
+        let lampToggles = NSGridView(views: [[videoCheckbox, autoLightCheckbox], [matchScreenCheckbox, presenceCheckbox],
+                                             [autoTemperatureCheckbox, NSGridCell.emptyContentView]])
+        lampToggles.rowSpacing = 4
+        lampToggles.columnSpacing = 16
 
         let grid = NSGridView(views: [
             [NSTextField(labelWithString: String(localized: "Name")), nameField, NSGridCell.emptyContentView],
             [NSTextField(labelWithString: String(localized: "Brightness")), brightnessSlider, brightnessLabel],
             [NSTextField(labelWithString: String(localized: "Color Temp")), temperatureSlider, temperatureLabel],
-            [NSGridCell.emptyContentView, videoCheckbox, NSGridCell.emptyContentView],
+            [NSTextField(labelWithString: String(localized: "Features")), lampToggles, NSGridCell.emptyContentView],
             [NSGridCell.emptyContentView, useCurrent, NSGridCell.emptyContentView]
         ])
         grid.rowSpacing = 8
@@ -496,6 +524,8 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
         grid.column(at: 1).width = 200
         grid.column(at: 2).width = 52
         grid.row(at: 0).mergeCells(in: NSRange(location: 1, length: 2))
+        grid.row(at: 3).mergeCells(in: NSRange(location: 1, length: 2))
+        grid.row(at: 3).yPlacement = .top
         grid.row(at: 4).cell(at: 1).xPlacement = .leading
         grid.frame = NSRect(origin: .zero, size: grid.fittingSize)
         return grid
@@ -506,11 +536,37 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
         temperatureLabel.stringValue = "\(roundedTemperature)K"
     }
 
+    private func setToggleCheckboxes(matchScreen: Bool, autoLight: Bool, presence: Bool, autoTemperature: Bool) {
+        autoLightCheckbox.state = autoLight ? .on : .off
+        matchScreenCheckbox.state = matchScreen && !autoLight ? .on : .off
+        presenceCheckbox.state = presence ? .on : .off
+        autoTemperatureCheckbox.state = autoTemperature ? .on : .off
+        updateEditorAvailability()
+    }
+
+    // Auto Light and Match Screen exclude each other; sliders the mode won't use are dimmed.
+    @objc private func toggleCheckboxChanged(_ sender: NSButton) {
+        if sender === autoLightCheckbox, sender.state == .on { matchScreenCheckbox.state = .off }
+        if sender === matchScreenCheckbox, sender.state == .on { autoLightCheckbox.state = .off }
+        updateEditorAvailability()
+    }
+
+    private func updateEditorAvailability() {
+        let autoLight = autoLightCheckbox.state == .on
+        brightnessSlider.isEnabled = !autoLight
+        brightnessLabel.textColor = autoLight ? .tertiaryLabelColor : .labelColor
+        let autoTemperature = autoTemperatureCheckbox.state == .on
+        temperatureSlider.isEnabled = !autoTemperature
+        temperatureLabel.textColor = autoTemperature ? .tertiaryLabelColor : .labelColor
+    }
+
     @objc private func useCurrentLampSettings() {
         guard let current = currentLampSettings() else { return }
         brightnessSlider.integerValue = current.brightness
         temperatureSlider.integerValue = current.temperature
         videoCheckbox.state = current.videoMode ? .on : .off
+        setToggleCheckboxes(matchScreen: current.matchScreen == true, autoLight: current.autoLight == true,
+                            presence: current.presence == true, autoTemperature: current.autoTemperature == true)
         sliderChanged(nil)
     }
 

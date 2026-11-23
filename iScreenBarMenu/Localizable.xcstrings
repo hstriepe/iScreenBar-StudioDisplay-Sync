@@ -44,12 +44,12 @@
         }
       }
     },
-    "A mode sets the lamp's brightness, color temperature, and video mode." : {
+    "A mode sets the lamp's brightness, color temperature, and video mode, and turns the checked features on and the others off." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "模式设置台灯的亮度、色温和视频模式。"
+            "value" : "模式设置台灯的亮度、色温和视频模式，并开启勾选的功能、关闭未勾选的功能。"
           }
         }
       }
@@ -90,6 +90,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "根据当前时间自动调整色温"
+          }
+        }
+      }
+    },
+    "Also Sets" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "同时设置"
           }
         }
       }
@@ -445,6 +455,16 @@
         }
       }
     },
+    "Color temperature follows the time of day; the color temperature above is not used" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "色温随时间变化；不使用上面的色温"
+          }
+        }
+      }
+    },
     "Control Panel" : {
       "localizations" : {
         "zh-Hans" : {
@@ -645,6 +665,16 @@
         }
       }
     },
+    "Features" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "功能"
+          }
+        }
+      }
+    },
     "Get ${feature}" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -782,6 +812,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "灯光状态"
+          }
+        }
+      }
+    },
+    "Lamp brightness follows the Studio Display, starting from this brightness" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯亮度跟随 Studio Display，从此亮度开始"
           }
         }
       }
@@ -1460,6 +1500,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "iScreenBar 未连接。"
+          }
+        }
+      }
+    },
+    "The lamp sets its own brightness; the brightness above is not used" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯自行调节亮度；不使用上面的亮度"
           }
         }
       }

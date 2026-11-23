@@ -17,6 +17,10 @@ final class LampController {
     /// Last power, auto-light, or presence-detection command from the app. Any of them can make the lamp switch
     /// itself on or off, so Wake Screen ignores lamp changes shortly after one (ADR 0008).
     private(set) var lastStateCommandAt = Date.distantPast
+    /// Auto-light state set by the app's own command, kept for a short while so a status report sent before the lamp
+    /// applied the command can't flip it back (a brightness write exits auto-light in the firmware).
+    private var commandedAutoLight: (enabled: Bool, until: Date)?
+    private static let autoLightCommandSettleTime: TimeInterval = 1.5
 
     var isConnected: Bool { device != nil }
 
@@ -64,6 +68,9 @@ final class LampController {
         let value = UInt8(clamping: max(1, min(100, brightness)))
         guard sendCommand(0x04, payload: [value, value]) else { return false }
         currentBrightness = Int(value)
+        if isAutoLightEnabled != false || commandedAutoLight != nil {
+            noteAutoLightCommand(enabled: false)
+        }
         log("Lamp brightness set to \(brightness)%")
         return true
     }
@@ -95,7 +102,7 @@ final class LampController {
             }
             guard setBrightness(brightness) else { return false }
         }
-        isAutoLightEnabled = enabled
+        noteAutoLightCommand(enabled: enabled)
         log(enabled ? "Auto-light on" : "Auto-light off")
         return true
     }
@@ -118,6 +125,23 @@ final class LampController {
     }
 
     private(set) var presenceDetectionDelaySeconds: Int?
+
+    private func noteAutoLightCommand(enabled: Bool) {
+        isAutoLightEnabled = enabled
+        commandedAutoLight = (enabled, Date().addingTimeInterval(Self.autoLightCommandSettleTime))
+    }
+
+    /// Status-report auto-light bit, unless it contradicts a command the app sent moments ago.
+    private func acceptReportedAutoLight(_ reported: Bool) {
+        if let commanded = commandedAutoLight, Date() < commanded.until {
+            if reported != commanded.enabled {
+                log("Ignoring stale auto-light \(reported ? "on" : "off") in status report (commanded \(commanded.enabled ? "on" : "off"))")
+            }
+            return
+        }
+        commandedAutoLight = nil
+        isAutoLightEnabled = reported
+    }
 
     func setVideoMode(enabled: Bool) -> Bool {
         guard sendCommand(0x09, payload: [enabled ? 1 : 0]) else { return false }
@@ -195,7 +219,7 @@ final class LampController {
                         log("Raw status report: \(statusHex)")
                     }
                     controller.isPowerOn = (report[6] & 0x01) != 0
-                    controller.isAutoLightEnabled = (report[6] & 0x04) != 0
+                    controller.acceptReportedAutoLight((report[6] & 0x04) != 0)
                     controller.isPresenceDetectionEnabled = (report[6] & 0x20) != 0
                     controller.isVideoModeEnabled = (report[6] & 0x80) != 0
                     let mainTemperature = (Int(report[8]) << 8) | Int(report[9])

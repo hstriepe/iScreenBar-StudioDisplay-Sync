@@ -356,7 +356,8 @@ final class DisplayLampSync {
             statusIndicator.update(isAsleep: isAsleep, healthy: true)
         }
 
-        if brightnessFollowEnabled != wasBrightnessFollowEnabled {
+        if brightnessFollowEnabled != wasBrightnessFollowEnabled || statusIndicator.brightnessFollowReanchorRequested {
+            statusIndicator.brightnessFollowReanchorRequested = false
             brightnessOffset = nil
             lastDisplayBrightness = nil
             if brightnessFollowEnabled {

@@ -100,10 +100,12 @@ English · [简体中文](FEATURES.zh-CN.md)
 
 ## 11. Light modes
 
-- A light mode saves a name, brightness, color temperature, and video mode. There can be any number of modes.
+- A light mode saves a name, brightness, color temperature, video mode, and the lamp features **Match Screen**, **Auto Light**, **Presence**, and **Auto Temp**. Applying it turns the checked features on and the others off, so each mode keeps its own setup. There can be any number of modes.
+- With Auto Light checked the mode's brightness isn't used (the lamp sets its own); with Match Screen checked it's the starting point for following the Studio Display (the two exclude each other); with Auto Temp checked the color temperature follows the time of day. Link Screens, Sleep Sync, Wake Screen, and Keep Awake aren't part of a mode.
+- Modes saved before 0.10 have no saved features: until edited they turn Match Screen and Auto Light off and leave Presence and Auto Temp as they are.
 - Default modes (created on first launch; editable and deletable like any other): **Favorite** 47% / 5500K, **Night Work** 30% / 4000K, **Wind Down** 20% / 3000K, all with video mode off.
 - **Mode Center** lists the modes. **+** adds one (prefilled with the current lamp settings), **−** deletes one (at least one stays), **Edit…** or a double-click changes name, brightness, color temperature, and video mode (**Use Current Lamp Settings** copies the lamp's values), **Apply** applies it. Drag a row or use the ▲▼ buttons to reorder; the panel and Favorites menu use the same order.
-- Applying a mode turns the lamp on, writes brightness and color temperature, sets video mode, and turns off iScreenBar Match Screen.
+- Applying a mode turns the lamp on, then sets its features (through the same code as the panel buttons, so pause/lock rules still apply), brightness, color temperature, and video mode.
 - **App Associations** in Mode Center: **+** picks an app and associates it with the selected mode, the pop-up changes the mode, **−** removes it. The associated mode is applied when that app comes to the front (nothing is restored when it leaves). Deleting a mode removes its associations.
 - Settings from 0.8 and earlier (the single custom mode and app bindings) are converted once on first launch.
 
