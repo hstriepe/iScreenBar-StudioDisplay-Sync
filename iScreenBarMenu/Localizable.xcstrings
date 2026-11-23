@@ -966,6 +966,16 @@
         }
       }
     },
+    "Mode for %@; your setting returns when you switch to an app without a mode" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ 的模式；切到没有模式的 App 时恢复你的设置"
+          }
+        }
+      }
+    },
     "Modes" : {
       "localizations" : {
         "zh-Hans" : {

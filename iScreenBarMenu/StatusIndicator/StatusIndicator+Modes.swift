@@ -9,7 +9,9 @@ extension StatusIndicator {
 
     /// Applies a mode: lamp on, saved toggles through their panel buttons (so persistence and lock rules apply),
     /// then brightness, color temperature, and video mode. Modes without saved toggles behave as before 0.10.
-    func applyMode(_ mode: LightMode) {
+    /// `fromApp`: applied for a linked app (or restoring after one); only the user's own choices become the selected
+    /// mode, and a user choice ends app-mode tracking so leaving the linked app changes nothing.
+    func applyMode(_ mode: LightMode, fromApp: Bool = false) {
         refreshControls()
         _ = lamp.setPower(on: true)
         let autoLight = mode.autoLight == true
@@ -33,10 +35,17 @@ extension StatusIndicator {
                 setToggle(brightnessFollowSwitch, on: true)
             }
         }
-        ModeStore.selectedModeID = mode.id
+        if !fromApp {
+            ModeStore.selectedModeID = mode.id
+            if isAppModeActive { log("Mode chosen while an app mode was active; it replaces the saved setting") }
+            isAppModeActive = false
+            appModeRestoreSnapshot = nil
+            activeAppModeID = nil
+            activeAppName = nil
+        }
         refreshControls()
         refreshModeButtonTitle()
-        log("Applied mode: \(mode.name)")
+        log(fromApp ? "Applied app mode: \(mode.name)" : "Applied mode: \(mode.name)")
         lamp.requestStatus()
     }
 
@@ -64,7 +73,7 @@ extension StatusIndicator {
 
     /// One menu item per mode (checked = selected mode); used by the panel picker and the Favorites submenu.
     func modeMenuItems(enabled: Bool) -> [NSMenuItem] {
-        let selected = ModeStore.selectedModeID
+        let selected = activeAppModeID ?? ModeStore.selectedModeID
         return ModeStore.modes.map { mode in
             let item = NSMenuItem(title: mode.name, action: #selector(presetChanged(_:)), keyEquivalent: "")
             item.target = self
@@ -88,8 +97,14 @@ extension StatusIndicator {
 
     func refreshModeButtonTitle() {
         let modes = ModeStore.modes
-        let selected = ModeStore.selectedModeID.flatMap { id in modes.first { $0.id == id } }
+        let shownID = activeAppModeID ?? ModeStore.selectedModeID
+        let selected = shownID.flatMap { id in modes.first { $0.id == id } }
         modeButton.title = selected?.name ?? String(localized: "Choose a Mode")
+        if activeAppModeID != nil, let activeAppName {
+            modeButton.toolTip = String(localized: "Mode for \(activeAppName); your setting returns when you switch to an app without a mode")
+        } else {
+            modeButton.toolTip = nil
+        }
     }
 
     @objc func showModeCenter() {
@@ -104,13 +119,54 @@ extension StatusIndicator {
         controller.show()
     }
 
+    /// Called every poll. A linked app coming to the front applies its mode; the first one saves the lamp state, which
+    /// is restored when an app without a mode comes to the front (ADR 0010).
     func applyModeForFrontmostAppIfNeeded() {
         guard let bundleID = NSWorkspace.shared.frontmostApplication?.bundleIdentifier,
-              bundleID != lastFrontmostBundleID else { return }
+              bundleID != lastFrontmostBundleID,
+              !Self.appSwitchIgnoredBundleIDs.contains(bundleID), bundleID != Bundle.main.bundleIdentifier else { return }
+        // While the display sleeps or the session is locked, wait; the switch is handled after wake.
+        guard !isAsleep, !isConsoleSessionLocked() else { return }
         lastFrontmostBundleID = bundleID
-        guard let modeID = ModeStore.bindings[bundleID], let mode = ModeStore.mode(id: modeID),
-              lamp.isConnected else { return }
-        log("Frontmost app \(bundleID) has mode \(mode.name)")
-        applyMode(mode)
+        guard lamp.isConnected else { return }
+        if let modeID = ModeStore.bindings[bundleID], let mode = ModeStore.mode(id: modeID) {
+            if !isAppModeActive {
+                appModeRestoreSnapshot = currentLampMode().map { current in
+                    var snapshot = current
+                    snapshot.name = "previous setting"
+                    return snapshot
+                }
+                appModeRestoreLampWasOn = lamp.isPowerOn != false
+                isAppModeActive = true
+                log("Saved lamp setting before app mode for \(bundleID)")
+            }
+            log("Frontmost app \(bundleID) has mode \(mode.name)")
+            activeAppModeID = mode.id
+            activeAppName = Self.appName(for: bundleID)
+            applyMode(mode, fromApp: true)
+        } else if isAppModeActive {
+            isAppModeActive = false
+            activeAppModeID = nil
+            activeAppName = nil
+            defer { appModeRestoreSnapshot = nil }
+            guard let snapshot = appModeRestoreSnapshot else {
+                log("Left app mode for \(bundleID); no saved setting to restore")
+                return
+            }
+            applyMode(snapshot, fromApp: true)
+            if !appModeRestoreLampWasOn { _ = lamp.setPower(on: false) }
+            refreshControls()
+            log("Restored setting after leaving app mode (now \(bundleID))")
+        }
     }
+
+    private static func appName(for bundleID: String) -> String {
+        guard let url = NSWorkspace.shared.urlForApplication(withBundleIdentifier: bundleID) else { return bundleID }
+        return FileManager.default.displayName(atPath: url.path).replacingOccurrences(of: ".app", with: "")
+    }
+
+    /// Frontmost apps that aren't a real app switch (login window, screen saver, auth dialogs).
+    private static let appSwitchIgnoredBundleIDs: Set<String> = [
+        "com.apple.loginwindow", "com.apple.ScreenSaver.Engine", "com.apple.SecurityAgent"
+    ]
 }

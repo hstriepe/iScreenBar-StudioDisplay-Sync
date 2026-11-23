@@ -67,7 +67,7 @@ On a Mac with no built-in display (Mac mini, Mac Studio) and only the Studio Dis
 
 ## 6. Light Modes and Rotation Preset
 
-A light mode saves brightness, color temperature, video mode, and whether Match Screen, Auto Light, Presence, and Auto Temp are on; applying it restores all of them. Pick one from the panel's mode button or **Favorites** in the menu. **Mode Center…** (at the bottom of both) lists the modes, where you add (**+**), delete (**−**), edit (**Edit…** or double-click), reorder (drag, or ▲▼), and apply them. Its **App Associations** list ties an app to a mode, which is then applied whenever that app comes to the front. Modes are separate from the lamp's own hardware memory.
+A light mode saves brightness, color temperature, video mode, and whether Match Screen, Auto Light, Presence, and Auto Temp are on; applying it restores all of them. Pick one from the panel's mode button or **Favorites** in the menu. **Mode Center…** (at the bottom of both) lists the modes, where you add (**+**), delete (**−**), edit (**Edit…** or double-click), reorder (drag, or ▲▼), and apply them. Its **App Associations** list ties an app to a mode, which is then applied whenever that app comes to the front; switch to an app without a mode and your previous setting comes back. Modes are separate from the lamp's own hardware memory.
 
 The rotation preset controls display configuration on its own. With **Enable Preset** on, the saved rotation is applied when the Studio Display connects; with it off, the built-in display returns to 0° landscape and stays there on reconnect. Turning it off does not delete the saved preset.
 

@@ -67,6 +67,13 @@ final class StatusIndicator: NSObject, NSMenuDelegate {
     var lastScheduledTemperature: Int?
     var lastScheduledTemperatureChangeAt = Date.distantPast
     var lastFrontmostBundleID: String?
+    /// Lamp state saved when a linked app's mode took over; restored when an unlinked app comes to the front.
+    var appModeRestoreSnapshot: LightMode?
+    var appModeRestoreLampWasOn = true
+    var isAppModeActive = false
+    /// The linked app's mode currently on the lamp and that app's name; shown instead of the selected mode.
+    var activeAppModeID: UUID?
+    var activeAppName: String?
     var isAmbientPresenceLockActive = false
     var presenceWasEnabledBeforeAmbientLock = false
     var autoLightWasEnabledBeforeAmbientLock = false
