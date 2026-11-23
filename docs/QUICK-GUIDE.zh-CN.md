@@ -1,14 +1,12 @@
 # iScreenBar Menu 快速指南
 
-[English](QUICK-GUIDE.md) · 简体中文
-
 iScreenBar Menu 是一款菜单栏 App，让 BenQ iScreenBar 与 Apple Studio Display 保持同步：显示器休眠时关灯，唤醒时重新开灯。它还可以让台灯跟随显示器亮度、按室内光线开关台灯，并管理 MacBook 内建显示器。
 
 **需要：** macOS 14 或更高版本的 Mac（控制中心控制项和小组件需要 macOS 26）、Apple Studio Display，以及通过 USB 连接的 BenQ iScreenBar。
 
 ## 快速开始
 
-1. **安装。** 将 **iScreenBar Menu** 从 DMG 拖到“应用程序”文件夹，或用 `./scripts/install.sh` 从源码构建（需要 Xcode 26）。
+1. **安装。** 将 **iScreenBar Menu** 从 DMG 拖到“应用程序”文件夹。
 2. **打开一次。** 菜单栏出现太阳图标，App 不显示 Dock 图标。黄色表示灯亮，灰色表示灯灭，红色表示需要处理的问题。
 3. **登录时启动。** 右键点击图标，选择**登录时启动**。
 4. **调节灯光。** 左键点击图标打开控制面板，调节**亮度**和**色温**。**熄屏同步**默认开启，台灯会随 Studio Display 休眠和唤醒。
@@ -40,4 +38,4 @@ iScreenBar Menu 是一款菜单栏 App，让 BenQ iScreenBar 与 Apple Studio Di
 
 ## 更多
 
-仓库：[README](../README.zh-CN.md)（安装、升级、故障排除）· [使用指南](UI-GUIDE.zh-CN.md)（每个控件）· [完整功能清单](FEATURES.zh-CN.md) · App 中的**帮助…**
+在菜单栏图标（面板或菜单）中选择**帮助…**，查看每个控件的完整说明。

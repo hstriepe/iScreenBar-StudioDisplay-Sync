@@ -1,14 +1,12 @@
 # iScreenBar Menu Quick Guide
 
-English · [简体中文](QUICK-GUIDE.zh-CN.md)
-
 iScreenBar Menu is a menu bar app that keeps a BenQ iScreenBar in step with an Apple Studio Display: the lamp turns off when the display sleeps and back on when it wakes. It can also follow the display's brightness, switch the lamp by room light, and manage a MacBook's built-in display.
 
 **You need:** a Mac with macOS 14 or later (macOS 26 for Control Center controls and the widget), an Apple Studio Display, and a BenQ iScreenBar connected by USB.
 
 ## Get started
 
-1. **Install.** Drag **iScreenBar Menu** from the DMG to `/Applications`, or build from source with `./scripts/install.sh` (needs Xcode 26).
+1. **Install.** Drag **iScreenBar Menu** from the DMG to `/Applications`.
 2. **Open it once.** A sun icon appears in the menu bar. There's no Dock icon. Yellow means the lamp is on, gray off, red needs attention.
 3. **Start at login.** Right-click the icon and choose **Launch at Login**.
 4. **Set the light.** Left-click the icon to open the control panel and adjust **Brightness** and **Color Temp**. **Sleep Sync** is already on, so the lamp now follows the Studio Display's sleep and wake.
@@ -40,4 +38,4 @@ iScreenBar Menu is a menu bar app that keeps a BenQ iScreenBar in step with an A
 
 ## More
 
-Repo: [README](../README.md) (install, upgrade, troubleshooting) · [UI Guide](UI-GUIDE.md) (every control) · [Full Feature List](FEATURES.md) · **Help…** in the app
+Choose **Help…** from the menu bar icon (panel or menu) for the full guide to every control.
