@@ -34,7 +34,7 @@
 	<key>NSAppleScriptEnabled</key>
 	<true/>
 	<key>NSAppleEventsUsageDescription</key>
-	<string>iScreenBar Menu uses Apple Events to be controlled by other apps.</string>
+	<string>iScreenBar Menu runs the AppleScripts you choose for modes and lamp actions, which can control other apps.</string>
 	<key>OSAScriptingDefinition</key>
 	<string>iScreenBarMenu.sdef</string>
 	<key>NSHumanReadableCopyright</key>

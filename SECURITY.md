@@ -8,7 +8,10 @@ The application is local-only: it has no networking code, analytics, updater,
 or remote-control interface.
 
 Local automation acts only on this Mac. AppleScript from other apps is gated by
-macOS Automation permission. Shortcuts actions run in the app. The Control
+macOS Automation permission. Mode and lamp actions run only the Shortcuts and
+AppleScript files you choose in Mode Center, with your user rights; the app has
+the Apple Events entitlement for this, and macOS asks before a script controls
+another app. Shortcuts actions run in the app. The Control
 Center extension is sandboxed and signals the app with Darwin notifications
 (`org.windholm.iScreenBarMenu.control.*`); any local process can post these, and
 they can only toggle the lamp, set or step its brightness and color temperature,

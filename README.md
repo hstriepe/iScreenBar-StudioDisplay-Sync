@@ -23,7 +23,7 @@ New here? Start with the [Quick Guide](docs/QUICK-GUIDE.md). See the [UI Guide](
 | Auto Temp | Cooler by day, warmer at night, by local time; it doesn't measure the room's color temperature |
 | Built-in Display | On/off, rotation (panel button cycles 0°/90°/270°, menu offers 0°/90°/180°/270°) with a 5-second confirm, forced back on when the external display is unplugged. Hidden on a Mac with no built-in display and only the Studio Display |
 | Studio Display button | Black overlay that keeps windows in place; **the backlight stays on** |
-| Favorites and Mode Center | Saved light modes you can add, edit, and delete, optionally applied when an associated app comes to the front; separate rotation preset applied when the Studio Display connects |
+| Favorites and Mode Center | Saved light modes you can add, edit, and delete, optionally applied when an associated app comes to the front; each mode, and the lamp turning on or off, can run a Shortcut or AppleScript; separate rotation preset applied when the Studio Display connects |
 | Keep Awake | Prevents system sleep until you turn it off or quit (asks for an administrator password) |
 | Automation | AppleScript, Shortcuts, Control Center, and a desktop widget (macOS 26 and later) |
 

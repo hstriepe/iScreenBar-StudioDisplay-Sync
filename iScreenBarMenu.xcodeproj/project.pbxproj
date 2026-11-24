@@ -19,6 +19,7 @@
 		3095D9F4170BE268D20CCAC2 /* ScriptingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3C3CFD0C27CE9F47B655A77 /* ScriptingSupport.swift */; };
 		39F7AB2463EDF3DA2CC086F8 /* ControlActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE1FBC1FF4DB2E02C1AED963 /* ControlActions.swift */; };
 		411D7551C1F9FF61D41F28E5 /* LoginItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4AD144B1CEC69124A05C0D5 /* LoginItem.swift */; };
+		42AE560906A614604DB46C8D /* ModeAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37A27BC61C83966840E108D8 /* ModeAction.swift */; };
 		54DE75B460EB364B9BC1A4AA /* DisplayBrightnessReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18E8E2F648E9D964F6F9348 /* DisplayBrightnessReader.swift */; };
 		5B2CE789EAE98CE157E5AE61 /* iScreenBar Menu Controls.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 93A2701C0D7E472F92CC7D31 /* iScreenBar Menu Controls.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		5B7538CE4BDF5AC6F52A8C84 /* AppShortcuts.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 00063A6C6B6A8F75E0E00FF8 /* AppShortcuts.xcstrings */; };
@@ -27,6 +28,7 @@
 		5E647852EA7FE8B8323FD10C /* Help.rtfd in Resources */ = {isa = PBXBuildFile; fileRef = 32150E644526D32552F1D989 /* Help.rtfd */; };
 		63373F7F89886D2E51BFD74E /* Automation.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA2C568461527313C47E6EEB /* Automation.swift */; };
 		671E723371B21FD0F1BBEE74 /* DisplayPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ECE3A0663FA2131F6F95B3C /* DisplayPreset.swift */; };
+		6B3BF66F9F6FF8D68F78D6EB /* ActionRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07B06C487338EAA69E7E0735 /* ActionRunner.swift */; };
 		737567EBF62AFE19894A6370 /* HiddenMainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F1B9EB69AFBD0C6869D9BC /* HiddenMainMenu.swift */; };
 		7E74C8BAD6A68159C18FD8D3 /* StatusIndicator+Displays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787316F752B3794C48FBF1BA /* StatusIndicator+Displays.swift */; };
 		84A5E704831377CA255F0849 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 965296E55828CE996BA4121B /* Localizable.xcstrings */; };
@@ -40,10 +42,12 @@
 		A5EEAB3C404B61F245B94B49 /* StudioDisplayAmbientSensor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46956C900551C6652DE583D0 /* StudioDisplayAmbientSensor.swift */; };
 		A66B0FF4A691C59787C6CFFE /* StatusIndicator+Ambient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F13F1B7A055C90097F77493 /* StatusIndicator+Ambient.swift */; };
 		A78EFB7B420EF96D7B72F160 /* ModeCenterWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F8CD72CB3AFEC2B4F08F93 /* ModeCenterWindowController.swift */; };
+		A93881EB02794FC76E1B8FFC /* StatusIndicator+Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235A6B2621B57013ADEEF4B3 /* StatusIndicator+Actions.swift */; };
 		A95D1601B68E5842F8E502A1 /* LightMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 639AEE263D5D57C91B7CE78B /* LightMode.swift */; };
 		ACAA611D74B0DE9146550A2E /* SystemDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF4E541F1370F33EEAD2C4A4 /* SystemDisplay.swift */; };
 		AE18C9CC2C124B94348C09D9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DAA755A6DDC7E3217F9DC25 /* Constants.swift */; };
 		B3E0192124BABFB5090567D7 /* StatusIndicator+Automation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17EF8669A5409B0D265434B3 /* StatusIndicator+Automation.swift */; };
+		B5E5B0BDEBAE8CB2A77A46AE /* ActionPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8E20F3A5CEAC4B5E2C30447 /* ActionPicker.swift */; };
 		B8A7EDE3A6196030FD4ABC1A /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = A269E1AF228891A531993D99 /* Controls.swift */; };
 		C412C27AA225B84F8E4BAD50 /* StatusIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D024FCB59808A236DFC67D4B /* StatusIndicator.swift */; };
 		CAA12ABBAD43AAFAE3ECAF87 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08DE76FC85ED039F0B17515A /* main.swift */; };
@@ -78,16 +82,19 @@
 
 /* Begin PBXFileReference section */
 		00063A6C6B6A8F75E0E00FF8 /* AppShortcuts.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = AppShortcuts.xcstrings; sourceTree = "<group>"; };
+		07B06C487338EAA69E7E0735 /* ActionRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionRunner.swift; sourceTree = "<group>"; };
 		08DE76FC85ED039F0B17515A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		0F3CE60EC01F76A9FD368835 /* BlackDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackDisplayView.swift; sourceTree = "<group>"; };
 		0FEAE63811C45F1FA599B9E0 /* StatusIndicator+Lamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusIndicator+Lamp.swift"; sourceTree = "<group>"; };
 		17EF8669A5409B0D265434B3 /* StatusIndicator+Automation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusIndicator+Automation.swift"; sourceTree = "<group>"; };
 		18E60EAD509DFE5E35D14D15 /* SettingsMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMigration.swift; sourceTree = "<group>"; };
 		199C8A416735BB3295AE50AC /* DisplayController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayController.swift; sourceTree = "<group>"; };
+		235A6B2621B57013ADEEF4B3 /* StatusIndicator+Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusIndicator+Actions.swift"; sourceTree = "<group>"; };
 		23F8CD72CB3AFEC2B4F08F93 /* ModeCenterWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeCenterWindowController.swift; sourceTree = "<group>"; };
 		25C870FB6FFAF06D437833F6 /* StatusIndicator+Panel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusIndicator+Panel.swift"; sourceTree = "<group>"; };
 		27B1B520A1D042A5C448E6F0 /* DisplayLampSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayLampSync.swift; sourceTree = "<group>"; };
 		2ECE3A0663FA2131F6F95B3C /* DisplayPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayPreset.swift; sourceTree = "<group>"; };
+		37A27BC61C83966840E108D8 /* ModeAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeAction.swift; sourceTree = "<group>"; };
 		3849C3C44F5D2F3E958639F1 /* StatusIndicator+Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusIndicator+Menu.swift"; sourceTree = "<group>"; };
 		439D1091E023518F9C3E540F /* iScreenBarMenu.sdef */ = {isa = PBXFileReference; path = iScreenBarMenu.sdef; sourceTree = "<group>"; };
 		452D4BB0F6F4D3D3BF9E07E0 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = wrapper.rtfd; name = "zh-Hans"; path = "zh-Hans.lproj/Help.rtfd"; sourceTree = "<group>"; };
@@ -117,6 +124,7 @@
 		D024FCB59808A236DFC67D4B /* StatusIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusIndicator.swift; sourceTree = "<group>"; };
 		D7ACB17BBB257033950198B9 /* Signing.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Signing.xcconfig; sourceTree = "<group>"; };
 		F5F1B9EB69AFBD0C6869D9BC /* HiddenMainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HiddenMainMenu.swift; sourceTree = "<group>"; };
+		F8E20F3A5CEAC4B5E2C30447 /* ActionPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPicker.swift; sourceTree = "<group>"; };
 		FE1FBC1FF4DB2E02C1AED963 /* ControlActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlActions.swift; sourceTree = "<group>"; };
 		FE60B4CDECC5F7F59A976E56 /* ModeStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeStore.swift; sourceTree = "<group>"; };
 		FE6F979420C94DDC982F383E /* iScreenBar Menu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iScreenBar Menu.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +135,7 @@
 		1B2CC592A74709CCA4B472A6 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				F8E20F3A5CEAC4B5E2C30447 /* ActionPicker.swift */,
 				0F3CE60EC01F76A9FD368835 /* BlackDisplayView.swift */,
 				A269E1AF228891A531993D99 /* Controls.swift */,
 				8A330F0127C4C06B6BDA7C5F /* HelpWindowController.swift */,
@@ -167,6 +176,7 @@
 		2B2BAB59E3FCA8A28E1F5B2D /* Automation */ = {
 			isa = PBXGroup;
 			children = (
+				07B06C487338EAA69E7E0735 /* ActionRunner.swift */,
 				BA2C568461527313C47E6EEB /* Automation.swift */,
 				B3C3CFD0C27CE9F47B655A77 /* ScriptingSupport.swift */,
 			);
@@ -177,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				D024FCB59808A236DFC67D4B /* StatusIndicator.swift */,
+				235A6B2621B57013ADEEF4B3 /* StatusIndicator+Actions.swift */,
 				9F13F1B7A055C90097F77493 /* StatusIndicator+Ambient.swift */,
 				17EF8669A5409B0D265434B3 /* StatusIndicator+Automation.swift */,
 				787316F752B3794C48FBF1BA /* StatusIndicator+Displays.swift */,
@@ -205,6 +216,7 @@
 			children = (
 				2ECE3A0663FA2131F6F95B3C /* DisplayPreset.swift */,
 				639AEE263D5D57C91B7CE78B /* LightMode.swift */,
+				37A27BC61C83966840E108D8 /* ModeAction.swift */,
 				FE60B4CDECC5F7F59A976E56 /* ModeStore.swift */,
 				63F6002DC3C75D0ABAE84B67 /* SavedMode.swift */,
 			);
@@ -378,6 +390,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5E5B0BDEBAE8CB2A77A46AE /* ActionPicker.swift in Sources */,
+				6B3BF66F9F6FF8D68F78D6EB /* ActionRunner.swift in Sources */,
 				63373F7F89886D2E51BFD74E /* Automation.swift in Sources */,
 				24624AABB9511F4AC86632E6 /* BlackDisplayView.swift in Sources */,
 				AE18C9CC2C124B94348C09D9 /* Constants.swift in Sources */,
@@ -395,11 +409,13 @@
 				A95D1601B68E5842F8E502A1 /* LightMode.swift in Sources */,
 				140B148BD8E9B1B1924A8A75 /* Logging.swift in Sources */,
 				411D7551C1F9FF61D41F28E5 /* LoginItem.swift in Sources */,
+				42AE560906A614604DB46C8D /* ModeAction.swift in Sources */,
 				A78EFB7B420EF96D7B72F160 /* ModeCenterWindowController.swift in Sources */,
 				F470E246E05025DFD4B45F87 /* ModeStore.swift in Sources */,
 				FDE1E35AC364627D8F5C8832 /* SavedMode.swift in Sources */,
 				3095D9F4170BE268D20CCAC2 /* ScriptingSupport.swift in Sources */,
 				2367B3F0EAF2F612C4D54883 /* SettingsMigration.swift in Sources */,
+				A93881EB02794FC76E1B8FFC /* StatusIndicator+Actions.swift in Sources */,
 				A66B0FF4A691C59787C6CFFE /* StatusIndicator+Ambient.swift in Sources */,
 				B3E0192124BABFB5090567D7 /* StatusIndicator+Automation.swift in Sources */,
 				7E74C8BAD6A68159C18FD8D3 /* StatusIndicator+Displays.swift in Sources */,
@@ -454,7 +470,7 @@
 				CODE_SIGN_ENTITLEMENTS = iScreenBarMenuControls/iScreenBarMenuControls.entitlements;
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -466,7 +482,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 0.11;
+				MARKETING_VERSION = 0.12;
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenBarMenu.Controls;
 				PRODUCT_NAME = iScreenBarMenuControls;
 				SDKROOT = macosx;
@@ -543,7 +559,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = iScreenBarMenuControls/iScreenBarMenuControls.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GENERATE_INFOPLIST_FILE = NO;
@@ -555,7 +571,7 @@
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
-				MARKETING_VERSION = 0.11;
+				MARKETING_VERSION = 0.12;
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenBarMenu.Controls;
 				PRODUCT_NAME = iScreenBarMenuControls;
 				SDKROOT = macosx;
@@ -569,9 +585,10 @@
 			baseConfigurationReference = D7ACB17BBB257033950198B9 /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iScreenBarMenu/iScreenBarMenu.entitlements;
 				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				EXECUTABLE_NAME = iScreenBarMenu;
@@ -582,7 +599,7 @@
 					"@executable_path/../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 0.11;
+				MARKETING_VERSION = 0.12;
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenBarMenu;
 				PRODUCT_NAME = "iScreenBar Menu";
 				SDKROOT = macosx;
@@ -595,8 +612,9 @@
 			baseConfigurationReference = D7ACB17BBB257033950198B9 /* Signing.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = iScreenBarMenu/iScreenBarMenu.entitlements;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 48;
+				CURRENT_PROJECT_VERSION = 49;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				EXECUTABLE_NAME = iScreenBarMenu;
@@ -607,7 +625,7 @@
 					"@executable_path/../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 0.11;
+				MARKETING_VERSION = 0.12;
 				PRODUCT_BUNDLE_IDENTIFIER = org.windholm.iScreenBarMenu;
 				PRODUCT_NAME = "iScreenBar Menu";
 				SDKROOT = macosx;

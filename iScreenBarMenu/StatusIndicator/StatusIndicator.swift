@@ -70,10 +70,17 @@ final class StatusIndicator: NSObject, NSMenuDelegate {
     /// Lamp state saved when a linked app's mode took over; restored when an unlinked app comes to the front.
     var appModeRestoreSnapshot: LightMode?
     var appModeRestoreLampWasOn = true
+    /// The user's selected mode when the linked app took over; its actions run again on restore (ADR 0011).
+    var appModeRestoreModeID: UUID?
     var isAppModeActive = false
     /// The linked app's mode currently on the lamp and that app's name; shown instead of the selected mode.
     var activeAppModeID: UUID?
     var activeAppName: String?
+    /// Lamp On / Lamp Off actions: last confirmed lamp power state, a pending change (must hold for
+    /// `lampActionSettleTime`), and the status revision before which reports are ignored (after the app's own turn-on).
+    var lampPowerBaseline: Bool?
+    var lampPowerCandidate: (on: Bool, since: Date)?
+    var lampPowerIgnoreThroughRevision = -1
     var isAmbientPresenceLockActive = false
     var presenceWasEnabledBeforeAmbientLock = false
     var autoLightWasEnabledBeforeAmbientLock = false

@@ -114,6 +114,7 @@ final class DisplayLampSync {
 
     private func pollDisplayAndLamp() {
         statusIndicator.applyModeForFrontmostAppIfNeeded()
+        statusIndicator.checkLampPowerActions()
         let consoleSessionLocked = isConsoleSessionLocked()
         if consoleSessionLocked != wasConsoleSessionLocked {
             if consoleSessionLocked {

@@ -1,8 +1,9 @@
 import AppKit
 import UniformTypeIdentifiers
 
-// Mode Center: lists the light modes (add, edit, delete, apply) and the app → mode associations (add, change, remove).
-// All data lives in ModeStore; the tables are reloaded from it after every change.
+// Mode Center: lists the light modes (add, edit, delete, apply), the app → mode associations (add, change, remove),
+// and the Lamp On / Lamp Off actions. Modes and bindings live in ModeStore; the tables are reloaded from it after
+// every change. Lamp actions are saved as soon as they change (ModeAction, ADR 0011).
 final class ModeCenterWindowController: NSWindowController, NSTableViewDataSource, NSTableViewDelegate {
     /// The lamp's current settings and toggles as an unnamed mode; nil while the lamp hasn't reported.
     var currentLampSettings: () -> LightMode? = { nil }
@@ -31,6 +32,11 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
     private let autoLightCheckbox = NSButton(checkboxWithTitle: String(localized: "Auto Light"), target: nil, action: nil)
     private let presenceCheckbox = NSButton(checkboxWithTitle: String(localized: "Presence"), target: nil, action: nil)
     private let autoTemperatureCheckbox = NSButton(checkboxWithTitle: String(localized: "Auto Temp"), target: nil, action: nil)
+    private let modeActionPicker = ActionPicker()
+
+    // Lamp Actions section.
+    private let lampOnPicker = ActionPicker()
+    private let lampOffPicker = ActionPicker()
 
     private static let modeColumn = NSUserInterfaceItemIdentifier("mode")
     private static let brightnessColumn = NSUserInterfaceItemIdentifier("brightness")
@@ -42,16 +48,17 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
     private static let modeRowType = NSPasteboard.PasteboardType("org.windholm.iScreenBarMenu.mode-row")
 
     init() {
-        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 660, height: 540),
+        let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 660, height: 640),
                               styleMask: [.titled, .closable, .miniaturizable, .resizable],
                               backing: .buffered, defer: false)
         window.title = String(localized: "Mode Center")
-        window.minSize = NSSize(width: 580, height: 440)
+        window.minSize = NSSize(width: 600, height: 560)
         window.isReleasedWhenClosed = false
-        window.setFrameAutosaveName("ModeCenterWindow2")
+        window.setFrameAutosaveName("ModeCenterWindow3")
         super.init(window: window)
+        modeActionPicker.scriptRow.widthAnchor.constraint(equalToConstant: 260).isActive = true
         window.contentView = makeContentView()
-        if !window.setFrameUsingName("ModeCenterWindow2") { window.center() }
+        if !window.setFrameUsingName("ModeCenterWindow3") { window.center() }
     }
 
     required init?(coder: NSCoder) { nil }
@@ -70,6 +77,8 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
             .sorted { Self.appName($0.bundleID).localizedCaseInsensitiveCompare(Self.appName($1.bundleID)) == .orderedAscending }
         modesTable.reloadData()
         appsTable.reloadData()
+        lampOnPicker.set(ModeAction.stored(forKey: ModeAction.lampOnKey))
+        lampOffPicker.set(ModeAction.stored(forKey: ModeAction.lampOffKey))
         // Keep the row that was selected; otherwise select the active mode (or the first one).
         let preferredID = selectedID ?? ModeStore.selectedModeID
         if let row = modes.firstIndex(where: { $0.id == preferredID }) ?? (modes.isEmpty ? nil : 0) {
@@ -136,12 +145,15 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
 
         let modesScroll = scrollView(for: modesTable)
         let appsScroll = scrollView(for: appsTable)
+        let lampActions = makeLampActionsView()
         let stack = NSStackView(views: [sectionLabel(String(localized: "Modes")), modesScroll, modesBar,
-                                        sectionLabel(String(localized: "App Associations")), appsScroll, appsBar])
+                                        sectionLabel(String(localized: "App Associations")), appsScroll, appsBar,
+                                        sectionLabel(String(localized: "Lamp Actions")), lampActions])
         stack.orientation = .vertical
         stack.alignment = .leading
         stack.spacing = 8
         stack.setCustomSpacing(18, after: modesBar)
+        stack.setCustomSpacing(18, after: appsBar)
         stack.edgeInsets = NSEdgeInsets(top: 18, left: 20, bottom: 18, right: 20)
         stack.translatesAutoresizingMaskIntoConstraints = false
         let content = NSView()
@@ -155,11 +167,46 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
             appsScroll.widthAnchor.constraint(equalTo: modesScroll.widthAnchor),
             modesBar.widthAnchor.constraint(equalTo: modesScroll.widthAnchor),
             appsBar.widthAnchor.constraint(equalTo: modesScroll.widthAnchor),
+            lampActions.widthAnchor.constraint(equalTo: modesScroll.widthAnchor),
             modesScroll.heightAnchor.constraint(greaterThanOrEqualToConstant: 140),
             appsScroll.heightAnchor.constraint(greaterThanOrEqualToConstant: 110),
             appsScroll.heightAnchor.constraint(equalTo: modesScroll.heightAnchor, multiplier: 0.8)
         ])
         return content
+    }
+
+    /// Two rows (lamp turns on / off), each with a Shortcut pop-up and a script; saved on every change.
+    private func makeLampActionsView() -> NSView {
+        lampOnPicker.onChange = { [weak self] in self?.saveLampAction(on: true) }
+        lampOffPicker.onChange = { [weak self] in self?.saveLampAction(on: false) }
+        let grid = NSGridView(views: [
+            [NSTextField(labelWithString: String(localized: "Lamp turns on")), lampOnPicker.shortcutPopup, lampOnPicker.scriptRow],
+            [NSTextField(labelWithString: String(localized: "Lamp turns off")), lampOffPicker.shortcutPopup, lampOffPicker.scriptRow]
+        ])
+        grid.rowSpacing = 6
+        grid.columnSpacing = 10
+        grid.column(at: 0).xPlacement = .trailing
+        grid.column(at: 1).width = 190
+        grid.rowAlignment = .firstBaseline
+        let hint = NSTextField(wrappingLabelWithString: String(localized: "Runs a Shortcut, then an AppleScript, when the lamp turns on or off for any reason, also while the display sleeps."))
+        hint.font = UIStyle.captionFont
+        hint.textColor = .secondaryLabelColor
+        let stack = NSStackView(views: [grid, hint])
+        stack.orientation = .vertical
+        stack.alignment = .leading
+        stack.spacing = 6
+        NSLayoutConstraint.activate([
+            grid.widthAnchor.constraint(equalTo: stack.widthAnchor),
+            hint.widthAnchor.constraint(equalTo: stack.widthAnchor)
+        ])
+        return stack
+    }
+
+    private func saveLampAction(on: Bool) {
+        let picker = on ? lampOnPicker : lampOffPicker
+        ModeAction.store(picker.action, forKey: on ? ModeAction.lampOnKey : ModeAction.lampOffKey)
+        let summary = picker.action?.summaryParts.joined(separator: ", ") ?? "none"
+        log("Lamp \(on ? "on" : "off") action: \(summary)")
     }
 
     private func configureTable(_ table: NSTableView, columns: [(NSUserInterfaceItemIdentifier, String, CGFloat)]) {
@@ -247,7 +294,10 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
             case Self.modeColumn: return textCell(mode.name)
             case Self.brightnessColumn: return textCell("\(mode.brightness)%")
             case Self.temperatureColumn: return textCell("\(mode.temperature)K")
-            case Self.togglesColumn: return textCell(mode.toggleSummary)
+            case Self.togglesColumn:
+                let cell = textCell(mode.toggleSummary)
+                cell.toolTip = mode.toggleSummary
+                return cell
             default: return textCell(mode.videoMode ? String(localized: "On") : "–")
             }
         }
@@ -442,11 +492,12 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
                             autoLight: mode.autoLight ?? current?.autoLight ?? false,
                             presence: mode.presence ?? current?.presence ?? false,
                             autoTemperature: mode.autoTemperature ?? current?.autoTemperature ?? false)
+        modeActionPicker.set(mode.actions)
         sliderChanged(nil)
 
         let alert = NSAlert()
         alert.messageText = isNew ? String(localized: "New Mode") : String(localized: "Edit Mode")
-        alert.informativeText = String(localized: "A mode sets the lamp's brightness, color temperature, and video mode, and turns the checked features on and the others off.")
+        alert.informativeText = String(localized: "A mode sets the lamp's brightness, color temperature, and video mode, and turns the checked features on and the others off. Then it runs its Shortcut and AppleScript, if set.")
         alert.accessoryView = makeEditorView()
         alert.addButton(withTitle: isNew ? String(localized: "Add") : String(localized: "Save"))
         alert.addButton(withTitle: String(localized: "Cancel"))
@@ -462,7 +513,8 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
                                    matchScreen: self.matchScreenCheckbox.state == .on,
                                    autoLight: self.autoLightCheckbox.state == .on,
                                    presence: self.presenceCheckbox.state == .on,
-                                   autoTemperature: self.autoTemperatureCheckbox.state == .on)
+                                   autoTemperature: self.autoTemperatureCheckbox.state == .on,
+                                   actions: self.modeActionPicker.action)
             var all = ModeStore.modes
             if let index = all.firstIndex(where: { $0.id == mode.id }) {
                 all[index] = edited
@@ -516,7 +568,9 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
             [NSTextField(labelWithString: String(localized: "Brightness")), brightnessSlider, brightnessLabel],
             [NSTextField(labelWithString: String(localized: "Color Temp")), temperatureSlider, temperatureLabel],
             [NSTextField(labelWithString: String(localized: "Features")), lampToggles, NSGridCell.emptyContentView],
-            [NSGridCell.emptyContentView, useCurrent, NSGridCell.emptyContentView]
+            [NSGridCell.emptyContentView, useCurrent, NSGridCell.emptyContentView],
+            [NSTextField(labelWithString: String(localized: "Shortcut")), modeActionPicker.shortcutPopup, NSGridCell.emptyContentView],
+            [NSTextField(labelWithString: String(localized: "AppleScript")), modeActionPicker.scriptRow, NSGridCell.emptyContentView]
         ])
         grid.rowSpacing = 8
         grid.columnSpacing = 8
@@ -527,6 +581,10 @@ final class ModeCenterWindowController: NSWindowController, NSTableViewDataSourc
         grid.row(at: 3).mergeCells(in: NSRange(location: 1, length: 2))
         grid.row(at: 3).yPlacement = .top
         grid.row(at: 4).cell(at: 1).xPlacement = .leading
+        grid.row(at: 4).bottomPadding = 8
+        grid.row(at: 5).mergeCells(in: NSRange(location: 1, length: 2))
+        grid.row(at: 5).cell(at: 1).xPlacement = .leading
+        grid.row(at: 6).mergeCells(in: NSRange(location: 1, length: 2))
         grid.frame = NSRect(origin: .zero, size: grid.fittingSize)
         return grid
     }

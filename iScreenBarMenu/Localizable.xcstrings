@@ -34,6 +34,16 @@
         }
       }
     },
+    "%@ (not found)" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@（未找到）"
+          }
+        }
+      }
+    },
     "%lld min" : {
       "localizations" : {
         "zh-Hans" : {
@@ -44,12 +54,12 @@
         }
       }
     },
-    "A mode sets the lamp's brightness, color temperature, and video mode, and turns the checked features on and the others off." : {
+    "A mode sets the lamp's brightness, color temperature, and video mode, and turns the checked features on and the others off. Then it runs its Shortcut and AppleScript, if set." : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "模式设置台灯的亮度、色温和视频模式，并开启勾选的功能、关闭未勾选的功能。"
+            "value" : "模式设置台灯的亮度、色温和视频模式，并开启勾选的功能、关闭未勾选的功能。然后运行其快捷指令和 AppleScript（如已设置）。"
           }
         }
       }
@@ -170,6 +180,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "应用关联"
+          }
+        }
+      }
+    },
+    "AppleScript" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppleScript"
           }
         }
       }
@@ -385,12 +405,42 @@
         }
       }
     },
+    "Choose" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择"
+          }
+        }
+      }
+    },
     "Choose a Mode" : {
       "localizations" : {
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "选择模式"
+          }
+        }
+      }
+    },
+    "Choose an AppleScript file to run" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择要运行的 AppleScript 文件"
+          }
+        }
+      }
+    },
+    "Choose an AppleScript to run" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择要运行的 AppleScript"
           }
         }
       }
@@ -411,6 +461,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "选择使用“%@”的应用"
+          }
+        }
+      }
+    },
+    "Choose…" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "选择…"
+          }
+        }
+      }
+    },
+    "Clear" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "清除"
           }
         }
       }
@@ -806,6 +876,16 @@
         }
       }
     },
+    "Lamp Actions" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯动作"
+          }
+        }
+      }
+    },
     "Lamp Status" : {
       "localizations" : {
         "zh-Hans" : {
@@ -822,6 +902,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "台灯亮度跟随 Studio Display，从此亮度开始"
+          }
+        }
+      }
+    },
+    "Lamp turns off" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯关闭时"
+          }
+        }
+      }
+    },
+    "Lamp turns on" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯开启时"
           }
         }
       }
@@ -892,6 +992,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "双屏亮度"
+          }
+        }
+      }
+    },
+    "Loading Shortcuts…" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正在载入快捷指令…"
           }
         }
       }
@@ -1042,6 +1152,36 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "夜间工作"
+          }
+        }
+      }
+    },
+    "No Script" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无脚本"
+          }
+        }
+      }
+    },
+    "No Shortcut" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "无快捷指令"
+          }
+        }
+      }
+    },
+    "No Shortcuts Found" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "未找到快捷指令"
           }
         }
       }
@@ -1312,6 +1452,16 @@
         }
       }
     },
+    "Runs a Shortcut, then an AppleScript, when the lamp turns on or off for any reason, also while the display sleeps." : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "台灯因任何原因开启或关闭时（包括显示器睡眠期间），先运行快捷指令，再运行 AppleScript。"
+          }
+        }
+      }
+    },
     "Save" : {
       "localizations" : {
         "zh-Hans" : {
@@ -1450,6 +1600,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "设置"
+          }
+        }
+      }
+    },
+    "Shortcut" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "快捷指令"
+          }
+        }
+      }
+    },
+    "Shortcut to run" : {
+      "localizations" : {
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "要运行的快捷指令"
           }
         }
       }

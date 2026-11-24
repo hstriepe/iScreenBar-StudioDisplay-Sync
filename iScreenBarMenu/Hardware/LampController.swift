@@ -8,6 +8,9 @@ final class LampController {
     private(set) var currentBrightness: Int?
     private(set) var currentTemperature: Int?
     private(set) var isPowerOn: Bool?
+    /// Power state from the lamp's last status report only (not from the app's own commands); nil until a report
+    /// arrives and again after a reconnect. Lamp On / Lamp Off actions use it (ADR 0011).
+    private(set) var reportedPowerOn: Bool?
     private(set) var isAutoLightEnabled: Bool?
     private(set) var isPresenceDetectionEnabled: Bool?
     private(set) var isVideoModeEnabled: Bool?
@@ -219,6 +222,7 @@ final class LampController {
                         log("Raw status report: \(statusHex)")
                     }
                     controller.isPowerOn = (report[6] & 0x01) != 0
+                    controller.reportedPowerOn = controller.isPowerOn
                     controller.acceptReportedAutoLight((report[6] & 0x04) != 0)
                     controller.isPresenceDetectionEnabled = (report[6] & 0x20) != 0
                     controller.isVideoModeEnabled = (report[6] & 0x80) != 0
@@ -243,6 +247,7 @@ final class LampController {
             IOHIDDeviceUnscheduleFromRunLoop(device, CFRunLoopGetCurrent(), CFRunLoopMode.defaultMode.rawValue)
         }
         device = nil
+        reportedPowerOn = nil
         IOHIDManagerClose(manager, IOOptionBits(kIOHIDOptionsTypeNone))
         manager = Self.makeManager()
         guard IOHIDManagerOpen(manager, IOOptionBits(kIOHIDOptionsTypeNone)) == kIOReturnSuccess else { return false }

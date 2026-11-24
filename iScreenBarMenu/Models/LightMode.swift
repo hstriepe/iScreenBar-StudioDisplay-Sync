@@ -13,9 +13,12 @@ struct LightMode: Codable, Equatable {
     var autoLight: Bool?
     var presence: Bool?
     var autoTemperature: Bool?
+    /// Shortcut and/or AppleScript run after the mode is applied (0.12, ADR 0011); nil in older stored modes.
+    var actions: ModeAction?
 
     init(id: UUID = UUID(), name: String, brightness: Int, temperature: Int, videoMode: Bool,
-         matchScreen: Bool? = nil, autoLight: Bool? = nil, presence: Bool? = nil, autoTemperature: Bool? = nil) {
+         matchScreen: Bool? = nil, autoLight: Bool? = nil, presence: Bool? = nil, autoTemperature: Bool? = nil,
+         actions: ModeAction? = nil) {
         self.id = id
         self.name = name
         self.brightness = max(1, min(100, brightness))
@@ -26,15 +29,17 @@ struct LightMode: Codable, Equatable {
         self.matchScreen = autoLight == true ? false : matchScreen
         self.presence = presence
         self.autoTemperature = autoTemperature
+        self.actions = actions?.isEmpty == true ? nil : actions
     }
 
-    /// Short summary of the saved toggles for the Mode Center table.
+    /// Short summary of the saved toggles and actions for the Mode Center table.
     var toggleSummary: String {
         var parts: [String] = []
         if autoLight == true { parts.append(String(localized: "Auto Light")) }
         if matchScreen == true { parts.append(String(localized: "Match Screen")) }
         if presence == true { parts.append(String(localized: "Presence")) }
         if autoTemperature == true { parts.append(String(localized: "Auto Temp")) }
+        parts += actions?.summaryParts ?? []
         return parts.isEmpty ? "–" : parts.joined(separator: ", ")
     }
 }

@@ -11,9 +11,11 @@ extension StatusIndicator {
     /// then brightness, color temperature, and video mode. Modes without saved toggles behave as before 0.10.
     /// `fromApp`: applied for a linked app (or restoring after one); only the user's own choices become the selected
     /// mode, and a user choice ends app-mode tracking so leaving the linked app changes nothing.
-    func applyMode(_ mode: LightMode, fromApp: Bool = false) {
+    /// `runActions`: run the Lamp On action (if this turns the lamp on) and then the mode's own actions (ADR 0011).
+    func applyMode(_ mode: LightMode, fromApp: Bool = false, runActions: Bool = true) {
         refreshControls()
-        _ = lamp.setPower(on: true)
+        let lampWasOff = lamp.reportedPowerOn == false
+        if lamp.setPower(on: true), lampWasOff, runActions { lampTurnedOnByApp() }
         let autoLight = mode.autoLight == true
         let matchScreen = !autoLight && mode.matchScreen == true
         // Stop following first so the follow loop doesn't overwrite the mode's brightness.
@@ -40,6 +42,7 @@ extension StatusIndicator {
             if isAppModeActive { log("Mode chosen while an app mode was active; it replaces the saved setting") }
             isAppModeActive = false
             appModeRestoreSnapshot = nil
+            appModeRestoreModeID = nil
             activeAppModeID = nil
             activeAppName = nil
         }
@@ -47,6 +50,7 @@ extension StatusIndicator {
         refreshModeButtonTitle()
         log(fromApp ? "Applied app mode: \(mode.name)" : "Applied mode: \(mode.name)")
         lamp.requestStatus()
+        if runActions { runModeActions(mode) }
     }
 
     /// Sets a panel toggle and runs its own action, like clicking it. Disabled controls (e.g. Presence during a
@@ -125,6 +129,8 @@ extension StatusIndicator {
         guard let bundleID = NSWorkspace.shared.frontmostApplication?.bundleIdentifier,
               bundleID != lastFrontmostBundleID,
               !Self.appSwitchIgnoredBundleIDs.contains(bundleID), bundleID != Bundle.main.bundleIdentifier else { return }
+        // Shortcuts coming to the front while an action runs is the action, not the user switching apps (ADR 0011).
+        if ActionRunner.shared.isBusy, bundleID.hasPrefix("com.apple.shortcuts") { return }
         // While the display sleeps or the session is locked, wait; the switch is handled after wake.
         guard !isAsleep, !isConsoleSessionLocked() else { return }
         lastFrontmostBundleID = bundleID
@@ -137,6 +143,7 @@ extension StatusIndicator {
                     return snapshot
                 }
                 appModeRestoreLampWasOn = lamp.isPowerOn != false
+                appModeRestoreModeID = ModeStore.selectedModeID
                 isAppModeActive = true
                 log("Saved lamp setting before app mode for \(bundleID)")
             }
@@ -148,15 +155,21 @@ extension StatusIndicator {
             isAppModeActive = false
             activeAppModeID = nil
             activeAppName = nil
-            defer { appModeRestoreSnapshot = nil }
+            let restoreMode = appModeRestoreModeID.flatMap { ModeStore.mode(id: $0) }
+            defer {
+                appModeRestoreSnapshot = nil
+                appModeRestoreModeID = nil
+            }
             guard let snapshot = appModeRestoreSnapshot else {
                 log("Left app mode for \(bundleID); no saved setting to restore")
                 return
             }
-            applyMode(snapshot, fromApp: true)
+            // The snapshot is plain lamp values; the actions are those of the mode chosen before the app took over.
+            applyMode(snapshot, fromApp: true, runActions: false)
             if !appModeRestoreLampWasOn { _ = lamp.setPower(on: false) }
             refreshControls()
             log("Restored setting after leaving app mode (now \(bundleID))")
+            if let restoreMode { runModeActions(restoreMode, restoring: true) }
         }
     }
 

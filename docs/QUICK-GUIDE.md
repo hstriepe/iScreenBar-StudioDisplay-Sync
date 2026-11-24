@@ -24,7 +24,7 @@ iScreenBar Menu is a menu bar app that keeps a BenQ iScreenBar in step with an A
 | Match Screen / Link Screens | Lamp follows the display's brightness; MacBook and Studio Display brightness stay linked |
 | Ambient Rules | Lamp off in a bright room, on in a dark one, from the Studio Display's light sensor |
 | Auto Temp | Cooler by day, warmer at night, by local time |
-| Favorites / Mode Center | Saved light modes (light plus Match Screen, Auto Light, Presence, Auto Temp) you can add, edit, reorder, and delete; an associated app applies its mode when it comes to the front, and your setting returns when you switch away |
+| Favorites / Mode Center | Saved light modes (light plus Match Screen, Auto Light, Presence, Auto Temp) you can add, edit, reorder, and delete; an associated app applies its mode when it comes to the front, and your setting returns when you switch away. Modes and the lamp turning on or off can also run a Shortcut or AppleScript |
 | Built-in Display | On/off and rotation; forced back on when the Studio Display is unplugged |
 | Keep Awake | Keeps the Mac from sleeping until you turn it off or quit |
 | Automation | AppleScript, Shortcuts, Control Center controls, and a desktop widget |
